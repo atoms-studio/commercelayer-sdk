@@ -29,6 +29,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn install --frozen-lockfile
-    - run: lerna bootstrap
     - run: yarn build
     - run: yarn test
