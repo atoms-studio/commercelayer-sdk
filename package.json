@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "prepublish": "yarn lint && rimraf dist && yarn build && yarn test",
-    "test": "jest",
+    "test": "jest --collect-coverage",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "dev": "rollup -c -w",
     "build": "rollup -c",

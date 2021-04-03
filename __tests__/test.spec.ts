@@ -1,5 +1,0 @@
-describe('asd', () => {
-  it('asdasd', () => {
-    /* */
-  })
-})

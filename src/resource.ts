@@ -1,3 +1,5 @@
+import { find, findBy, RequestQuery } from './api'
+
 export interface ResourceConfig<T, U> {
   type: string
   attributes: (keyof T)[]
@@ -25,8 +27,8 @@ export interface ResourcePagination<T> {
 }
 
 export interface Resource<T> {
-  find: () => Promise<T | null>
-  findBy: () => Promise<T | null>
+  find: (id: string, query?: RequestQuery) => Promise<T>
+  findBy: (query: RequestQuery) => Promise<T | null>
   findAll: () => Promise<ResourcePagination<T>>
   create: () => Promise<T>
   update: (id: string) => Promise<T>
@@ -46,12 +48,12 @@ export const createResource = <T, U, V = CommonResourceAttributes & T>(
   config: ResourceConfig<T, U>,
 ): Resource<V> => {
   return {
-    find(): Promise<V | null> {
-      return Promise.resolve(null)
+    find(id: string, query?: RequestQuery): Promise<V> {
+      return find(id, query, config.type)
     },
 
-    findBy(): Promise<V | null> {
-      return Promise.resolve(null)
+    findBy(query: RequestQuery): Promise<V | null> {
+      return findBy(query, config.type)
     },
 
     findAll(): Promise<ResourcePagination<V>> {

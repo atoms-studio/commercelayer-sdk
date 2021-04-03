@@ -2,7 +2,7 @@ import {
   ResourceConfig,
   ConcreteResourceInstance,
   createResource,
-} from '../createResource'
+} from '../resource'
 import { SkuInstance } from './Skus'
 
 export interface ShippingCategoryAttributes {

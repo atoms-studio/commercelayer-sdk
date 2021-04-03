@@ -97,7 +97,7 @@ const writeTemplate = (
   ResourceConfig,
   ConcreteResourceInstance,
   createResource,
-} from '../createResource'
+} from '../resource'
 
 export interface ${singular}Attributes {${attributesInterfaceString}
 }

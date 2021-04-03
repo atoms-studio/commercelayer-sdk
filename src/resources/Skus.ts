@@ -2,7 +2,7 @@ import {
   ResourceConfig,
   createResource,
   ConcreteResourceInstance,
-} from '../createResource'
+} from '../resource'
 import { ShippingCategoryInstance } from './ShippingCategories'
 
 export interface InventoryDeliveryLeadTimesShippingMethod {
