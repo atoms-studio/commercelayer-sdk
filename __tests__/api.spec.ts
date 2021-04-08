@@ -1,7 +1,31 @@
-import { createRequestParams, createRequest } from '../src/api'
-import { mockRequestWithUri } from './utils'
+import {
+  createRequestParams,
+  createRequest,
+  find,
+  findBy,
+  findAll,
+  destroy,
+  create,
+} from '../src/api'
+import {
+  mockRequestWithUri,
+  mockRequestWithResponse,
+  mockRequestWithError,
+  mockRequestWithEcho,
+} from './utils'
+import singleSku from './responses/single-sku.json'
+import multipleSkus from './responses/multiple-skus.json'
+import unauthorized from './responses/401-unauthorized.json'
+import { commonResourceFields } from '../src/resource'
+import { ResourceError } from '../src/errors'
+
+const _originalCreateRequest = createRequest
 
 describe('api', () => {
+  afterEach(() => {
+    ;(createRequest as any) = _originalCreateRequest
+  })
+
   describe('createRequestParams', () => {
     it('adds relationships', () => {
       let params = createRequestParams({})
@@ -153,6 +177,383 @@ describe('api', () => {
       expect(decodeURI((uri as unknown) as string)).toBe(
         '/test?filter[q][name_eq]=red+handbag&filter[q][email_matches]=%%40gmail.com',
       )
+    })
+  })
+
+  describe('find', () => {
+    it('deserializes data', async () => {
+      mockRequestWithResponse(singleSku)
+      const res = await find(
+        '12345',
+        {},
+        {
+          type: 'skus',
+          attributes: [],
+          relationships: {},
+        },
+      )
+
+      const attributes = Object.keys(singleSku.data.attributes)
+      const relationships = ['prices']
+
+      for (const attribute of attributes) {
+        expect(res).toHaveProperty(attribute)
+      }
+
+      for (const relationship of relationships) {
+        expect(res).toHaveProperty(relationship)
+      }
+
+      for (const commonField of commonResourceFields) {
+        expect(res).toHaveProperty(commonField)
+      }
+    })
+
+    it('handles errors', async () => {
+      mockRequestWithError(unauthorized, 401)
+
+      const fn = async () => {
+        try {
+          await find(
+            '12345',
+            {},
+            {
+              type: 'skus',
+              attributes: [],
+              relationships: {},
+            },
+          )
+          return null
+        } catch (error) {
+          return error
+        }
+      }
+
+      const err: ResourceError = await fn()
+      expect(err.message).toBe('CommerceLayer API error')
+      expect(err.isResourceError).toBe(true)
+      expect(err.status).toBe(401)
+      expect(err.messages.length).toBe(unauthorized.errors.length)
+      expect(err.firstMessage?.title).toBe(unauthorized.errors[0].title)
+    })
+  })
+
+  describe('findAll', () => {
+    it('returns all results from the response', async () => {
+      mockRequestWithResponse(multipleSkus)
+
+      const res = await findAll(
+        {},
+        {
+          type: 'skus',
+          attributes: [],
+          relationships: {},
+        },
+      )
+
+      expect(Object.keys(res).sort()).toEqual(
+        [
+          'items',
+          'total',
+          'currentPage',
+          'prevPage',
+          'nextPage',
+          'lastPage',
+          'hasMore',
+        ].sort(),
+      )
+      expect(res.items.length).toBe(multipleSkus.data.length)
+      expect(res.total).toBe(multipleSkus.meta.record_count)
+      expect(res.currentPage).toBe(1)
+      expect(res.prevPage).toBeNull()
+      expect(res.nextPage).toBe(2)
+      expect(res.lastPage).toBe(multipleSkus.meta.page_count)
+      expect(res.hasMore).toBe(true)
+    })
+
+    it('handles errors', async () => {
+      mockRequestWithError(unauthorized, 401)
+
+      const fn = async () => {
+        try {
+          await findAll(
+            {},
+            {
+              type: 'skus',
+              attributes: [],
+              relationships: {},
+            },
+          )
+          return null
+        } catch (error) {
+          return error
+        }
+      }
+
+      const err: ResourceError = await fn()
+      expect(err.message).toBe('CommerceLayer API error')
+      expect(err.isResourceError).toBe(true)
+      expect(err.status).toBe(401)
+      expect(err.messages.length).toBe(unauthorized.errors.length)
+      expect(err.firstMessage?.title).toBe(unauthorized.errors[0].title)
+    })
+  })
+
+  describe('findBy', () => {
+    it('returns the first result from the response', async () => {
+      mockRequestWithResponse(multipleSkus)
+
+      const res = await findBy(
+        {},
+        {
+          type: 'skus',
+          attributes: [],
+          relationships: {},
+        },
+      )
+
+      const attributes = Object.keys(multipleSkus.data[0].attributes)
+      const relationships = ['prices']
+
+      for (const attribute of attributes) {
+        expect(res).toHaveProperty(attribute)
+      }
+
+      for (const relationship of relationships) {
+        expect(res).toHaveProperty(relationship)
+      }
+
+      for (const commonField of commonResourceFields) {
+        expect(res).toHaveProperty(commonField)
+      }
+    })
+
+    it('returns null if there are no results', async () => {
+      mockRequestWithResponse({
+        data: [],
+      })
+
+      const res = await findBy(
+        {},
+        {
+          type: 'skus',
+          attributes: [],
+          relationships: {},
+        },
+      )
+
+      expect(res).toBeNull()
+    })
+
+    it('handles errors', async () => {
+      mockRequestWithError(unauthorized, 401)
+
+      const fn = async () => {
+        try {
+          await findBy(
+            {},
+            {
+              type: 'skus',
+              attributes: [],
+              relationships: {},
+            },
+          )
+          return null
+        } catch (error) {
+          return error
+        }
+      }
+
+      const err: ResourceError = await fn()
+      expect(err.message).toBe('CommerceLayer API error')
+      expect(err.isResourceError).toBe(true)
+      expect(err.status).toBe(401)
+      expect(err.messages.length).toBe(unauthorized.errors.length)
+      expect(err.firstMessage?.title).toBe(unauthorized.errors[0].title)
+    })
+  })
+
+  describe('destroy', () => {
+    it('resolves with an empty result', async () => {
+      mockRequestWithResponse({}, 204)
+
+      const res = await destroy('1234', {
+        type: 'skus',
+        attributes: [],
+        relationships: {},
+      })
+
+      expect(res).toBeUndefined()
+    })
+
+    it('handles errors', async () => {
+      mockRequestWithError(unauthorized, 401)
+
+      const fn = async () => {
+        try {
+          await destroy('12345', {
+            type: 'skus',
+            attributes: [],
+            relationships: {},
+          })
+          return null
+        } catch (error) {
+          return error
+        }
+      }
+
+      const err: ResourceError = await fn()
+      expect(err.message).toBe('CommerceLayer API error')
+      expect(err.isResourceError).toBe(true)
+      expect(err.status).toBe(401)
+      expect(err.messages.length).toBe(unauthorized.errors.length)
+      expect(err.firstMessage?.title).toBe(unauthorized.errors[0].title)
+    })
+  })
+
+  describe('create', () => {
+    it('sends a serialized payload', async () => {
+      mockRequestWithEcho()
+      ;(createRequest as any) = jest.fn(
+        (url: string, method: string, query: any, data: any) => {
+          return {
+            data: {
+              data: {},
+            },
+            status: 200,
+          }
+        },
+      )
+
+      await create(
+        {
+          name: 'asd',
+          description: 'asdasd',
+        },
+        {
+          order: {
+            type: 'orders',
+            id: '12345',
+          },
+        },
+        {
+          type: 'skus',
+          attributes: ['name', 'description'],
+          relationships: {
+            order: 'orders',
+          },
+        },
+      )
+      expect(createRequest).toHaveBeenLastCalledWith(
+        '/api/skus',
+        'post',
+        {},
+        {
+          data: {
+            type: 'skus',
+            attributes: {
+              name: 'asd',
+              description: 'asdasd',
+            },
+            relationships: {
+              order: {
+                data: {
+                  type: 'orders',
+                  id: '12345',
+                },
+              },
+            },
+          },
+        },
+      )
+    })
+
+    it('adds only supported relationships', async () => {
+      mockRequestWithEcho()
+      ;(createRequest as any) = jest.fn(
+        (url: string, method: string, query: any, data: any) => {
+          return {
+            data: {
+              data: {},
+            },
+            status: 200,
+          }
+        },
+      )
+
+      await create(
+        {
+          name: 'another title',
+          description: 'another description',
+        },
+        {
+          order: {
+            type: 'orders',
+            id: '98765',
+          },
+          market: {
+            type: 'markets',
+            id: '00001',
+          },
+        } as any,
+        {
+          type: 'skus',
+          attributes: ['name', 'description'],
+          relationships: {
+            order: 'orders',
+          },
+        },
+      )
+      expect(createRequest).toHaveBeenLastCalledWith(
+        '/api/skus',
+        'post',
+        {},
+        {
+          data: {
+            type: 'skus',
+            attributes: {
+              name: 'another title',
+              description: 'another description',
+            },
+            relationships: {
+              order: {
+                data: {
+                  type: 'orders',
+                  id: '98765',
+                },
+              },
+            },
+          },
+        },
+      )
+    })
+
+    it('deserializes data', async () => {
+      mockRequestWithResponse(singleSku)
+      const res = await create(
+        {},
+        {},
+        {
+          type: 'skus',
+          attributes: [],
+          relationships: {},
+        },
+      )
+
+      const attributes = Object.keys(singleSku.data.attributes)
+      const relationships = ['prices']
+
+      for (const attribute of attributes) {
+        expect(res).toHaveProperty(attribute)
+      }
+
+      for (const relationship of relationships) {
+        expect(res).toHaveProperty(relationship)
+      }
+
+      for (const commonField of commonResourceFields) {
+        expect(res).toHaveProperty(commonField)
+      }
     })
   })
 })

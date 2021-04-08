@@ -1,0 +1,206 @@
+{
+    "data": {
+        "id": "WPwySpzvzZ",
+        "type": "skus",
+        "links": {
+            "self": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ"
+        },
+        "attributes": {
+            "code": "809713225",
+            "name": "RAOB0UPZA160000-0-abito_pre_couture-plain_twill-anthracite-r-46",
+            "description": null,
+            "image_url": null,
+            "pieces_per_pack": null,
+            "weight": 1300.0,
+            "unit_of_weight": "gr",
+            "hs_tariff_number": "62031100",
+            "inventory": {
+                "available": true,
+                "quantity": 1,
+                "levels": [
+                    {
+                        "quantity": 1,
+                        "delivery_lead_times": []
+                    },
+                    {
+                        "quantity": 0,
+                        "delivery_lead_times": []
+                    }
+                ]
+            },
+            "created_at": "2021-02-18T12:24:20.804Z",
+            "updated_at": "2021-02-18T12:29:59.670Z",
+            "reference": "RAOB0UPZA160000",
+            "reference_origin": null,
+            "metadata": {
+                "class": "301",
+                "event": "B1",
+                "colour": "0",
+                "pro_65": "N",
+                "season": "20211",
+                "subclass": "500",
+                "drop_code": "R",
+                "department": "250",
+                "event_desc": "Pre S/S",
+                "style_code": "RAOB0U",
+                "check_digit": "0",
+                "season_desc": "S/S 2021",
+                "delivery_type": "1",
+                "material_code": "PZA16",
+                "subdepartment": "201",
+                "pf_description": "Abito Pre couture",
+                "madein_iso_code": "IT",
+                "percentage_list": "T 100% VIRGIN WOOL",
+                "size_description": "46",
+                "trasmission_date": "20201117",
+                "trasmission_time": "94737",
+                "class_description": "NOTCH LAPELS",
+                "style_description": "Suit Pre Couture",
+                "colour_description": "ANTHRACITE",
+                "trasmission_number": "277613",
+                "delivery_group_code": "NO",
+                "flag_hazard_material": "N",
+                "subclass_description": "FORMAL",
+                "department_description": "FORMALWEAR",
+                "material_description_1": "-",
+                "global_trade_item_number": "3,62E+12",
+                "delivery_type_description": "Normale",
+                "subdepartment_description": "FORMAL SUITS",
+                "delivery_group_description": "Normale",
+                "material_code_description_1": "PLAIN TWILL"
+            }
+        },
+        "relationships": {
+            "shipping_category": {
+                "links": {
+                    "self": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/relationships/shipping_category",
+                    "related": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/shipping_category"
+                }
+            },
+            "prices": {
+                "links": {
+                    "self": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/relationships/prices",
+                    "related": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/prices"
+                },
+                "data": [
+                    {
+                        "type": "prices",
+                        "id": "pPOmUrGKOa"
+                    }
+                ]
+            },
+            "stock_items": {
+                "links": {
+                    "self": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/relationships/stock_items",
+                    "related": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/stock_items"
+                }
+            },
+            "delivery_lead_times": {
+                "links": {
+                    "self": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/relationships/delivery_lead_times",
+                    "related": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/delivery_lead_times"
+                }
+            },
+            "sku_options": {
+                "links": {
+                    "self": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/relationships/sku_options",
+                    "related": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/sku_options"
+                }
+            },
+            "attachments": {
+                "links": {
+                    "self": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/relationships/attachments",
+                    "related": "https://yourdomain.commercelayer.io/api/skus/WPwySpzvzZ/attachments"
+                }
+            }
+        },
+        "meta": {
+            "mode": "live"
+        }
+    },
+    "included": [
+        {
+            "id": "pPOmUrGKOa",
+            "type": "prices",
+            "links": {
+                "self": "https://yourdomain.commercelayer.io/api/prices/pPOmUrGKOa"
+            },
+            "attributes": {
+                "currency_code": "EUR",
+                "sku_code": "809713225",
+                "amount_cents": 290000,
+                "amount_float": 2900.0,
+                "formatted_amount": "€2.900,00",
+                "compare_at_amount_cents": 290000,
+                "compare_at_amount_float": 2900.0,
+                "formatted_compare_at_amount": "€2.900,00",
+                "created_at": "2021-02-18T16:15:21.300Z",
+                "updated_at": "2021-02-18T16:29:50.974Z",
+                "reference": null,
+                "reference_origin": null,
+                "metadata": {}
+            },
+            "relationships": {
+                "price_list": {
+                    "links": {
+                        "self": "https://yourdomain.commercelayer.io/api/prices/pPOmUrGKOa/relationships/price_list",
+                        "related": "https://yourdomain.commercelayer.io/api/prices/pPOmUrGKOa/price_list"
+                    },
+                    "data": {
+                        "type": "price_lists",
+                        "id": "VByVpCwyyk"
+                    }
+                },
+                "sku": {
+                    "links": {
+                        "self": "https://yourdomain.commercelayer.io/api/prices/pPOmUrGKOa/relationships/sku",
+                        "related": "https://yourdomain.commercelayer.io/api/prices/pPOmUrGKOa/sku"
+                    }
+                },
+                "attachments": {
+                    "links": {
+                        "self": "https://yourdomain.commercelayer.io/api/prices/pPOmUrGKOa/relationships/attachments",
+                        "related": "https://yourdomain.commercelayer.io/api/prices/pPOmUrGKOa/attachments"
+                    }
+                }
+            },
+            "meta": {
+                "mode": "live"
+            }
+        },
+        {
+            "id": "VByVpCwyyk",
+            "type": "price_lists",
+            "links": {
+                "self": "https://yourdomain.commercelayer.io/api/price_lists/VByVpCwyyk"
+            },
+            "attributes": {
+                "name": "EUR Price List",
+                "currency_code": "EUR",
+                "tax_included": true,
+                "created_at": "2021-02-17T16:10:53.951Z",
+                "updated_at": "2021-02-17T16:35:44.508Z",
+                "reference": "15012",
+                "reference_origin": "",
+                "metadata": {}
+            },
+            "relationships": {
+                "prices": {
+                    "links": {
+                        "self": "https://yourdomain.commercelayer.io/api/price_lists/VByVpCwyyk/relationships/prices",
+                        "related": "https://yourdomain.commercelayer.io/api/price_lists/VByVpCwyyk/prices"
+                    }
+                },
+                "attachments": {
+                    "links": {
+                        "self": "https://yourdomain.commercelayer.io/api/price_lists/VByVpCwyyk/relationships/attachments",
+                        "related": "https://yourdomain.commercelayer.io/api/price_lists/VByVpCwyyk/attachments"
+                    }
+                }
+            },
+            "meta": {
+                "mode": "live"
+            }
+        }
+    ]
+}

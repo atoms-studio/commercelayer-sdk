@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "title": "Key is not included in URL",
+      "detail": "The URL does not support the key 10272",
+      "code": "KEY_NOT_INCLUDED_IN_URL",
+      "status": "400"
+    }
+  ]
+}

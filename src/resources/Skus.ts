@@ -2,6 +2,7 @@ import {
   ResourceConfig,
   createResource,
   ConcreteResourceInstance,
+  Resource,
 } from '../resource'
 import { ShippingCategoryInstance } from './ShippingCategories'
 
@@ -44,12 +45,12 @@ export interface SkuAttributes {
 }
 
 export interface SkuRelationships {
-  shipping_category: ShippingCategoryInstance
-  prices: string
-  stock_items: string
-  delivery_lead_times: string
-  sku_options: number
-  attachments: number
+  shipping_category?: ShippingCategoryInstance
+  prices?: any[]
+  stock_items?: any[]
+  delivery_lead_times?: any[]
+  sku_options?: any[]
+  attachments?: any[]
 }
 
 export type SkuInstance = ConcreteResourceInstance<
@@ -72,14 +73,17 @@ export const SkusConfig: ResourceConfig<SkuAttributes, SkuRelationships> = {
     'inventory',
   ],
 
-  relationships: [
-    'shipping_category',
-    'prices',
-    'stock_items',
-    'delivery_lead_times',
-    'sku_options',
-    'attachments',
-  ],
+  relationships: {
+    shipping_category: 'shipping_categories',
+    prices: 'prices',
+    stock_items: 'stock_items',
+    delivery_lead_times: 'delivery_lead_times',
+    sku_options: 'sku_options',
+    attachments: 'attachments',
+  },
 }
 
-export const Skus = createResource<SkuAttributes, SkuRelationships>(SkusConfig)
+export const Skus: Resource<SkuInstance> = createResource<
+  SkuAttributes,
+  SkuRelationships
+>(SkusConfig)

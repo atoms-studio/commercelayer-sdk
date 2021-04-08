@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "title": "Access denied",
+      "detail": "You are not authorized to perform this action on the requested resource.",
+      "code": "UNAUTHORIZED",
+      "status": "401"
+    }
+  ]
+}

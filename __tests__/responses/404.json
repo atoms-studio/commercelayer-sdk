@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "title": "Record not found",
+      "detail": "The requested resource was not found. Please double-check the resource id.",
+      "code": "RECORD_NOT_FOUND",
+      "status": "404"
+    }
+  ]
+}

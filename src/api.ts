@@ -1,9 +1,14 @@
 import { AxiosResponse } from 'axios'
 import { getBaseRequest } from './request'
-
-const formatError = () => {
-  //
-}
+import { serialize, deserialize } from './serializer'
+import {
+  ResourceConfig,
+  ConcreteResourceInstance,
+  ResourcePagination,
+  AttributesPayload,
+  RelationshipsPayload,
+} from './resource'
+import { handleApiErrors } from './errors'
 
 export type RequestMethod = 'get' | 'post' | 'patch' | 'delete'
 
@@ -61,31 +66,82 @@ export const createRequest = (
   })
 }
 
-export const find = async <T>(
+export const find = async <T, U>(
   id: string,
-  query: RequestQuery = {},
-  resourceType: string,
-): Promise<T> => {
-  const request = createRequest(`/api/${resourceType}/${id}`, 'get', query)
+  query: RequestQuery,
+  config: ResourceConfig<T, U>,
+): Promise<ConcreteResourceInstance<T, U>> => {
+  const request = createRequest(`/api/${config.type}/${id}`, 'get', query)
 
   try {
     const { data } = await request
-    return data
+    return await deserialize(data)
   } catch (error) {
-    throw new Error(error.message)
+    throw handleApiErrors(error)
   }
 }
 
-export const findBy = async <T>(
+export const findAll = async <T, U>(
   query: RequestQuery,
-  resourceType: string,
-): Promise<T | null> => {
-  const request = createRequest(`/api/${resourceType}`, 'get', query)
+  config: ResourceConfig<T, U>,
+): Promise<ResourcePagination<ConcreteResourceInstance<T, U>>> => {
+  const request = createRequest(`/api/${config.type}`, 'get', query)
 
   try {
     const { data } = await request
-    return data
+    const result = await deserialize(data)
+
+    const currentPage = (query.page || {}).number || 1
+
+    return {
+      items: result.items,
+      total: result.total,
+      currentPage,
+      prevPage: currentPage - 1 || null,
+      nextPage: currentPage < result.lastPage ? currentPage + 1 : null,
+      lastPage: result.lastPage,
+      hasMore: currentPage < result.lastPage,
+    }
   } catch (error) {
-    throw new Error(error.message)
+    throw handleApiErrors(error)
+  }
+}
+
+export const findBy = async <T, U>(
+  query: RequestQuery,
+  config: ResourceConfig<T, U>,
+): Promise<ConcreteResourceInstance<T, U> | null> => {
+  const result = await findAll(query, config)
+  if (result.items.length) {
+    return result.items[0]
+  }
+
+  return null
+}
+
+export const destroy = async <T, U>(
+  id: string,
+  config: ResourceConfig<T, U>,
+): Promise<void> => {
+  try {
+    await createRequest(`/api/${config.type}/${id}`, 'delete')
+  } catch (error) {
+    throw handleApiErrors(error)
+  }
+}
+
+export const create = async <T, U>(
+  attributes: AttributesPayload<T>,
+  relationships: RelationshipsPayload<U>,
+  config: ResourceConfig<T, U>,
+): Promise<ConcreteResourceInstance<T, U>> => {
+  const body = await serialize(config, attributes, relationships)
+  const request = createRequest(`/api/${config.type}`, 'post', {}, body)
+
+  try {
+    const { data } = await request
+    return await deserialize(data)
+  } catch (error) {
+    throw handleApiErrors(error)
   }
 }

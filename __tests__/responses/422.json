@@ -1,0 +1,18 @@
+{
+  "errors": [
+    {
+      "title": "must be less than or equal to 10",
+      "detail": "quantity - must be less than or equal to 10",
+      "code": "VALIDATION_ERROR",
+      "source": {
+        "pointer": "/data/attributes/quantity"
+      },
+      "status": "422",
+      "meta": {
+        "error": "less_than_or_equal_to",
+        "value": 100,
+        "count": 10
+      }
+    }
+  ]
+}

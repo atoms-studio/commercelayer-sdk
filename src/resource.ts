@@ -1,9 +1,9 @@
-import { find, findBy, RequestQuery } from './api'
+import { find, findBy, findAll, destroy, create, RequestQuery } from './api'
 
 export interface ResourceConfig<T, U> {
   type: string
   attributes: (keyof T)[]
-  relationships: (keyof U)[]
+  relationships: Record<keyof U, string>
 }
 
 export interface CommonResourceAttributes {
@@ -15,10 +15,19 @@ export interface CommonResourceAttributes {
   updated_at: string
 }
 
+export type AttributesPayload<T> = {
+  [K in keyof T]?: T[K]
+}
+
+export type RelationshipsPayload<T> = {
+  [K in keyof T]?: T[K] | string
+}
+
 export type ConcreteResourceInstance<T, U> = CommonResourceAttributes & T & U
 
 export interface ResourcePagination<T> {
   items: T[]
+  total: number
   currentPage: number
   prevPage: number | null
   nextPage: number | null
@@ -29,8 +38,11 @@ export interface ResourcePagination<T> {
 export interface Resource<T> {
   find: (id: string, query?: RequestQuery) => Promise<T>
   findBy: (query: RequestQuery) => Promise<T | null>
-  findAll: () => Promise<ResourcePagination<T>>
-  create: () => Promise<T>
+  findAll: (query: RequestQuery) => Promise<ResourcePagination<T>>
+  create: (
+    attributes: AttributesPayload<any>,
+    relationships?: RelationshipsPayload<any>,
+  ) => Promise<T>
   update: (id: string) => Promise<T>
   delete: (id: string) => Promise<void>
 }
@@ -44,39 +56,42 @@ export const commonResourceFields: (keyof CommonResourceAttributes)[] = [
   'updated_at',
 ]
 
-export const createResource = <T, U, V = CommonResourceAttributes & T>(
+export const createResource = <T, U>(
   config: ResourceConfig<T, U>,
-): Resource<V> => {
+): Resource<ConcreteResourceInstance<T, U>> => {
   return {
-    find(id: string, query?: RequestQuery): Promise<V> {
-      return find(id, query, config.type)
+    find(
+      id: string,
+      query?: RequestQuery,
+    ): Promise<ConcreteResourceInstance<T, U>> {
+      return find<T, U>(id, query || {}, config)
     },
 
-    findBy(query: RequestQuery): Promise<V | null> {
-      return findBy(query, config.type)
+    findBy(
+      query: RequestQuery,
+    ): Promise<ConcreteResourceInstance<T, U> | null> {
+      return findBy<T, U>(query, config)
     },
 
-    findAll(): Promise<ResourcePagination<V>> {
-      return Promise.resolve({
-        items: [] as V[],
-        currentPage: 1,
-        prevPage: null,
-        nextPage: null,
-        lastPage: 1,
-        hasMore: false,
-      })
+    findAll(
+      query: RequestQuery,
+    ): Promise<ResourcePagination<ConcreteResourceInstance<T, U>>> {
+      return findAll<T, U>(query, config)
     },
 
-    create() {
-      return Promise.resolve({} as V)
+    create(
+      attributes: AttributesPayload<T>,
+      relationships?: RelationshipsPayload<U>,
+    ) {
+      return create(attributes, relationships || {}, config)
     },
 
     update(id: string) {
-      return Promise.resolve({} as V)
+      return Promise.resolve({} as ConcreteResourceInstance<T, U>)
     },
 
-    delete(id: string) {
-      return Promise.resolve()
+    delete(id: string): Promise<void> {
+      return destroy<T, U>(id, config)
     },
   }
 }

@@ -2,6 +2,7 @@ import {
   ResourceConfig,
   ConcreteResourceInstance,
   createResource,
+  Resource,
 } from '../resource'
 import { SkuInstance } from './Skus'
 
@@ -30,7 +31,7 @@ export const ShippingCategoriesConfig: ResourceConfig<
   relationships: ['skus', 'attachments'],
 }
 
-export const ShippingCategories = createResource<
+export const ShippingCategories: Resource<ShippingCategoryInstance> = createResource<
   ShippingCategoryAttributes,
   ShippingCategoryRelationships
 >(ShippingCategoriesConfig)

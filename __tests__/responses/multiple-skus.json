@@ -1,0 +1,1579 @@
+{
+   "data": [
+       {
+           "id": "ZDklSywoXn",
+           "type": "skus",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn"
+           },
+           "attributes": {
+               "code": "808811825",
+               "name": "UJCA0LPZ6001200-2-t-shirt-pz600-graphite-l",
+               "description": null,
+               "image_url": null,
+               "pieces_per_pack": null,
+               "weight": 150.0,
+               "unit_of_weight": "gr",
+               "hs_tariff_number": "61091000",
+               "created_at": "2021-02-18T12:07:47.815Z",
+               "updated_at": "2021-02-18T12:07:47.822Z",
+               "reference": "UJCA0LPZ6001200",
+               "reference_origin": null,
+               "metadata": {
+                   "class": "335",
+                   "event": "B6",
+                   "colour": "1200",
+                   "pro_65": "N",
+                   "season": "20193",
+                   "subclass": "521",
+                   "department": "251",
+                   "event_desc": "Pre F/W",
+                   "style_code": "UJCA0L",
+                   "check_digit": "2",
+                   "season_desc": "F/W 2019",
+                   "delivery_type": "1",
+                   "material_code": "PZ600",
+                   "subdepartment": "216",
+                   "pf_description": "T-Shirt",
+                   "madein_iso_code": "IT",
+                   "percentage_list": "T 100% COTTON",
+                   "size_description": "L",
+                   "trasmission_date": "20201203",
+                   "trasmission_time": "223356",
+                   "class_description": "T-SHIRT",
+                   "style_description": "T-SHIRT S\\S",
+                   "colour_description": "GRAPHITE",
+                   "trasmission_number": "280381",
+                   "delivery_group_code": "NO",
+                   "flag_hazard_material": "N",
+                   "subclass_description": "CLASSIC",
+                   "department_description": "LEISUREWEAR",
+                   "material_description_1": "-",
+                   "global_trade_item_number": "3,62E+12",
+                   "delivery_type_description": "Normale",
+                   "subdepartment_description": "JERSEY",
+                   "delivery_group_description": "Normale",
+                   "material_code_description_1": "PZ600"
+               }
+           },
+           "relationships": {
+               "shipping_category": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/relationships/shipping_category",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/shipping_category"
+                   }
+               },
+               "prices": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/relationships/prices",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/prices"
+                   },
+                   "data": [
+                       {
+                           "type": "prices",
+                           "id": "pVOMUXleWA"
+                       }
+                   ]
+               },
+               "stock_items": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/relationships/stock_items",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/stock_items"
+                   }
+               },
+               "delivery_lead_times": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/relationships/delivery_lead_times",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/delivery_lead_times"
+                   }
+               },
+               "sku_options": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/relationships/sku_options",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/sku_options"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZDklSywoXn/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "WlwzSJzXPZ",
+           "type": "skus",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ"
+           },
+           "attributes": {
+               "code": "808811824",
+               "name": "UJCA0LPZ6001200-4-t-shirt-pz600-graphite-m",
+               "description": null,
+               "image_url": null,
+               "pieces_per_pack": null,
+               "weight": 150.0,
+               "unit_of_weight": "gr",
+               "hs_tariff_number": "61091000",
+               "created_at": "2021-02-18T12:07:47.852Z",
+               "updated_at": "2021-02-18T12:07:47.859Z",
+               "reference": "UJCA0LPZ6001200",
+               "reference_origin": null,
+               "metadata": {
+                   "class": "335",
+                   "event": "B6",
+                   "colour": "1200",
+                   "pro_65": "N",
+                   "season": "20193",
+                   "subclass": "521",
+                   "department": "251",
+                   "event_desc": "Pre F/W",
+                   "style_code": "UJCA0L",
+                   "check_digit": "4",
+                   "season_desc": "F/W 2019",
+                   "delivery_type": "1",
+                   "material_code": "PZ600",
+                   "subdepartment": "216",
+                   "pf_description": "T-Shirt",
+                   "madein_iso_code": "IT",
+                   "percentage_list": "T 100% COTTON",
+                   "size_description": "M",
+                   "trasmission_date": "20201203",
+                   "trasmission_time": "223356",
+                   "class_description": "T-SHIRT",
+                   "style_description": "T-SHIRT S\\S",
+                   "colour_description": "GRAPHITE",
+                   "trasmission_number": "280381",
+                   "delivery_group_code": "NO",
+                   "flag_hazard_material": "N",
+                   "subclass_description": "CLASSIC",
+                   "department_description": "LEISUREWEAR",
+                   "material_description_1": "-",
+                   "global_trade_item_number": "3,62E+12",
+                   "delivery_type_description": "Normale",
+                   "subdepartment_description": "JERSEY",
+                   "delivery_group_description": "Normale",
+                   "material_code_description_1": "PZ600"
+               }
+           },
+           "relationships": {
+               "shipping_category": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/relationships/shipping_category",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/shipping_category"
+                   }
+               },
+               "prices": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/relationships/prices",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/prices"
+                   },
+                   "data": [
+                       {
+                           "type": "prices",
+                           "id": "peNYUXOvqA"
+                       }
+                   ]
+               },
+               "stock_items": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/relationships/stock_items",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/stock_items"
+                   }
+               },
+               "delivery_lead_times": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/relationships/delivery_lead_times",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/delivery_lead_times"
+                   }
+               },
+               "sku_options": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/relationships/sku_options",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/sku_options"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WlwzSJzXPZ/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "BdplSQepOB",
+           "type": "skus",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB"
+           },
+           "attributes": {
+               "code": "808811823",
+               "name": "UJCA0LPZ6001200-6-t-shirt-pz600-graphite-s",
+               "description": null,
+               "image_url": null,
+               "pieces_per_pack": null,
+               "weight": 150.0,
+               "unit_of_weight": "gr",
+               "hs_tariff_number": "61091000",
+               "created_at": "2021-02-18T12:07:47.886Z",
+               "updated_at": "2021-02-18T12:07:47.896Z",
+               "reference": "UJCA0LPZ6001200",
+               "reference_origin": null,
+               "metadata": {
+                   "class": "335",
+                   "event": "B6",
+                   "colour": "1200",
+                   "pro_65": "N",
+                   "season": "20193",
+                   "subclass": "521",
+                   "department": "251",
+                   "event_desc": "Pre F/W",
+                   "style_code": "UJCA0L",
+                   "check_digit": "6",
+                   "season_desc": "F/W 2019",
+                   "delivery_type": "1",
+                   "material_code": "PZ600",
+                   "subdepartment": "216",
+                   "pf_description": "T-Shirt",
+                   "madein_iso_code": "IT",
+                   "percentage_list": "T 100% COTTON",
+                   "size_description": "S",
+                   "trasmission_date": "20201203",
+                   "trasmission_time": "223356",
+                   "class_description": "T-SHIRT",
+                   "style_description": "T-SHIRT S\\S",
+                   "colour_description": "GRAPHITE",
+                   "trasmission_number": "280381",
+                   "delivery_group_code": "NO",
+                   "flag_hazard_material": "N",
+                   "subclass_description": "CLASSIC",
+                   "department_description": "LEISUREWEAR",
+                   "material_description_1": "-",
+                   "global_trade_item_number": "3,62E+12",
+                   "delivery_type_description": "Normale",
+                   "subdepartment_description": "JERSEY",
+                   "delivery_group_description": "Normale",
+                   "material_code_description_1": "PZ600"
+               }
+           },
+           "relationships": {
+               "shipping_category": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/relationships/shipping_category",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/shipping_category"
+                   }
+               },
+               "prices": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/relationships/prices",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/prices"
+                   },
+                   "data": [
+                       {
+                           "type": "prices",
+                           "id": "gqwEUdQPNp"
+                       }
+                   ]
+               },
+               "stock_items": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/relationships/stock_items",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/stock_items"
+                   }
+               },
+               "delivery_lead_times": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/relationships/delivery_lead_times",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/delivery_lead_times"
+                   }
+               },
+               "sku_options": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/relationships/sku_options",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/sku_options"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BdplSQepOB/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "BorzSmVwyW",
+           "type": "skus",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW"
+           },
+           "attributes": {
+               "code": "808811826",
+               "name": "UJCA0LPZ6001200-1-t-shirt-pz600-graphite-xl",
+               "description": null,
+               "image_url": null,
+               "pieces_per_pack": null,
+               "weight": 150.0,
+               "unit_of_weight": "gr",
+               "hs_tariff_number": "61091000",
+               "created_at": "2021-02-18T12:07:47.926Z",
+               "updated_at": "2021-02-18T12:07:47.931Z",
+               "reference": "UJCA0LPZ6001200",
+               "reference_origin": null,
+               "metadata": {
+                   "class": "335",
+                   "event": "B6",
+                   "colour": "1200",
+                   "pro_65": "N",
+                   "season": "20193",
+                   "subclass": "521",
+                   "department": "251",
+                   "event_desc": "Pre F/W",
+                   "style_code": "UJCA0L",
+                   "check_digit": "1",
+                   "season_desc": "F/W 2019",
+                   "delivery_type": "1",
+                   "material_code": "PZ600",
+                   "subdepartment": "216",
+                   "pf_description": "T-Shirt",
+                   "madein_iso_code": "IT",
+                   "percentage_list": "T 100% COTTON",
+                   "size_description": "XL",
+                   "trasmission_date": "20201203",
+                   "trasmission_time": "223356",
+                   "class_description": "T-SHIRT",
+                   "style_description": "T-SHIRT S\\S",
+                   "colour_description": "GRAPHITE",
+                   "trasmission_number": "280381",
+                   "delivery_group_code": "NO",
+                   "flag_hazard_material": "N",
+                   "subclass_description": "CLASSIC",
+                   "department_description": "LEISUREWEAR",
+                   "material_description_1": "-",
+                   "global_trade_item_number": "3,62E+12",
+                   "delivery_type_description": "Normale",
+                   "subdepartment_description": "JERSEY",
+                   "delivery_group_description": "Normale",
+                   "material_code_description_1": "PZ600"
+               }
+           },
+           "relationships": {
+               "shipping_category": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/relationships/shipping_category",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/shipping_category"
+                   }
+               },
+               "prices": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/relationships/prices",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/prices"
+                   },
+                   "data": [
+                       {
+                           "type": "prices",
+                           "id": "aGqWUeJNOA"
+                       }
+                   ]
+               },
+               "stock_items": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/relationships/stock_items",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/stock_items"
+                   }
+               },
+               "delivery_lead_times": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/relationships/delivery_lead_times",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/delivery_lead_times"
+                   }
+               },
+               "sku_options": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/relationships/sku_options",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/sku_options"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BorzSmVwyW/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "WMPOSMkgLZ",
+           "type": "skus",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ"
+           },
+           "attributes": {
+               "code": "808908888",
+               "name": "UJCA0LPZ6001200-8-t-shirt-pz600-graphite-xs",
+               "description": null,
+               "image_url": null,
+               "pieces_per_pack": null,
+               "weight": 150.0,
+               "unit_of_weight": "gr",
+               "hs_tariff_number": "61091000",
+               "created_at": "2021-02-18T12:07:47.954Z",
+               "updated_at": "2021-02-18T12:07:47.959Z",
+               "reference": "UJCA0LPZ6001200",
+               "reference_origin": null,
+               "metadata": {
+                   "class": "335",
+                   "event": "B6",
+                   "colour": "1200",
+                   "pro_65": "N",
+                   "season": "20193",
+                   "subclass": "521",
+                   "department": "251",
+                   "event_desc": "Pre F/W",
+                   "style_code": "UJCA0L",
+                   "check_digit": "8",
+                   "season_desc": "F/W 2019",
+                   "delivery_type": "1",
+                   "material_code": "PZ600",
+                   "subdepartment": "216",
+                   "pf_description": "T-Shirt",
+                   "madein_iso_code": "IT",
+                   "percentage_list": "T 100% COTTON",
+                   "size_description": "XS",
+                   "trasmission_date": "20201203",
+                   "trasmission_time": "223356",
+                   "class_description": "T-SHIRT",
+                   "style_description": "T-SHIRT S\\S",
+                   "colour_description": "GRAPHITE",
+                   "trasmission_number": "280381",
+                   "delivery_group_code": "NO",
+                   "flag_hazard_material": "N",
+                   "subclass_description": "CLASSIC",
+                   "department_description": "LEISUREWEAR",
+                   "material_description_1": "-",
+                   "global_trade_item_number": "3,62E+12",
+                   "delivery_type_description": "Normale",
+                   "subdepartment_description": "JERSEY",
+                   "delivery_group_description": "Normale",
+                   "material_code_description_1": "PZ600"
+               }
+           },
+           "relationships": {
+               "shipping_category": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/relationships/shipping_category",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/shipping_category"
+                   }
+               },
+               "prices": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/relationships/prices",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/prices"
+                   },
+                   "data": [
+                       {
+                           "type": "prices",
+                           "id": "ARXmULQjDa"
+                       }
+                   ]
+               },
+               "stock_items": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/relationships/stock_items",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/stock_items"
+                   }
+               },
+               "delivery_lead_times": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/relationships/delivery_lead_times",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/delivery_lead_times"
+                   }
+               },
+               "sku_options": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/relationships/sku_options",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/sku_options"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/WMPOSMkgLZ/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "nVyPSaVqpB",
+           "type": "skus",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB"
+           },
+           "attributes": {
+               "code": "808811827",
+               "name": "UJCA0LPZ6001200-9-t-shirt-pz600-graphite-xxl",
+               "description": null,
+               "image_url": null,
+               "pieces_per_pack": null,
+               "weight": 150.0,
+               "unit_of_weight": "gr",
+               "hs_tariff_number": "61091000",
+               "created_at": "2021-02-18T12:07:47.981Z",
+               "updated_at": "2021-02-18T12:07:47.986Z",
+               "reference": "UJCA0LPZ6001200",
+               "reference_origin": null,
+               "metadata": {
+                   "class": "335",
+                   "event": "B6",
+                   "colour": "1200",
+                   "pro_65": "N",
+                   "season": "20193",
+                   "subclass": "521",
+                   "department": "251",
+                   "event_desc": "Pre F/W",
+                   "style_code": "UJCA0L",
+                   "check_digit": "9",
+                   "season_desc": "F/W 2019",
+                   "delivery_type": "1",
+                   "material_code": "PZ600",
+                   "subdepartment": "216",
+                   "pf_description": "T-Shirt",
+                   "madein_iso_code": "IT",
+                   "percentage_list": "T 100% COTTON",
+                   "size_description": "XXL",
+                   "trasmission_date": "20201203",
+                   "trasmission_time": "223356",
+                   "class_description": "T-SHIRT",
+                   "style_description": "T-SHIRT S\\S",
+                   "colour_description": "GRAPHITE",
+                   "trasmission_number": "280381",
+                   "delivery_group_code": "NO",
+                   "flag_hazard_material": "N",
+                   "subclass_description": "CLASSIC",
+                   "department_description": "LEISUREWEAR",
+                   "material_description_1": "-",
+                   "global_trade_item_number": "3,62E+12",
+                   "delivery_type_description": "Normale",
+                   "subdepartment_description": "JERSEY",
+                   "delivery_group_description": "Normale",
+                   "material_code_description_1": "PZ600"
+               }
+           },
+           "relationships": {
+               "shipping_category": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/relationships/shipping_category",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/shipping_category"
+                   }
+               },
+               "prices": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/relationships/prices",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/prices"
+                   },
+                   "data": [
+                       {
+                           "type": "prices",
+                           "id": "gkLYUzlKOa"
+                       }
+                   ]
+               },
+               "stock_items": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/relationships/stock_items",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/stock_items"
+                   }
+               },
+               "delivery_lead_times": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/relationships/delivery_lead_times",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/delivery_lead_times"
+                   }
+               },
+               "sku_options": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/relationships/sku_options",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/sku_options"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nVyPSaVqpB/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "BXxPSEjQGB",
+           "type": "skus",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB"
+           },
+           "attributes": {
+               "code": "808811828",
+               "name": "UJCA0LPZ6001200-7-t-shirt-pz600-graphite-3xl",
+               "description": null,
+               "image_url": null,
+               "pieces_per_pack": null,
+               "weight": 150.0,
+               "unit_of_weight": "gr",
+               "hs_tariff_number": "61091000",
+               "created_at": "2021-02-18T12:07:48.010Z",
+               "updated_at": "2021-02-18T12:07:48.017Z",
+               "reference": "UJCA0LPZ6001200",
+               "reference_origin": null,
+               "metadata": {
+                   "class": "335",
+                   "event": "B6",
+                   "colour": "1200",
+                   "pro_65": "N",
+                   "season": "20193",
+                   "subclass": "521",
+                   "department": "251",
+                   "event_desc": "Pre F/W",
+                   "style_code": "UJCA0L",
+                   "check_digit": "7",
+                   "season_desc": "F/W 2019",
+                   "delivery_type": "1",
+                   "material_code": "PZ600",
+                   "subdepartment": "216",
+                   "pf_description": "T-Shirt",
+                   "madein_iso_code": "IT",
+                   "percentage_list": "T 100% COTTON",
+                   "size_description": "3XL",
+                   "trasmission_date": "20201203",
+                   "trasmission_time": "223356",
+                   "class_description": "T-SHIRT",
+                   "style_description": "T-SHIRT S\\S",
+                   "colour_description": "GRAPHITE",
+                   "trasmission_number": "280381",
+                   "delivery_group_code": "NO",
+                   "flag_hazard_material": "N",
+                   "subclass_description": "CLASSIC",
+                   "department_description": "LEISUREWEAR",
+                   "material_description_1": "-",
+                   "global_trade_item_number": "3,62E+12",
+                   "delivery_type_description": "Normale",
+                   "subdepartment_description": "JERSEY",
+                   "delivery_group_description": "Normale",
+                   "material_code_description_1": "PZ600"
+               }
+           },
+           "relationships": {
+               "shipping_category": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/relationships/shipping_category",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/shipping_category"
+                   }
+               },
+               "prices": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/relationships/prices",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/prices"
+                   },
+                   "data": [
+                       {
+                           "type": "prices",
+                           "id": "gMJQUBYqWa"
+                       }
+                   ]
+               },
+               "stock_items": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/relationships/stock_items",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/stock_items"
+                   }
+               },
+               "delivery_lead_times": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/relationships/delivery_lead_times",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/delivery_lead_times"
+                   }
+               },
+               "sku_options": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/relationships/sku_options",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/sku_options"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/BXxPSEjQGB/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "ZqkxSMljMB",
+           "type": "skus",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB"
+           },
+           "attributes": {
+               "code": "808811829",
+               "name": "UJCA0LPZ6001200-5-t-shirt-pz600-graphite-4xl",
+               "description": null,
+               "image_url": null,
+               "pieces_per_pack": null,
+               "weight": 150.0,
+               "unit_of_weight": "gr",
+               "hs_tariff_number": "61091000",
+               "created_at": "2021-02-18T12:07:48.041Z",
+               "updated_at": "2021-02-18T12:07:48.048Z",
+               "reference": "UJCA0LPZ6001200",
+               "reference_origin": null,
+               "metadata": {
+                   "class": "335",
+                   "event": "B6",
+                   "colour": "1200",
+                   "pro_65": "N",
+                   "season": "20193",
+                   "subclass": "521",
+                   "department": "251",
+                   "event_desc": "Pre F/W",
+                   "style_code": "UJCA0L",
+                   "check_digit": "5",
+                   "season_desc": "F/W 2019",
+                   "delivery_type": "1",
+                   "material_code": "PZ600",
+                   "subdepartment": "216",
+                   "pf_description": "T-Shirt",
+                   "madein_iso_code": "IT",
+                   "percentage_list": "T 100% COTTON",
+                   "size_description": "4XL",
+                   "trasmission_date": "20201203",
+                   "trasmission_time": "223356",
+                   "class_description": "T-SHIRT",
+                   "style_description": "T-SHIRT S\\S",
+                   "colour_description": "GRAPHITE",
+                   "trasmission_number": "280381",
+                   "delivery_group_code": "NO",
+                   "flag_hazard_material": "N",
+                   "subclass_description": "CLASSIC",
+                   "department_description": "LEISUREWEAR",
+                   "material_description_1": "-",
+                   "global_trade_item_number": "3,62E+12",
+                   "delivery_type_description": "Normale",
+                   "subdepartment_description": "JERSEY",
+                   "delivery_group_description": "Normale",
+                   "material_code_description_1": "PZ600"
+               }
+           },
+           "relationships": {
+               "shipping_category": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/relationships/shipping_category",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/shipping_category"
+                   }
+               },
+               "prices": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/relationships/prices",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/prices"
+                   },
+                   "data": [
+                       {
+                           "type": "prices",
+                           "id": "pLQzUYwXVA"
+                       }
+                   ]
+               },
+               "stock_items": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/relationships/stock_items",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/stock_items"
+                   }
+               },
+               "delivery_lead_times": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/relationships/delivery_lead_times",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/delivery_lead_times"
+                   }
+               },
+               "sku_options": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/relationships/sku_options",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/sku_options"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZqkxSMljMB/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "nGDMSNPrPZ",
+           "type": "skus",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ"
+           },
+           "attributes": {
+               "code": "808811830",
+               "name": "UJCA0LPZ6001200-9-t-shirt-pz600-graphite-5xl",
+               "description": null,
+               "image_url": null,
+               "pieces_per_pack": null,
+               "weight": 150.0,
+               "unit_of_weight": "gr",
+               "hs_tariff_number": "61091000",
+               "created_at": "2021-02-18T12:07:48.070Z",
+               "updated_at": "2021-02-18T12:07:48.075Z",
+               "reference": "UJCA0LPZ6001200",
+               "reference_origin": null,
+               "metadata": {
+                   "class": "335",
+                   "event": "B6",
+                   "colour": "1200",
+                   "pro_65": "N",
+                   "season": "20193",
+                   "subclass": "521",
+                   "department": "251",
+                   "event_desc": "Pre F/W",
+                   "style_code": "UJCA0L",
+                   "check_digit": "9",
+                   "season_desc": "F/W 2019",
+                   "delivery_type": "1",
+                   "material_code": "PZ600",
+                   "subdepartment": "216",
+                   "pf_description": "T-Shirt",
+                   "madein_iso_code": "IT",
+                   "percentage_list": "T 100% COTTON",
+                   "size_description": "5XL",
+                   "trasmission_date": "20201203",
+                   "trasmission_time": "223356",
+                   "class_description": "T-SHIRT",
+                   "style_description": "T-SHIRT S\\S",
+                   "colour_description": "GRAPHITE",
+                   "trasmission_number": "280381",
+                   "delivery_group_code": "NO",
+                   "flag_hazard_material": "N",
+                   "subclass_description": "CLASSIC",
+                   "department_description": "LEISUREWEAR",
+                   "material_description_1": "-",
+                   "global_trade_item_number": "3,62E+12",
+                   "delivery_type_description": "Normale",
+                   "subdepartment_description": "JERSEY",
+                   "delivery_group_description": "Normale",
+                   "material_code_description_1": "PZ600"
+               }
+           },
+           "relationships": {
+               "shipping_category": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/relationships/shipping_category",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/shipping_category"
+                   }
+               },
+               "prices": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/relationships/prices",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/prices"
+                   },
+                   "data": [
+                       {
+                           "type": "prices",
+                           "id": "geNYUXWdXa"
+                       }
+                   ]
+               },
+               "stock_items": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/relationships/stock_items",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/stock_items"
+                   }
+               },
+               "delivery_lead_times": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/relationships/delivery_lead_times",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/delivery_lead_times"
+                   }
+               },
+               "sku_options": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/relationships/sku_options",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/sku_options"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/nGDMSNPrPZ/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "ZwpOSVjDmW",
+           "type": "skus",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW"
+           },
+           "attributes": {
+               "code": "808813271",
+               "name": "UJCA0LPZ6001200-9-t-shirt-pz600-graphite-6xl",
+               "description": null,
+               "image_url": null,
+               "pieces_per_pack": null,
+               "weight": 150.0,
+               "unit_of_weight": "gr",
+               "hs_tariff_number": "61091000",
+               "created_at": "2021-02-18T12:07:48.098Z",
+               "updated_at": "2021-02-18T12:07:48.104Z",
+               "reference": "UJCA0LPZ6001200",
+               "reference_origin": null,
+               "metadata": {
+                   "class": "335",
+                   "event": "B6",
+                   "colour": "1200",
+                   "pro_65": "N",
+                   "season": "20193",
+                   "subclass": "521",
+                   "department": "251",
+                   "event_desc": "Pre F/W",
+                   "style_code": "UJCA0L",
+                   "check_digit": "9",
+                   "season_desc": "F/W 2019",
+                   "delivery_type": "1",
+                   "material_code": "PZ600",
+                   "subdepartment": "216",
+                   "pf_description": "T-Shirt",
+                   "madein_iso_code": "IT",
+                   "percentage_list": "T 100% COTTON",
+                   "size_description": "6XL",
+                   "trasmission_date": "20201203",
+                   "trasmission_time": "223356",
+                   "class_description": "T-SHIRT",
+                   "style_description": "T-SHIRT S\\S",
+                   "colour_description": "GRAPHITE",
+                   "trasmission_number": "280381",
+                   "delivery_group_code": "NO",
+                   "flag_hazard_material": "N",
+                   "subclass_description": "CLASSIC",
+                   "department_description": "LEISUREWEAR",
+                   "material_description_1": "-",
+                   "global_trade_item_number": "3,62E+12",
+                   "delivery_type_description": "Normale",
+                   "subdepartment_description": "JERSEY",
+                   "delivery_group_description": "Normale",
+                   "material_code_description_1": "PZ600"
+               }
+           },
+           "relationships": {
+               "shipping_category": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/relationships/shipping_category",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/shipping_category"
+                   }
+               },
+               "prices": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/relationships/prices",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/prices"
+                   },
+                   "data": [
+                       {
+                           "type": "prices",
+                           "id": "glnlUJVblp"
+                       }
+                   ]
+               },
+               "stock_items": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/relationships/stock_items",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/stock_items"
+                   }
+               },
+               "delivery_lead_times": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/relationships/delivery_lead_times",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/delivery_lead_times"
+                   }
+               },
+               "sku_options": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/relationships/sku_options",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/sku_options"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/skus/ZwpOSVjDmW/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       }
+   ],
+   "included": [
+       {
+           "id": "pVOMUXleWA",
+           "type": "prices",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/prices/pVOMUXleWA"
+           },
+           "attributes": {
+               "currency_code": "EUR",
+               "sku_code": "808811825",
+               "amount_cents": 25000,
+               "amount_float": 250.0,
+               "formatted_amount": "€250,00",
+               "compare_at_amount_cents": 25000,
+               "compare_at_amount_float": 250.0,
+               "formatted_compare_at_amount": "€250,00",
+               "created_at": "2021-02-18T15:36:08.429Z",
+               "updated_at": "2021-02-18T16:32:30.545Z",
+               "reference": null,
+               "reference_origin": null,
+               "metadata": {}
+           },
+           "relationships": {
+               "price_list": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/pVOMUXleWA/relationships/price_list",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/pVOMUXleWA/price_list"
+                   },
+                   "data": {
+                       "type": "price_lists",
+                       "id": "VByVpCwyyk"
+                   }
+               },
+               "sku": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/pVOMUXleWA/relationships/sku",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/pVOMUXleWA/sku"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/pVOMUXleWA/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/pVOMUXleWA/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "peNYUXOvqA",
+           "type": "prices",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/prices/peNYUXOvqA"
+           },
+           "attributes": {
+               "currency_code": "EUR",
+               "sku_code": "808811824",
+               "amount_cents": 25000,
+               "amount_float": 250.0,
+               "formatted_amount": "€250,00",
+               "compare_at_amount_cents": 25000,
+               "compare_at_amount_float": 250.0,
+               "formatted_compare_at_amount": "€250,00",
+               "created_at": "2021-02-18T16:17:41.220Z",
+               "updated_at": "2021-02-18T16:32:30.514Z",
+               "reference": null,
+               "reference_origin": null,
+               "metadata": {}
+           },
+           "relationships": {
+               "price_list": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/peNYUXOvqA/relationships/price_list",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/peNYUXOvqA/price_list"
+                   },
+                   "data": {
+                       "type": "price_lists",
+                       "id": "VByVpCwyyk"
+                   }
+               },
+               "sku": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/peNYUXOvqA/relationships/sku",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/peNYUXOvqA/sku"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/peNYUXOvqA/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/peNYUXOvqA/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "gqwEUdQPNp",
+           "type": "prices",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/prices/gqwEUdQPNp"
+           },
+           "attributes": {
+               "currency_code": "EUR",
+               "sku_code": "808811823",
+               "amount_cents": 25000,
+               "amount_float": 250.0,
+               "formatted_amount": "€250,00",
+               "compare_at_amount_cents": 25000,
+               "compare_at_amount_float": 250.0,
+               "formatted_compare_at_amount": "€250,00",
+               "created_at": "2021-02-18T15:36:08.408Z",
+               "updated_at": "2021-02-18T16:32:30.457Z",
+               "reference": null,
+               "reference_origin": null,
+               "metadata": {}
+           },
+           "relationships": {
+               "price_list": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/gqwEUdQPNp/relationships/price_list",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/gqwEUdQPNp/price_list"
+                   },
+                   "data": {
+                       "type": "price_lists",
+                       "id": "VByVpCwyyk"
+                   }
+               },
+               "sku": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/gqwEUdQPNp/relationships/sku",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/gqwEUdQPNp/sku"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/gqwEUdQPNp/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/gqwEUdQPNp/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "aGqWUeJNOA",
+           "type": "prices",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/prices/aGqWUeJNOA"
+           },
+           "attributes": {
+               "currency_code": "EUR",
+               "sku_code": "808811826",
+               "amount_cents": 25000,
+               "amount_float": 250.0,
+               "formatted_amount": "€250,00",
+               "compare_at_amount_cents": 25000,
+               "compare_at_amount_float": 250.0,
+               "formatted_compare_at_amount": "€250,00",
+               "created_at": "2021-02-18T16:17:41.494Z",
+               "updated_at": "2021-02-18T16:32:30.773Z",
+               "reference": null,
+               "reference_origin": null,
+               "metadata": {}
+           },
+           "relationships": {
+               "price_list": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/aGqWUeJNOA/relationships/price_list",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/aGqWUeJNOA/price_list"
+                   },
+                   "data": {
+                       "type": "price_lists",
+                       "id": "VByVpCwyyk"
+                   }
+               },
+               "sku": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/aGqWUeJNOA/relationships/sku",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/aGqWUeJNOA/sku"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/aGqWUeJNOA/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/aGqWUeJNOA/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "ARXmULQjDa",
+           "type": "prices",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/prices/ARXmULQjDa"
+           },
+           "attributes": {
+               "currency_code": "EUR",
+               "sku_code": "808908888",
+               "amount_cents": 25000,
+               "amount_float": 250.0,
+               "formatted_amount": "€250,00",
+               "compare_at_amount_cents": 25000,
+               "compare_at_amount_float": 250.0,
+               "formatted_compare_at_amount": "€250,00",
+               "created_at": "2021-02-18T16:17:41.687Z",
+               "updated_at": "2021-02-18T16:32:30.980Z",
+               "reference": null,
+               "reference_origin": null,
+               "metadata": {}
+           },
+           "relationships": {
+               "price_list": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/ARXmULQjDa/relationships/price_list",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/ARXmULQjDa/price_list"
+                   },
+                   "data": {
+                       "type": "price_lists",
+                       "id": "VByVpCwyyk"
+                   }
+               },
+               "sku": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/ARXmULQjDa/relationships/sku",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/ARXmULQjDa/sku"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/ARXmULQjDa/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/ARXmULQjDa/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "gkLYUzlKOa",
+           "type": "prices",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/prices/gkLYUzlKOa"
+           },
+           "attributes": {
+               "currency_code": "EUR",
+               "sku_code": "808811827",
+               "amount_cents": 25000,
+               "amount_float": 250.0,
+               "formatted_amount": "€250,00",
+               "compare_at_amount_cents": 25000,
+               "compare_at_amount_float": 250.0,
+               "formatted_compare_at_amount": "€250,00",
+               "created_at": "2021-02-18T15:36:08.456Z",
+               "updated_at": "2021-02-18T16:32:30.805Z",
+               "reference": null,
+               "reference_origin": null,
+               "metadata": {}
+           },
+           "relationships": {
+               "price_list": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/gkLYUzlKOa/relationships/price_list",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/gkLYUzlKOa/price_list"
+                   },
+                   "data": {
+                       "type": "price_lists",
+                       "id": "VByVpCwyyk"
+                   }
+               },
+               "sku": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/gkLYUzlKOa/relationships/sku",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/gkLYUzlKOa/sku"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/gkLYUzlKOa/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/gkLYUzlKOa/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "gMJQUBYqWa",
+           "type": "prices",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/prices/gMJQUBYqWa"
+           },
+           "attributes": {
+               "currency_code": "EUR",
+               "sku_code": "808811828",
+               "amount_cents": 25000,
+               "amount_float": 250.0,
+               "formatted_amount": "€250,00",
+               "compare_at_amount_cents": 25000,
+               "compare_at_amount_float": 250.0,
+               "formatted_compare_at_amount": "€250,00",
+               "created_at": "2021-02-18T16:17:41.561Z",
+               "updated_at": "2021-02-18T16:32:30.839Z",
+               "reference": null,
+               "reference_origin": null,
+               "metadata": {}
+           },
+           "relationships": {
+               "price_list": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/gMJQUBYqWa/relationships/price_list",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/gMJQUBYqWa/price_list"
+                   },
+                   "data": {
+                       "type": "price_lists",
+                       "id": "VByVpCwyyk"
+                   }
+               },
+               "sku": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/gMJQUBYqWa/relationships/sku",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/gMJQUBYqWa/sku"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/gMJQUBYqWa/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/gMJQUBYqWa/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "pLQzUYwXVA",
+           "type": "prices",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/prices/pLQzUYwXVA"
+           },
+           "attributes": {
+               "currency_code": "EUR",
+               "sku_code": "808811829",
+               "amount_cents": 25000,
+               "amount_float": 250.0,
+               "formatted_amount": "€250,00",
+               "compare_at_amount_cents": 25000,
+               "compare_at_amount_float": 250.0,
+               "formatted_compare_at_amount": "€250,00",
+               "created_at": "2021-02-18T15:36:08.480Z",
+               "updated_at": "2021-02-18T16:32:30.872Z",
+               "reference": null,
+               "reference_origin": null,
+               "metadata": {}
+           },
+           "relationships": {
+               "price_list": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/pLQzUYwXVA/relationships/price_list",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/pLQzUYwXVA/price_list"
+                   },
+                   "data": {
+                       "type": "price_lists",
+                       "id": "VByVpCwyyk"
+                   }
+               },
+               "sku": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/pLQzUYwXVA/relationships/sku",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/pLQzUYwXVA/sku"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/pLQzUYwXVA/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/pLQzUYwXVA/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "geNYUXWdXa",
+           "type": "prices",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/prices/geNYUXWdXa"
+           },
+           "attributes": {
+               "currency_code": "EUR",
+               "sku_code": "808811830",
+               "amount_cents": 25000,
+               "amount_float": 250.0,
+               "formatted_amount": "€250,00",
+               "compare_at_amount_cents": 25000,
+               "compare_at_amount_float": 250.0,
+               "formatted_compare_at_amount": "€250,00",
+               "created_at": "2021-02-18T15:36:08.504Z",
+               "updated_at": "2021-02-18T16:32:30.904Z",
+               "reference": null,
+               "reference_origin": null,
+               "metadata": {}
+           },
+           "relationships": {
+               "price_list": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/geNYUXWdXa/relationships/price_list",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/geNYUXWdXa/price_list"
+                   },
+                   "data": {
+                       "type": "price_lists",
+                       "id": "VByVpCwyyk"
+                   }
+               },
+               "sku": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/geNYUXWdXa/relationships/sku",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/geNYUXWdXa/sku"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/geNYUXWdXa/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/geNYUXWdXa/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "glnlUJVblp",
+           "type": "prices",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/prices/glnlUJVblp"
+           },
+           "attributes": {
+               "currency_code": "EUR",
+               "sku_code": "808813271",
+               "amount_cents": 25000,
+               "amount_float": 250.0,
+               "formatted_amount": "€250,00",
+               "compare_at_amount_cents": 25000,
+               "compare_at_amount_float": 250.0,
+               "formatted_compare_at_amount": "€250,00",
+               "created_at": "2021-02-18T16:17:41.655Z",
+               "updated_at": "2021-02-18T16:32:30.939Z",
+               "reference": null,
+               "reference_origin": null,
+               "metadata": {}
+           },
+           "relationships": {
+               "price_list": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/glnlUJVblp/relationships/price_list",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/glnlUJVblp/price_list"
+                   },
+                   "data": {
+                       "type": "price_lists",
+                       "id": "VByVpCwyyk"
+                   }
+               },
+               "sku": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/glnlUJVblp/relationships/sku",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/glnlUJVblp/sku"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/prices/glnlUJVblp/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/prices/glnlUJVblp/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       },
+       {
+           "id": "VByVpCwyyk",
+           "type": "price_lists",
+           "links": {
+               "self": "https://yourdomain.commercelayer.io/api/price_lists/VByVpCwyyk"
+           },
+           "attributes": {
+               "name": "EUR Price List",
+               "currency_code": "EUR",
+               "tax_included": true,
+               "created_at": "2021-02-17T16:10:53.951Z",
+               "updated_at": "2021-02-17T16:35:44.508Z",
+               "reference": "15012",
+               "reference_origin": "",
+               "metadata": {}
+           },
+           "relationships": {
+               "prices": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/price_lists/VByVpCwyyk/relationships/prices",
+                       "related": "https://yourdomain.commercelayer.io/api/price_lists/VByVpCwyyk/prices"
+                   }
+               },
+               "attachments": {
+                   "links": {
+                       "self": "https://yourdomain.commercelayer.io/api/price_lists/VByVpCwyyk/relationships/attachments",
+                       "related": "https://yourdomain.commercelayer.io/api/price_lists/VByVpCwyyk/attachments"
+                   }
+               }
+           },
+           "meta": {
+               "mode": "live"
+           }
+       }
+   ],
+   "meta": {
+       "record_count": 4292,
+       "page_count": 430
+   },
+   "links": {
+       "first": "https://yourdomain.commercelayer.io/api/skus?include=prices%2Cprices.price_list&page%5Bnumber%5D=1&page%5Bsize%5D=10",
+       "next": "https://yourdomain.commercelayer.io/api/skus?include=prices%2Cprices.price_list&page%5Bnumber%5D=2&page%5Bsize%5D=10",
+       "last": "https://yourdomain.commercelayer.io/api/skus?include=prices%2Cprices.price_list&page%5Bnumber%5D=430&page%5Bsize%5D=10"
+   }
+}

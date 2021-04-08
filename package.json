@@ -29,6 +29,7 @@
     "@commitlint/config-conventional": "^12.0.1",
     "@types/jest": "^26.0.21",
     "@types/jsdom": "^16.2.10",
+    "@types/jsonapi-serializer": "^3.6.3",
     "@types/pluralize": "^0.0.29",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
@@ -49,6 +50,7 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "jsonapi-serializer": "^3.6.7"
   }
 }

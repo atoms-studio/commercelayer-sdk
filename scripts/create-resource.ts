@@ -97,6 +97,7 @@ const writeTemplate = (
   ResourceConfig,
   ConcreteResourceInstance,
   createResource,
+  Resource,
 } from '../resource'
 
 export interface ${singular}Attributes {${attributesInterfaceString}
@@ -123,7 +124,7 @@ export const ${resourceName}Config: ResourceConfig<
   ],
 }
 
-export const ${resourceName} = createResource<
+export const ${resourceName}: Resource<${singular}Instance> = createResource<
   ${singular}Attributes,
   ${singular}Relationships
 >(${resourceName}Config)
