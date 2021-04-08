@@ -84,7 +84,12 @@ const writeTemplate = (
     .map((attribute) => "\n    '" + attribute + "',")
     .join('')
   const relationshipsString = relationships
-    .map((relationship) => "\n    '" + relationship + "',")
+    .map(
+      (relationship) =>
+        `\n    ${relationship}: '` +
+        pluralize(relationship) +
+        "', // TODO check relationship type",
+    )
     .join('')
   const attributesInterfaceString = Object.entries(attributesInterface)
     .map(([key, value]) => `\n  ${key}: ${value}`)
@@ -120,8 +125,8 @@ export const ${resourceName}Config: ResourceConfig<
   attributes: [${attributesString}
   ],
 
-  relationships: [${relationshipsString}
-  ],
+  relationships: {${relationshipsString}
+  },
 }
 
 export const ${resourceName}: Resource<${singular}Instance> = createResource<
