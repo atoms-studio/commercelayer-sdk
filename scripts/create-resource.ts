@@ -88,7 +88,7 @@ const writeTemplate = (
       (relationship) =>
         `\n    ${relationship}: '` +
         pluralize(relationship) +
-        "', // TODO check relationship type",
+        "', // TODO: check relationship type",
     )
     .join('')
   const attributesInterfaceString = Object.entries(attributesInterface)
@@ -129,10 +129,11 @@ export const ${resourceName}Config: ResourceConfig<
   },
 }
 
-export const ${resourceName}: Resource<${singular}Instance> = createResource<
+export const ${resourceName}: Resource<
   ${singular}Attributes,
-  ${singular}Relationships
->(${resourceName}Config)
+  ${singular}Relationships,
+  ${singular}Instance
+> = createResource<${singular}Attributes, ${singular}Relationships>(${resourceName}Config)
 `
 
   writeFileSync(path, template, 'UTF8')

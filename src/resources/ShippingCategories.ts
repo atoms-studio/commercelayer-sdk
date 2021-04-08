@@ -28,10 +28,16 @@ export const ShippingCategoriesConfig: ResourceConfig<
 
   attributes: ['name'],
 
-  relationships: ['skus', 'attachments'],
+  relationships: {
+    skus: 'skus',
+    attachments: 'attachments',
+  },
 }
 
-export const ShippingCategories: Resource<ShippingCategoryInstance> = createResource<
+export const ShippingCategories: Resource<
   ShippingCategoryAttributes,
-  ShippingCategoryRelationships
->(ShippingCategoriesConfig)
+  ShippingCategoryRelationships,
+  ShippingCategoryInstance
+> = createResource<ShippingCategoryAttributes, ShippingCategoryRelationships>(
+  ShippingCategoriesConfig,
+)

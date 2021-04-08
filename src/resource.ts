@@ -35,15 +35,15 @@ export interface ResourcePagination<T> {
   hasMore: boolean
 }
 
-export interface Resource<T> {
-  find: (id: string, query?: RequestQuery) => Promise<T>
-  findBy: (query: RequestQuery) => Promise<T | null>
-  findAll: (query: RequestQuery) => Promise<ResourcePagination<T>>
+export interface Resource<T, U, V = ConcreteResourceInstance<T, U>> {
+  find: (id: string, query?: RequestQuery) => Promise<V>
+  findBy: (query: RequestQuery) => Promise<V | null>
+  findAll: (query: RequestQuery) => Promise<ResourcePagination<V>>
   create: (
-    attributes: AttributesPayload<any>,
-    relationships?: RelationshipsPayload<any>,
+    attributes: AttributesPayload<T>,
+    relationships?: RelationshipsPayload<U>,
   ) => Promise<T>
-  update: (id: string) => Promise<T>
+  update: (id: string) => Promise<V>
   delete: (id: string) => Promise<void>
 }
 
@@ -58,7 +58,7 @@ export const commonResourceFields: (keyof CommonResourceAttributes)[] = [
 
 export const createResource = <T, U>(
   config: ResourceConfig<T, U>,
-): Resource<ConcreteResourceInstance<T, U>> => {
+): Resource<T, U, ConcreteResourceInstance<T, U>> => {
   return {
     find(
       id: string,

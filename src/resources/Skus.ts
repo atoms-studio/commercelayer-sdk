@@ -83,7 +83,8 @@ export const SkusConfig: ResourceConfig<SkuAttributes, SkuRelationships> = {
   },
 }
 
-export const Skus: Resource<SkuInstance> = createResource<
+export const Skus: Resource<
   SkuAttributes,
-  SkuRelationships
->(SkusConfig)
+  SkuRelationships,
+  SkuInstance
+> = createResource<SkuAttributes, SkuRelationships>(SkusConfig)
