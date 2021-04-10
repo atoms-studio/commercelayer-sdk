@@ -6,8 +6,10 @@ import {
   findAll,
   destroy,
   create,
+  update,
 } from '../src/api'
 import {
+  mockRequestWithConfig,
   mockRequestWithUri,
   mockRequestWithResponse,
   mockRequestWithError,
@@ -21,12 +23,39 @@ import { ResourceError } from '../src/errors'
 
 const _originalCreateRequest = createRequest
 
+const mockCreateRequest = () => {
+  ;(createRequest as any) = jest.fn(
+    (url: string, method: string, query: any, data: any) => {
+      return {
+        data: {
+          data: {},
+        },
+        status: 200,
+      }
+    },
+  )
+}
+
 describe('api', () => {
   afterEach(() => {
     ;(createRequest as any) = _originalCreateRequest
   })
 
   describe('createRequestParams', () => {
+    it('returns an empty object with bad input', () => {
+      let params = createRequestParams(null as any)
+      expect(params).toEqual({})
+
+      params = createRequestParams('asd' as any)
+      expect(params).toEqual({})
+
+      params = createRequestParams(45 as any)
+      expect(params).toEqual({})
+
+      params = createRequestParams([] as any)
+      expect(params).toEqual({})
+    })
+
     it('adds relationships', () => {
       let params = createRequestParams({})
       expect(params).not.toHaveProperty('include')
@@ -178,9 +207,38 @@ describe('api', () => {
         '/test?filter[q][name_eq]=red+handbag&filter[q][email_matches]=%%40gmail.com',
       )
     })
+
+    it('adds JSON API headers', async () => {
+      mockRequestWithConfig()
+
+      const config = await createRequest('/test', 'get')
+      expect(config).toHaveProperty('headers', {
+        accept: 'application/vnd.api+json',
+        'content-type': 'application/vnd.api+json',
+      })
+    })
   })
 
   describe('find', () => {
+    it('passes parameters to request', async () => {
+      mockCreateRequest()
+      const query = {
+        include: ['123', '456'],
+      }
+
+      await find('12345', query, {
+        type: 'skus',
+        attributes: [],
+        relationships: {},
+      })
+
+      expect(createRequest).toHaveBeenLastCalledWith(
+        '/api/skus/12345',
+        'get',
+        query,
+      )
+    })
+
     it('deserializes data', async () => {
       mockRequestWithResponse(singleSku)
       const res = await find(
@@ -239,6 +297,21 @@ describe('api', () => {
   })
 
   describe('findAll', () => {
+    it('passes parameters to request', async () => {
+      mockCreateRequest()
+      const query = {
+        include: ['123', '456'],
+      }
+
+      await findAll(query, {
+        type: 'skus',
+        attributes: [],
+        relationships: {},
+      })
+
+      expect(createRequest).toHaveBeenLastCalledWith('/api/skus', 'get', query)
+    })
+
     it('returns all results from the response', async () => {
       mockRequestWithResponse(multipleSkus)
 
@@ -300,6 +373,21 @@ describe('api', () => {
   })
 
   describe('findBy', () => {
+    it('passes parameters to request', async () => {
+      mockCreateRequest()
+      const query = {
+        include: ['123', '456'],
+      }
+
+      await findBy(query, {
+        type: 'skus',
+        attributes: [],
+        relationships: {},
+      })
+
+      expect(createRequest).toHaveBeenLastCalledWith('/api/skus', 'get', query)
+    })
+
     it('returns the first result from the response', async () => {
       mockRequestWithResponse(multipleSkus)
 
@@ -374,6 +462,18 @@ describe('api', () => {
   })
 
   describe('destroy', () => {
+    it('passes parameters to request', async () => {
+      mockCreateRequest()
+
+      await destroy('1234', {
+        type: 'skus',
+        attributes: [],
+        relationships: {},
+      })
+
+      expect(createRequest).toHaveBeenLastCalledWith('/api/skus/1234', 'delete')
+    })
+
     it('resolves with an empty result', async () => {
       mockRequestWithResponse({}, 204)
 
@@ -412,18 +512,9 @@ describe('api', () => {
   })
 
   describe('create', () => {
-    it('sends a serialized payload', async () => {
+    it('sends a serialized payload with relationships as objects', async () => {
       mockRequestWithEcho()
-      ;(createRequest as any) = jest.fn(
-        (url: string, method: string, query: any, data: any) => {
-          return {
-            data: {
-              data: {},
-            },
-            status: 200,
-          }
-        },
-      )
+      mockCreateRequest()
 
       await create(
         {
@@ -468,18 +559,53 @@ describe('api', () => {
       )
     })
 
-    it('adds only supported relationships', async () => {
+    it('sends a serialized payload with relationships as string', async () => {
       mockRequestWithEcho()
-      ;(createRequest as any) = jest.fn(
-        (url: string, method: string, query: any, data: any) => {
-          return {
-            data: {
-              data: {},
-            },
-            status: 200,
-          }
+      mockCreateRequest()
+
+      await create(
+        {
+          name: 'asd',
+          description: 'asdasd',
+        },
+        {
+          order: '12345',
+        },
+        {
+          type: 'skus',
+          attributes: ['name', 'description'],
+          relationships: {
+            order: 'orders',
+          },
         },
       )
+      expect(createRequest).toHaveBeenLastCalledWith(
+        '/api/skus',
+        'post',
+        {},
+        {
+          data: {
+            type: 'skus',
+            attributes: {
+              name: 'asd',
+              description: 'asdasd',
+            },
+            relationships: {
+              order: {
+                data: {
+                  type: 'orders',
+                  id: '12345',
+                },
+              },
+            },
+          },
+        },
+      )
+    })
+
+    it('adds only supported relationships', async () => {
+      mockRequestWithEcho()
+      mockCreateRequest()
 
       await create(
         {
@@ -554,6 +680,242 @@ describe('api', () => {
       for (const commonField of commonResourceFields) {
         expect(res).toHaveProperty(commonField)
       }
+    })
+
+    it('handles errors', async () => {
+      mockRequestWithError(unauthorized, 401)
+
+      const fn = async () => {
+        try {
+          await create(
+            {},
+            {},
+            {
+              type: 'skus',
+              attributes: [],
+              relationships: {},
+            },
+          )
+          return null
+        } catch (error) {
+          return error
+        }
+      }
+
+      const err: ResourceError = await fn()
+      expect(err.message).toBe('CommerceLayer API error')
+      expect(err.isResourceError).toBe(true)
+      expect(err.status).toBe(401)
+      expect(err.messages.length).toBe(unauthorized.errors.length)
+      expect(err.firstMessage?.title).toBe(unauthorized.errors[0].title)
+    })
+  })
+
+  describe('update', () => {
+    it('sends a serialized payload with relationships as objects', async () => {
+      mockRequestWithEcho()
+      mockCreateRequest()
+
+      await update(
+        '12345',
+        {
+          name: 'asd',
+          description: 'asdasd',
+        },
+        {
+          order: {
+            type: 'orders',
+            id: '098765',
+          },
+        },
+        {
+          type: 'skus',
+          attributes: ['name', 'description'],
+          relationships: {
+            order: 'orders',
+          },
+        },
+      )
+      expect(createRequest).toHaveBeenLastCalledWith(
+        '/api/skus/12345',
+        'patch',
+        {},
+        {
+          data: {
+            id: '12345',
+            type: 'skus',
+            attributes: {
+              name: 'asd',
+              description: 'asdasd',
+            },
+            relationships: {
+              order: {
+                data: {
+                  type: 'orders',
+                  id: '098765',
+                },
+              },
+            },
+          },
+        },
+      )
+    })
+
+    it('sends a serialized payload with relationships as string', async () => {
+      mockRequestWithEcho()
+      mockCreateRequest()
+
+      await update(
+        '12345',
+        {
+          name: 'asd',
+          description: 'asdasd',
+        },
+        {
+          order: '098765',
+        },
+        {
+          type: 'skus',
+          attributes: ['name', 'description'],
+          relationships: {
+            order: 'orders',
+          },
+        },
+      )
+      expect(createRequest).toHaveBeenLastCalledWith(
+        '/api/skus/12345',
+        'patch',
+        {},
+        {
+          data: {
+            id: '12345',
+            type: 'skus',
+            attributes: {
+              name: 'asd',
+              description: 'asdasd',
+            },
+            relationships: {
+              order: {
+                data: {
+                  type: 'orders',
+                  id: '098765',
+                },
+              },
+            },
+          },
+        },
+      )
+    })
+
+    it('adds only supported relationships', async () => {
+      mockRequestWithEcho()
+      mockCreateRequest()
+
+      await update(
+        '11111',
+        {
+          name: 'another title',
+          description: 'another description',
+        },
+        {
+          order: {
+            type: 'orders',
+            id: '98765',
+          },
+          market: {
+            type: 'markets',
+            id: '00001',
+          },
+        } as any,
+        {
+          type: 'skus',
+          attributes: ['name', 'description'],
+          relationships: {
+            order: 'orders',
+          },
+        },
+      )
+      expect(createRequest).toHaveBeenLastCalledWith(
+        '/api/skus/11111',
+        'patch',
+        {},
+        {
+          data: {
+            type: 'skus',
+            id: '11111',
+            attributes: {
+              name: 'another title',
+              description: 'another description',
+            },
+            relationships: {
+              order: {
+                data: {
+                  type: 'orders',
+                  id: '98765',
+                },
+              },
+            },
+          },
+        },
+      )
+    })
+
+    it('deserializes data', async () => {
+      mockRequestWithResponse(singleSku)
+      const res = await update(
+        '12345',
+        {},
+        {},
+        {
+          type: 'skus',
+          attributes: [],
+          relationships: {},
+        },
+      )
+
+      const attributes = Object.keys(singleSku.data.attributes)
+      const relationships = ['prices']
+
+      for (const attribute of attributes) {
+        expect(res).toHaveProperty(attribute)
+      }
+
+      for (const relationship of relationships) {
+        expect(res).toHaveProperty(relationship)
+      }
+
+      for (const commonField of commonResourceFields) {
+        expect(res).toHaveProperty(commonField)
+      }
+    })
+
+    it('handles errors', async () => {
+      mockRequestWithError(unauthorized, 401)
+
+      const fn = async () => {
+        try {
+          await update(
+            '12345',
+            {},
+            {},
+            {
+              type: 'skus',
+              attributes: [],
+              relationships: {},
+            },
+          )
+          return null
+        } catch (error) {
+          return error
+        }
+      }
+
+      const err: ResourceError = await fn()
+      expect(err.message).toBe('CommerceLayer API error')
+      expect(err.isResourceError).toBe(true)
+      expect(err.status).toBe(401)
+      expect(err.messages.length).toBe(unauthorized.errors.length)
+      expect(err.firstMessage?.title).toBe(unauthorized.errors[0].title)
     })
   })
 })

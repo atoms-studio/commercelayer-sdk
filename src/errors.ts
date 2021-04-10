@@ -40,7 +40,7 @@ export class ResourceError extends Error {
       this.messages = this.response.data.errors
     }
 
-    if (this.messages.length) {
+    if (Array.isArray(this.messages) && this.messages.length) {
       this.firstMessage = this.messages[0]
     }
 

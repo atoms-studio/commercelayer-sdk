@@ -1,4 +1,13 @@
-import { find, findBy, findAll, destroy, create, RequestQuery } from './api'
+import {
+  find,
+  findBy,
+  findAll,
+  destroy,
+  create,
+  update,
+  RequestQuery,
+} from './api'
+import { getType, isObject } from './utils'
 
 export interface ResourceConfig<T, U> {
   type: string
@@ -43,7 +52,11 @@ export interface Resource<T, U, V = ConcreteResourceInstance<T, U>> {
     attributes: AttributesPayload<T>,
     relationships?: RelationshipsPayload<U>,
   ) => Promise<T>
-  update: (id: string) => Promise<V>
+  update: (
+    id: string,
+    attributes: AttributesPayload<T>,
+    relationships?: RelationshipsPayload<U>,
+  ) => Promise<V>
   delete: (id: string) => Promise<void>
 }
 
@@ -56,6 +69,69 @@ export const commonResourceFields: (keyof CommonResourceAttributes)[] = [
   'updated_at',
 ]
 
+const requireId = <T, U>(id: string, config: ResourceConfig<T, U>): void => {
+  if (!id) {
+    throw new Error(`[${config.type}] Missing resource id`)
+  }
+}
+
+const checkQuery = <T, U>(
+  query: RequestQuery | undefined,
+  config: ResourceConfig<T, U>,
+): void => {
+  if (query && !isObject(query)) {
+    throw new Error(
+      `[${
+        config.type
+      }] Invalid resource query, expected object, received ${getType(query)}`,
+    )
+  }
+}
+
+const requireQuery = <T, U>(
+  query: RequestQuery,
+  config: ResourceConfig<T, U>,
+): void => {
+  if (!query) {
+    throw new Error(`[${config.type}] Missing resource query`)
+  }
+  checkQuery(query, config)
+}
+
+const requireAttributes = <T, U>(
+  attributes: AttributesPayload<T>,
+  config: ResourceConfig<T, U>,
+): void => {
+  if (!attributes) {
+    throw new Error(`[${config.type}] Missing resource attributes`)
+  }
+
+  if (!isObject(attributes)) {
+    throw new Error(
+      `[${
+        config.type
+      }] Invalid resource attributes, expected object, received ${getType(
+        attributes,
+      )}`,
+    )
+  }
+}
+
+const checkRelationships = <T, U>(
+  relationships: RelationshipsPayload<U> | undefined,
+  config: ResourceConfig<T, U>,
+): void => {
+  if (relationships && !isObject(relationships)) {
+    throw new Error(
+      `[${
+        config.type
+      }] Invalid resource relationships, expected object, received ${getType(
+        relationships,
+      )}`,
+    )
+  }
+}
+
 export const createResource = <T, U>(
   config: ResourceConfig<T, U>,
 ): Resource<T, U, ConcreteResourceInstance<T, U>> => {
@@ -64,18 +140,25 @@ export const createResource = <T, U>(
       id: string,
       query?: RequestQuery,
     ): Promise<ConcreteResourceInstance<T, U>> {
+      requireId(id, config)
+      checkQuery(query, config)
+
       return find<T, U>(id, query || {}, config)
     },
 
     findBy(
       query: RequestQuery,
     ): Promise<ConcreteResourceInstance<T, U> | null> {
+      requireQuery(query, config)
+
       return findBy<T, U>(query, config)
     },
 
     findAll(
       query: RequestQuery,
     ): Promise<ResourcePagination<ConcreteResourceInstance<T, U>>> {
+      requireQuery(query, config)
+
       return findAll<T, U>(query, config)
     },
 
@@ -83,14 +166,27 @@ export const createResource = <T, U>(
       attributes: AttributesPayload<T>,
       relationships?: RelationshipsPayload<U>,
     ) {
+      requireAttributes(attributes, config)
+      checkRelationships(relationships, config)
+
       return create(attributes, relationships || {}, config)
     },
 
-    update(id: string) {
-      return Promise.resolve({} as ConcreteResourceInstance<T, U>)
+    update(
+      id: string,
+      attributes: AttributesPayload<T>,
+      relationships?: RelationshipsPayload<U>,
+    ) {
+      requireId(id, config)
+      requireAttributes(attributes, config)
+      checkRelationships(relationships, config)
+
+      return update(id, attributes, relationships || {}, config)
     },
 
     delete(id: string): Promise<void> {
+      requireId(id, config)
+
       return destroy<T, U>(id, config)
     },
   }

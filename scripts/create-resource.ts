@@ -140,7 +140,7 @@ export const ${resourceName}: Resource<
 }
 
 const url = `https://docs.commercelayer.io/api/resources/${resourceName.toLowerCase()}`
-console.log(white.bgCyan.bold(` Fetching ${url}`))
+console.log(white.bgBlueBright.bold(` Fetching ${url}`))
 
 axios
   .get(url)

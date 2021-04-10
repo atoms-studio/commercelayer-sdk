@@ -20,8 +20,14 @@ export interface RequestQuery {
   filter?: Record<string, string | number>
 }
 
-export const createRequestParams = (query: RequestQuery): any => {
-  const params: Record<string, any> = {}
+export const createRequestParams = (
+  query: RequestQuery,
+): Record<string, string> => {
+  const params: Record<string, string> = {}
+  if (!query || query.toString() !== '[object Object]') {
+    return params
+  }
+
   if (query.include) {
     params.include = query.include.join(',')
   }
@@ -61,8 +67,12 @@ export const createRequest = (
   return baseRequest.request({
     method,
     url,
-    params: query ? createRequestParams(query) : {},
+    params: createRequestParams(query || {}),
     data,
+    headers: {
+      accept: 'application/vnd.api+json',
+      'content-type': 'application/vnd.api+json',
+    },
   })
 }
 
@@ -94,7 +104,7 @@ export const findAll = async <T, U>(
     const currentPage = (query.page || {}).number || 1
 
     return {
-      items: result.items,
+      items: result.items || [],
       total: result.total,
       currentPage,
       prevPage: currentPage - 1 || null,
@@ -137,6 +147,28 @@ export const create = async <T, U>(
 ): Promise<ConcreteResourceInstance<T, U>> => {
   const body = await serialize(config, attributes, relationships)
   const request = createRequest(`/api/${config.type}`, 'post', {}, body)
+
+  try {
+    const { data } = await request
+    return await deserialize(data)
+  } catch (error) {
+    throw handleApiErrors(error)
+  }
+}
+
+export const update = async <T, U>(
+  id: string,
+  attributes: AttributesPayload<T>,
+  relationships: RelationshipsPayload<U>,
+  config: ResourceConfig<T, U>,
+): Promise<ConcreteResourceInstance<T, U>> => {
+  // Add id to attributes as it is always required
+  Object.assign(attributes, {
+    id,
+  })
+
+  const body = await serialize(config, attributes, relationships)
+  const request = createRequest(`/api/${config.type}/${id}`, 'patch', {}, body)
 
   try {
     const { data } = await request

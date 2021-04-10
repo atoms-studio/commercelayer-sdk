@@ -1,6 +1,15 @@
 import axios, { AxiosInstance } from 'axios'
 import { initRequest, getBaseRequest } from '../src/request'
 
+export const mockRequestWithConfig = (): AxiosInstance => {
+  initRequest('http://www.google.com')
+  const baseRequest = getBaseRequest()
+
+  ;(baseRequest.request as any) = jest.fn((config) => Promise.resolve(config))
+
+  return baseRequest
+}
+
 export const mockRequestWithUri = (): AxiosInstance => {
   initRequest('http://www.google.com')
   const baseRequest = getBaseRequest()
@@ -60,4 +69,17 @@ export const mockRequestWithError = (
   )
 
   return baseRequest
+}
+
+export const mockFnWithEmptyResponse = (fn: any) => {
+  ;(fn as any) = jest.fn(
+    (url: string, method: string, query: any, data: any) => {
+      return {
+        data: {
+          data: {},
+        },
+        status: 200,
+      }
+    },
+  )
 }
