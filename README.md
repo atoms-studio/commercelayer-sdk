@@ -1,9 +1,12 @@
+[![Build Status](https://github.com//atoms-studio/commercelayer-sdk/workflows/Node.js%20CI/badge.svg)](https://github.com/atoms-studio/commercelayer-sdk/actions)
+![Codecov](https://img.shields.io/codecov/c/github/atoms-studio/commercelayer-sdk)
+
 # CommerceLayer SDK
 An opinionated CommerceLayer SDK built for quick delivery of e-commerce functionalities.
 
 ## Why
-The official CommerceLayer SDK is a great multi-purpose library that covers a lot of scenarios, but we found out that in every e-commerce we built, we had to provide extra code to handle some features and edge cases.<br>
-This library aims to speed-up development by creating a thinner interface with the CommerceLayer API and provide utilities to deal with the aforementioned problems.
+The official CommerceLayer SDK is a great multi-purpose library that covers a lot of scenarios, but we found out that in every e-commerce we built, we had to provide extra code to handle some common features and edge cases.<br>
+This library aims to speed-up development by creating a thinner and easier interface with the CommerceLayer API and provide utilities to deal with the aforementioned problems.
 
 ## Features
 
