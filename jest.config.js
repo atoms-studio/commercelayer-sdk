@@ -10,5 +10,5 @@ module.exports = {
   testEnvironment: 'node',
   collectCoverage: true,
   coveragePathIgnorePatterns: ['__tests__/utils.ts'],
-  coverageReporters: ['json', 'html', 'text'],
+  coverageReporters: ['lcov', 'html', 'text'],
 }
