@@ -83,3 +83,12 @@ export const mockFnWithEmptyResponse = (fn: any) => {
     },
   )
 }
+
+export const mockAuthResponse = (response: any) => {
+  ;(axios.post as any) = jest.fn(() => {
+    return Promise.resolve({
+      data: response,
+      status: 200,
+    })
+  })
+}

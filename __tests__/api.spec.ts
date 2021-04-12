@@ -23,6 +23,12 @@ import { ResourceError } from '../src/errors'
 
 const _originalCreateRequest = createRequest
 
+const dummyConfig = {
+  type: 'skus',
+  attributes: [] as any,
+  relationships: {},
+}
+
 const mockCreateRequest = () => {
   ;(createRequest as any) = jest.fn(
     (url: string, method: string, query: any, data: any) => {
@@ -226,11 +232,7 @@ describe('api', () => {
         include: ['123', '456'],
       }
 
-      await find('12345', query, {
-        type: 'skus',
-        attributes: [],
-        relationships: {},
-      })
+      await find('12345', query, dummyConfig)
 
       expect(createRequest).toHaveBeenLastCalledWith(
         '/api/skus/12345',
@@ -241,15 +243,7 @@ describe('api', () => {
 
     it('deserializes data', async () => {
       mockRequestWithResponse(singleSku)
-      const res = await find(
-        '12345',
-        {},
-        {
-          type: 'skus',
-          attributes: [],
-          relationships: {},
-        },
-      )
+      const res = await find('12345', {}, dummyConfig)
 
       const attributes = Object.keys(singleSku.data.attributes)
       const relationships = ['prices']
@@ -272,15 +266,7 @@ describe('api', () => {
 
       const fn = async () => {
         try {
-          await find(
-            '12345',
-            {},
-            {
-              type: 'skus',
-              attributes: [],
-              relationships: {},
-            },
-          )
+          await find('12345', {}, dummyConfig)
           return null
         } catch (error) {
           return error
@@ -303,11 +289,7 @@ describe('api', () => {
         include: ['123', '456'],
       }
 
-      await findAll(query, {
-        type: 'skus',
-        attributes: [],
-        relationships: {},
-      })
+      await findAll(query, dummyConfig)
 
       expect(createRequest).toHaveBeenLastCalledWith('/api/skus', 'get', query)
     })
@@ -315,14 +297,7 @@ describe('api', () => {
     it('returns all results from the response', async () => {
       mockRequestWithResponse(multipleSkus)
 
-      const res = await findAll(
-        {},
-        {
-          type: 'skus',
-          attributes: [],
-          relationships: {},
-        },
-      )
+      const res = await findAll({}, dummyConfig)
 
       expect(Object.keys(res).sort()).toEqual(
         [
@@ -349,14 +324,7 @@ describe('api', () => {
 
       const fn = async () => {
         try {
-          await findAll(
-            {},
-            {
-              type: 'skus',
-              attributes: [],
-              relationships: {},
-            },
-          )
+          await findAll({}, dummyConfig)
           return null
         } catch (error) {
           return error
@@ -379,11 +347,7 @@ describe('api', () => {
         include: ['123', '456'],
       }
 
-      await findBy(query, {
-        type: 'skus',
-        attributes: [],
-        relationships: {},
-      })
+      await findBy(query, dummyConfig)
 
       expect(createRequest).toHaveBeenLastCalledWith('/api/skus', 'get', query)
     })
@@ -391,14 +355,7 @@ describe('api', () => {
     it('returns the first result from the response', async () => {
       mockRequestWithResponse(multipleSkus)
 
-      const res = await findBy(
-        {},
-        {
-          type: 'skus',
-          attributes: [],
-          relationships: {},
-        },
-      )
+      const res = await findBy({}, dummyConfig)
 
       const attributes = Object.keys(multipleSkus.data[0].attributes)
       const relationships = ['prices']
@@ -421,14 +378,7 @@ describe('api', () => {
         data: [],
       })
 
-      const res = await findBy(
-        {},
-        {
-          type: 'skus',
-          attributes: [],
-          relationships: {},
-        },
-      )
+      const res = await findBy({}, dummyConfig)
 
       expect(res).toBeNull()
     })
@@ -438,14 +388,7 @@ describe('api', () => {
 
       const fn = async () => {
         try {
-          await findBy(
-            {},
-            {
-              type: 'skus',
-              attributes: [],
-              relationships: {},
-            },
-          )
+          await findBy({}, dummyConfig)
           return null
         } catch (error) {
           return error
@@ -465,11 +408,7 @@ describe('api', () => {
     it('passes parameters to request', async () => {
       mockCreateRequest()
 
-      await destroy('1234', {
-        type: 'skus',
-        attributes: [],
-        relationships: {},
-      })
+      await destroy('1234', dummyConfig)
 
       expect(createRequest).toHaveBeenLastCalledWith('/api/skus/1234', 'delete')
     })
@@ -477,11 +416,7 @@ describe('api', () => {
     it('resolves with an empty result', async () => {
       mockRequestWithResponse({}, 204)
 
-      const res = await destroy('1234', {
-        type: 'skus',
-        attributes: [],
-        relationships: {},
-      })
+      const res = await destroy('1234', dummyConfig)
 
       expect(res).toBeUndefined()
     })
@@ -491,11 +426,7 @@ describe('api', () => {
 
       const fn = async () => {
         try {
-          await destroy('12345', {
-            type: 'skus',
-            attributes: [],
-            relationships: {},
-          })
+          await destroy('12345', dummyConfig)
           return null
         } catch (error) {
           return error
@@ -656,15 +587,7 @@ describe('api', () => {
 
     it('deserializes data', async () => {
       mockRequestWithResponse(singleSku)
-      const res = await create(
-        {},
-        {},
-        {
-          type: 'skus',
-          attributes: [],
-          relationships: {},
-        },
-      )
+      const res = await create({}, {}, dummyConfig)
 
       const attributes = Object.keys(singleSku.data.attributes)
       const relationships = ['prices']
@@ -687,15 +610,7 @@ describe('api', () => {
 
       const fn = async () => {
         try {
-          await create(
-            {},
-            {},
-            {
-              type: 'skus',
-              attributes: [],
-              relationships: {},
-            },
-          )
+          await create({}, {}, dummyConfig)
           return null
         } catch (error) {
           return error
@@ -862,16 +777,7 @@ describe('api', () => {
 
     it('deserializes data', async () => {
       mockRequestWithResponse(singleSku)
-      const res = await update(
-        '12345',
-        {},
-        {},
-        {
-          type: 'skus',
-          attributes: [],
-          relationships: {},
-        },
-      )
+      const res = await update('12345', {}, {}, dummyConfig)
 
       const attributes = Object.keys(singleSku.data.attributes)
       const relationships = ['prices']
@@ -894,16 +800,7 @@ describe('api', () => {
 
       const fn = async () => {
         try {
-          await update(
-            '12345',
-            {},
-            {},
-            {
-              type: 'skus',
-              attributes: [],
-              relationships: {},
-            },
-          )
+          await update('12345', {}, {}, dummyConfig)
           return null
         } catch (error) {
           return error

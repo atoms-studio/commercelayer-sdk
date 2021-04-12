@@ -12,7 +12,7 @@ const originalApi = {
 
 const dummyConfig = {
   type: 'test_types',
-  attributes: [],
+  attributes: [] as any,
   relationships: {},
 }
 
@@ -52,11 +52,7 @@ describe('resource', () => {
     })
 
     it('creates a collection of resource methods', () => {
-      const resource = createResource({
-        type: 'test_types',
-        attributes: [],
-        relationships: {},
-      })
+      const resource = createDummyResource()
 
       expect(Object.keys(resource)).toEqual([
         'find',
