@@ -27,6 +27,7 @@ export const loginAsGuest = async (): Promise<GuestResponse> => {
     scope: getScope(),
   })
 
+  /* istanbul ignore next */
   const expires = Date.now() + (Number(data.expires_in) || 0)
   cacheToken(data.access_token, expires)
 

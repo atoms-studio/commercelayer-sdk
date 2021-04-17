@@ -1,3 +1,5 @@
+import { initRequest } from './request'
+
 export interface InternalConfig {
   host: string
   clientId: string
@@ -50,6 +52,11 @@ export const config: InternalConfig = {
   },
 }
 
+/* istanbul ignore next */
+export const __resetConfig = (): void => {
+  Object.assign(config, defaultConfig)
+}
+
 export const initConfig = (providedConfig: Config): void => {
   config.host = providedConfig.host
   config.clientId = providedConfig.clientId
@@ -97,6 +104,8 @@ export const initConfig = (providedConfig: Config): void => {
   if (isNaN(config.refreshTokensAttempts)) {
     config.refreshTokensAttempts = defaultConfig.refreshTokensAttempts
   }
+
+  initRequest(config.host)
 }
 
 export const getConfig = (): Readonly<Config> => config

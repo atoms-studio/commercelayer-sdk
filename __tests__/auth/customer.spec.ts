@@ -2,11 +2,12 @@ import { __resetMarket, setMarket } from '../../src/auth/market'
 import {
   loginAsCustomer,
   currentCustomerData,
-  resetCustomerData,
-  hasActiveCustomer,
+  logoutCustomer,
+  isCustomerLoggedIn,
   getCustomerToken,
+  refreshCustomer,
 } from '../../src/auth/customer'
-import { initConfig } from '../../src/config'
+import { initConfig, __resetConfig } from '../../src/config'
 import { mockAuthResponse } from '../utils'
 import axios from 'axios'
 
@@ -15,11 +16,12 @@ const _originalPost = axios.post
 describe('auth:customer', () => {
   beforeEach(() => {
     __resetMarket()
+    __resetConfig()
   })
 
   afterEach(() => {
     ;(axios.post as any) = _originalPost
-    resetCustomerData()
+    logoutCustomer()
   })
 
   it('throws an error if used before initializing the config', () => {
@@ -44,7 +46,7 @@ describe('auth:customer', () => {
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
-    setMarket(1)
+    await setMarket(1)
 
     const response = await loginAsCustomer('asd', 'asd')
     expect(response).toHaveProperty('token', 'your-access-token')
@@ -63,7 +65,6 @@ describe('auth:customer', () => {
       clientId: 'asdasd',
     })
     const createdAt = Date.now() - 60 * 1000
-    setMarket([7777])
     mockAuthResponse({
       access_token: 'your-access-token',
       token_type: 'bearer',
@@ -74,6 +75,8 @@ describe('auth:customer', () => {
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
+
+    await setMarket([7777])
 
     await loginAsCustomer('asdasd', 'asdasd')
     expect(currentCustomerData).toEqual({
@@ -90,7 +93,6 @@ describe('auth:customer', () => {
       clientId: 'asdasd',
     })
     const createdAt = Date.now() - 60 * 1000
-    setMarket([7777])
     mockAuthResponse({
       access_token: 'your-access-token',
       token_type: 'bearer',
@@ -101,6 +103,7 @@ describe('auth:customer', () => {
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
+    setMarket([7777])
 
     await loginAsCustomer('asdasd', 'asdasd')
     expect(currentCustomerData).toEqual({
@@ -110,7 +113,7 @@ describe('auth:customer', () => {
       expires: expect.any(Number),
     })
 
-    resetCustomerData()
+    logoutCustomer()
 
     expect(currentCustomerData).toEqual({
       customer: null,
@@ -121,13 +124,12 @@ describe('auth:customer', () => {
   })
 
   it("tells if there's an active customer", async () => {
-    expect(hasActiveCustomer()).toBe(false)
+    expect(isCustomerLoggedIn()).toBe(false)
     initConfig({
       host: 'asda',
       clientId: 'asdasd',
     })
     const createdAt = Date.now() - 60 * 1000
-    setMarket([7777])
     mockAuthResponse({
       access_token: 'your-access-token',
       token_type: 'bearer',
@@ -139,11 +141,13 @@ describe('auth:customer', () => {
       owner_type: 'customer',
     })
 
-    await loginAsCustomer('asdasd', 'asdasd')
-    expect(hasActiveCustomer()).toBe(true)
+    await setMarket([7777])
 
-    resetCustomerData()
-    expect(hasActiveCustomer()).toBe(false)
+    await loginAsCustomer('asdasd', 'asdasd')
+    expect(isCustomerLoggedIn()).toBe(true)
+
+    logoutCustomer()
+    expect(isCustomerLoggedIn()).toBe(false)
   })
 
   it('returns the customer token', async () => {
@@ -156,7 +160,6 @@ describe('auth:customer', () => {
       clientId: 'asdasd',
     })
     const createdAt = Date.now() - 60 * 1000
-    setMarket([7777])
     mockAuthResponse({
       access_token: 'your-access-token',
       token_type: 'bearer',
@@ -168,9 +171,67 @@ describe('auth:customer', () => {
       owner_type: 'customer',
     })
 
+    await setMarket([7777])
+
     await loginAsCustomer('asdasd', 'asdasd')
     expect(getCustomerToken()).toEqual({
       token: 'your-access-token',
+      expires: expect.any(Number),
+    })
+  })
+
+  it('refreshes customer token', async () => {
+    expect(currentCustomerData).toEqual({
+      customer: null,
+      token: '',
+      refreshToken: '',
+      expires: 0,
+    })
+
+    expect(async () => {
+      await refreshCustomer()
+    }).rejects.toThrow('You must call "init" before using any Auth method')
+
+    initConfig({
+      host: 'asda',
+      clientId: 'asdasd',
+    })
+    const createdAt = Date.now() - 60 * 1000
+    mockAuthResponse({
+      access_token: 'your-access-token',
+      token_type: 'bearer',
+      expires_in: 7200,
+      refresh_token: 'your-refresh-token',
+      scope: 'market:7778',
+      created_at: createdAt,
+      owner_id: 'zxcVBnMASd',
+      owner_type: 'customer',
+    })
+
+    await setMarket([7778])
+
+    const badResult = await refreshCustomer()
+    expect(badResult).toEqual({
+      customer: null,
+      token: '',
+      refreshToken: '',
+      expires: 0,
+    })
+
+    currentCustomerData.token = '123'
+    currentCustomerData.refreshToken = '456'
+
+    const result = await refreshCustomer()
+    expect(result).toEqual({
+      customer: null,
+      token: 'your-access-token',
+      refreshToken: 'your-refresh-token',
+      expires: expect.any(Number),
+    })
+    expect(currentCustomerData).toEqual({
+      customer: null,
+      token: 'your-access-token',
+      refreshToken: 'your-refresh-token',
       expires: expect.any(Number),
     })
   })

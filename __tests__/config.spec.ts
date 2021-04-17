@@ -1,4 +1,5 @@
 import { initConfig, config, defaultConfig, getConfig } from '../src/config'
+import { getBaseRequest } from '../src/request'
 
 describe('config', () => {
   describe('initConfig', () => {
@@ -135,6 +136,21 @@ describe('config', () => {
           scopes: defaultConfig.cookies.scopes,
         },
       })
+    })
+
+    it('passes host to request', () => {
+      initConfig({
+        host: 'asdasd',
+        clientId: 'asd',
+        refreshTokens: true,
+        refreshTokensAttempts: 4,
+        cookies: {
+          customer_token: '',
+        },
+      })
+
+      const req = getBaseRequest()
+      expect(req.defaults.baseURL).toBe('asdasd')
     })
   })
 

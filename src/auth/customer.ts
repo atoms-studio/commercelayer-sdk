@@ -17,17 +17,15 @@ export const currentCustomerData: CustomerData = {
   expires: 0,
 }
 
-export const resetCustomerData = (): void => {
+export const logoutCustomer = (): void => {
   currentCustomerData.customer = null
   currentCustomerData.token = ''
   currentCustomerData.refreshToken = ''
   currentCustomerData.expires = 0
 }
 
-export const hasActiveCustomer = (): boolean => {
-  return !!(
-    currentCustomerData.token && currentCustomerData.expires > Date.now()
-  )
+export const isCustomerLoggedIn = (): boolean => {
+  return !!(currentCustomerData.token && currentCustomerData.refreshToken)
 }
 
 export const getCustomerToken = (): TokenCacheEntry => {
@@ -61,6 +59,46 @@ export const loginAsCustomer = async (
     username,
     password,
     scope: getScope(),
+  })
+
+  let expires = 0
+  /* istanbul ignore else */
+  if (data.access_token) {
+    expires = Date.now() + data.expires_in
+    currentCustomerData.token = data.access_token
+    currentCustomerData.refreshToken = data.refresh_token
+    currentCustomerData.customer = null
+    currentCustomerData.expires = Date.now() + data.expires_in
+  }
+
+  return {
+    customer: null,
+    token: data.access_token,
+    refreshToken: data.refresh_token,
+    expires,
+  }
+}
+
+export const refreshCustomer = async (): Promise<CustomerData> => {
+  const config = getConfig()
+  if (!config.host) {
+    throw new Error('You must call "init" before using any Auth method')
+  }
+
+  if (!isCustomerLoggedIn()) {
+    return {
+      customer: null,
+      token: '',
+      refreshToken: '',
+      expires: 0,
+    }
+  }
+
+  // We dont use try..catch as auth errors must be handled by consumers
+  const { data } = await axios.post(`${config.host}/oauth/token`, {
+    grant_type: 'refresh_token',
+    client_id: config.clientId,
+    refresh_token: currentCustomerData.refreshToken,
   })
 
   let expires = 0

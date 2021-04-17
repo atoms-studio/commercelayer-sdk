@@ -6,12 +6,6 @@ export interface TokenCacheEntry {
 }
 
 export const tokenCache: Map<string, TokenCacheEntry> = new Map()
-export const currentCustomerData = {
-  profile: null,
-  token: '',
-  refreshToken: '',
-  expires: 0,
-}
 
 export const cacheKey = (): string => getMarket().join(',')
 

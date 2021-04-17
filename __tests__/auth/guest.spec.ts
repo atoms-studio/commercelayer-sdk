@@ -1,15 +1,24 @@
 import { __resetMarket, setMarket } from '../../src/auth/market'
 import { tokenCache } from '../../src/auth/cache'
 import { loginAsGuest } from '../../src/auth/guest'
-import { initConfig } from '../../src/config'
+import { initConfig, __resetConfig } from '../../src/config'
 import { mockAuthResponse } from '../utils'
 import axios from 'axios'
 
 const _originalPost = axios.post
 
-describe('auth:customer', () => {
+describe('auth:guest', () => {
   beforeEach(() => {
     __resetMarket()
+    __resetConfig()
+    ;(axios.post as any) = _originalPost
+    mockAuthResponse({
+      access_token: 'your-592-access-token',
+      token_type: 'bearer',
+      expires_in: 7200,
+      scope: 'market:592',
+      created_at: Date.now(),
+    })
   })
 
   afterEach(() => {
@@ -35,7 +44,7 @@ describe('auth:customer', () => {
       scope: 'market:1234',
       created_at: createdAt,
     })
-    setMarket(1)
+    await setMarket(1)
 
     const response = await loginAsGuest()
     expect(response).toHaveProperty('token', 'your-access-token')
@@ -52,7 +61,6 @@ describe('auth:customer', () => {
       clientId: 'asdasd',
     })
     const createdAt = Date.now() - 60 * 1000
-    setMarket([7777])
     mockAuthResponse({
       access_token: 'your-7777-access-token',
       token_type: 'bearer',
@@ -60,6 +68,8 @@ describe('auth:customer', () => {
       scope: 'market:7777',
       created_at: createdAt,
     })
+
+    await setMarket([7777])
 
     await loginAsGuest()
     expect(tokenCache.has('7777')).toBe(true)
@@ -79,7 +89,7 @@ describe('auth:customer', () => {
       created_at: Date.now(),
     })
 
-    setMarket([19])
+    await setMarket([19])
     await loginAsGuest()
     expect(axios.post).toHaveBeenCalledTimes(1)
 
