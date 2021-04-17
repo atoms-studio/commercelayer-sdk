@@ -110,6 +110,11 @@ describe('api', () => {
       let params = createRequestParams({})
       expect(params).not.toHaveProperty('page')
 
+      params = createRequestParams({
+        page: {} as any,
+      })
+      expect(params).not.toHaveProperty('page')
+
       const pagination = {
         size: 20,
         number: 1,
