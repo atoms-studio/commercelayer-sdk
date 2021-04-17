@@ -34,7 +34,9 @@ export const createRequestParams = (
 
   if (query.fields) {
     Object.keys(query.fields).forEach((key) => {
-      params[`fields[${key}]`] = (query.fields as any)[key].join(',')
+      params[`fields[${key}]`] = (query.fields as Record<string, string[]>)[
+        key
+      ].join(',')
     })
   }
 
@@ -43,14 +45,20 @@ export const createRequestParams = (
   }
 
   if (query.page) {
-    Object.keys(query.page).forEach((key) => {
-      params[`page[${key}]`] = (query.page as any)[key]
-    })
+    if (query.page.number) {
+      params[`page[number]`] = query.page.number.toString()
+    }
+    if (query.page.size) {
+      params[`page[size]`] = query.page.size.toString()
+    }
   }
 
   if (query.filter) {
     Object.keys(query.filter).forEach((key) => {
-      params[`filter[q][${key}]`] = (query.filter as any)[key]
+      params[`filter[q][${key}]`] = (query.filter as Record<
+        string,
+        string | number
+      >)[key].toString()
     })
   }
 
@@ -61,6 +69,7 @@ export const createRequest = (
   url: string,
   method: RequestMethod,
   query?: RequestQuery,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data?: Record<string, any>,
 ): Promise<AxiosResponse> => {
   const baseRequest = getBaseRequest()

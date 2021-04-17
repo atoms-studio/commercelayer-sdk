@@ -19,6 +19,7 @@ export interface CommonResourceAttributes {
   id: string
   reference: string
   reference_origin: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metadata: Record<string, any>
   created_at: string
   updated_at: string

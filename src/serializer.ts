@@ -10,6 +10,7 @@ const deserializer = new Deserializer({
   keyForAttribute: 'snake_case',
 })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const deserialize = async (data: Record<string, any>): Promise<any> => {
   const deserialized = await deserializer.deserialize(data)
 
@@ -28,6 +29,7 @@ export const serialize = async <T, U>(
   config: ResourceConfig<T, U>,
   attributes: AttributesPayload<T>,
   relationships: RelationshipsPayload<U>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> => {
   if (!attributes || !isObject(attributes)) {
     throw new Error(
@@ -75,10 +77,12 @@ export const serialize = async <T, U>(
     // }
     //
     relationshipKeys.forEach((relationshipKey) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const configRelationships: Record<string, any> = config.relationships
 
       // Only add relationships supported by the config
       if (configRelationships[relationshipKey]) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const relationshipValue = (relationships as any)[relationshipKey] || {
           id: null,
         }

@@ -6,9 +6,11 @@ export interface ApiErrorMessage {
   code: string
   status: string
   source?: { pointer: string }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   meta?: Record<string, any>
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/explicit-module-boundary-types
 export const handleApiErrors = (error: any): ResourceError => {
   // Process axios error
   if (error.response) {
@@ -20,6 +22,7 @@ export const handleApiErrors = (error: any): ResourceError => {
 }
 
 export class ResourceError extends Error {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public request: any
   public config?: AxiosRequestConfig
   public response?: AxiosResponse

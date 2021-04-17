@@ -44,11 +44,13 @@ export const config: InternalConfig = {
   refreshTokens: defaultConfig.refreshTokens,
   refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
   cookies: {
-    scopes: (defaultConfig.cookies as Record<string, any>).scopes,
-    customer_token: (defaultConfig.cookies as Record<string, any>)
+    scopes: (defaultConfig.cookies as Record<string, string | false>).scopes,
+    customer_token: (defaultConfig.cookies as Record<string, string | false>)
       .customer_token,
-    customer_refresh_token: (defaultConfig.cookies as Record<string, any>)
-      .customer_refresh_token,
+    customer_refresh_token: (defaultConfig.cookies as Record<
+      string,
+      string | false
+    >).customer_refresh_token,
   },
 }
 
@@ -76,13 +78,13 @@ export const initConfig = (providedConfig: Config): void => {
       customer_refresh_token: false,
     }
   } else if (providedConfig.cookies) {
-    ;(config.cookies as any) = {}
-    ;(config.cookies as Record<string, any>).scopes =
+    ;(config.cookies as Record<string, string | false>) = {}
+    ;(config.cookies as Record<string, string | false>).scopes =
       providedConfig.cookies.scopes || defaultConfig.cookies.scopes
-    ;(config.cookies as Record<string, any>).customer_token =
+    ;(config.cookies as Record<string, string | false>).customer_token =
       providedConfig.cookies.customer_token ||
       defaultConfig.cookies.customer_token
-    ;(config.cookies as Record<string, any>).customer_refresh_token =
+    ;(config.cookies as Record<string, string | false>).customer_refresh_token =
       providedConfig.cookies.customer_refresh_token ||
       defaultConfig.cookies.customer_refresh_token
   } else {

@@ -4,6 +4,7 @@ import { getConfig } from '../config'
 import { TokenCacheEntry } from './cache'
 
 export interface CustomerData {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   customer: any
   token: string
   refreshToken: string
@@ -45,7 +46,6 @@ export const getCustomerToken = (): TokenCacheEntry => {
 export const loginAsCustomer = async (
   username: string,
   password: string,
-  rememberMe = false,
 ): Promise<CustomerData> => {
   const config = getConfig()
   if (!config.host) {
