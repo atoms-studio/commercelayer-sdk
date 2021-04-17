@@ -114,8 +114,11 @@ describe('api', () => {
         page: pagination,
       })
 
-      expect(params).toHaveProperty('page[size]', pagination.size)
-      expect(params).toHaveProperty('page[number]', pagination.number)
+      expect(params).toHaveProperty('page[size]', pagination.size.toString())
+      expect(params).toHaveProperty(
+        'page[number]',
+        pagination.number.toString(),
+      )
     })
 
     it('adds filters', () => {
@@ -195,7 +198,7 @@ describe('api', () => {
       })
 
       expect(decodeURI((uri as unknown) as string)).toBe(
-        '/test?page[size]=10&page[number]=3',
+        '/test?page[number]=3&page[size]=10',
       )
     })
 
