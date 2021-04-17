@@ -14,12 +14,16 @@ import {
   mockRequestWithResponse,
   mockRequestWithError,
   mockRequestWithEcho,
+  mockAuthResponse,
 } from './utils'
 import singleSku from './responses/single-sku.json'
 import multipleSkus from './responses/multiple-skus.json'
 import unauthorized from './responses/401-unauthorized.json'
 import { commonResourceFields } from '../src/resource'
 import { ResourceError } from '../src/errors'
+import { setMarket } from '../src/auth/market'
+import { initConfig } from '../src/config'
+import { loginAsCustomer } from '../src/auth/customer'
 
 const _originalCreateRequest = createRequest
 
@@ -217,11 +221,34 @@ describe('api', () => {
       )
     })
 
-    it('adds JSON API headers', async () => {
+    it('adds headers', async () => {
+      initConfig({
+        host: 'orshfwoed',
+        clientId: 'ahsdoahsdo',
+      })
       mockRequestWithConfig()
+      mockAuthResponse({
+        access_token: 'asdasd',
+        expires_in: 7200,
+      })
+      await setMarket(9528)
 
       const config = await createRequest('/test', 'get')
       expect(config).toHaveProperty('headers', {
+        authorization: `Bearer asdasd`,
+        accept: 'application/vnd.api+json',
+        'content-type': 'application/vnd.api+json',
+      })
+
+      mockAuthResponse({
+        access_token: 'qwerty',
+        refresh_token: 'asdasd',
+        expires_in: 7200,
+      })
+      await loginAsCustomer('asd', 'asdad')
+      const customerConfig = await createRequest('/test', 'get')
+      expect(customerConfig).toHaveProperty('headers', {
+        authorization: `Bearer qwerty`,
         accept: 'application/vnd.api+json',
         'content-type': 'application/vnd.api+json',
       })
