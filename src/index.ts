@@ -1,5 +1,6 @@
+import { initConfig as init } from './config'
 import { Auth } from './auth'
-export { Auth }
+export { Auth, init }
 
 import { ResourceError } from './errors'
 export { ResourceError }

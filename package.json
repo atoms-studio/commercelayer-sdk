@@ -8,7 +8,7 @@
     "prepublish": "yarn lint && rimraf dist && yarn build && yarn test",
     "test": "jest --collect-coverage",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-    "dev": "rollup -c -w",
+    "dev": "vite",
     "build": "rollup -c",
     "create:resource": "ts-node --project scripts/tsconfig.json scripts/create-resource.ts"
   },
@@ -34,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "chalk": "^4.1.0",
+    "cypress": "^7.1.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
@@ -45,9 +46,11 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.34.2",
     "rollup-plugin-typescript2": "^0.29.0",
+    "start-server-and-test": "^1.12.1",
     "ts-jest": "^26.5.4",
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "vite": "^2.2.1"
   },
   "dependencies": {
     "axios": "^0.21.1",
