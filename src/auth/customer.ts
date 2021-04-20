@@ -52,13 +52,18 @@ export const loginAsCustomer = async (
     throw new Error('You must call "init" before using any Auth method')
   }
 
+  const scope = getScope()
+  if (!scope) {
+    throw new Error('You must first set a market')
+  }
+
   // We dont use try..catch as auth errors must be handled by consumers
   const { data } = await axios.post(`${config.host}/oauth/token`, {
     grant_type: 'password',
     client_id: config.clientId,
     username,
     password,
-    scope: getScope(),
+    scope,
   })
 
   let expires = 0

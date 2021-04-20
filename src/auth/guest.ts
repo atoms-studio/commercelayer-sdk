@@ -14,6 +14,11 @@ export const loginAsGuest = async (): Promise<GuestResponse> => {
     throw new Error('You must call "init" before using any Auth method')
   }
 
+  const scope = getScope()
+  if (!scope) {
+    throw new Error('You must first set a market')
+  }
+
   // Check if a token is already available
   const cachedValue = getToken()
   if (cachedValue.token) {
@@ -24,7 +29,7 @@ export const loginAsGuest = async (): Promise<GuestResponse> => {
   const { data } = await axios.post(`${config.host}/oauth/token`, {
     grant_type: 'client_credentials',
     client_id: config.clientId,
-    scope: getScope(),
+    scope,
   })
 
   /* istanbul ignore next */

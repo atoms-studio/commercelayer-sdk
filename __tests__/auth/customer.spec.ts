@@ -30,6 +30,17 @@ describe('auth:customer', () => {
     )
   })
 
+  it('throws an error if used before setting a market', () => {
+    initConfig({
+      host: 'asda',
+      clientId: 'asdasd',
+    })
+
+    expect(() => loginAsCustomer('asd', 'asd')).rejects.toThrow(
+      'You must first set a market',
+    )
+  })
+
   it('returns CustomerData', async () => {
     initConfig({
       host: 'asda',

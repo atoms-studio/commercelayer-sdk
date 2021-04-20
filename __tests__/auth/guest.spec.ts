@@ -31,6 +31,15 @@ describe('auth:guest', () => {
     )
   })
 
+  it('throws an error if used before setting a market', () => {
+    initConfig({
+      host: 'asda',
+      clientId: 'asdasd',
+    })
+
+    expect(() => loginAsGuest()).rejects.toThrow('You must first set a market')
+  })
+
   it('returns a GuestResponse', async () => {
     initConfig({
       host: 'asda',
