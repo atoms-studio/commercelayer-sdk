@@ -4,6 +4,7 @@ import {
   createResource,
   Resource,
 } from '../resource'
+import { SkuInstance } from './Skus'
 
 export interface PriceAttributes {
   currency_code: string
@@ -18,7 +19,7 @@ export interface PriceAttributes {
 
 export interface PriceRelationships {
   price_list: any // TODO: improve this type
-  sku: any // TODO: improve this type
+  sku: SkuInstance
   attachments: any[] // TODO: improve this type
 }
 
