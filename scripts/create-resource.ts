@@ -3,6 +3,7 @@ import { existsSync, writeFileSync } from 'fs'
 import pluralize from 'pluralize'
 import { JSDOM } from 'jsdom'
 import axios from 'axios'
+import { snakeCase } from 'lodash'
 
 const pluralCustomRules: Record<string, string> = {
   Skus: 'Sku',
@@ -139,7 +140,8 @@ export const ${resourceName}: Resource<
   writeFileSync(path, template, 'UTF8')
 }
 
-const url = `https://docs.commercelayer.io/api/resources/${resourceName.toLowerCase()}`
+const resourceSlug = snakeCase(resourceName)
+const url = `https://docs.commercelayer.io/api/resources/${resourceSlug}`
 console.log(white.bgBlueBright.bold(` Fetching ${url}`))
 
 axios
