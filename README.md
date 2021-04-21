@@ -1,5 +1,5 @@
 [![Build Status](https://github.com//atoms-studio/commercelayer-sdk/workflows/Node.js%20CI/badge.svg)](https://github.com/atoms-studio/commercelayer-sdk/actions)
-![Codecov](https://img.shields.io/codecov/c/github/atoms-studio/commercelayer-sdk)
+[![codecov](https://codecov.io/gh/atoms-studio/commercelayer-sdk/branch/main/graph/badge.svg?token=PYZQB331CP)](https://codecov.io/gh/atoms-studio/commercelayer-sdk)
 
 # CommerceLayer SDK
 An opinionated CommerceLayer SDK built for quick delivery of e-commerce functionalities.

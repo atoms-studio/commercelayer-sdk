@@ -32,12 +32,13 @@ describe('serializer', () => {
     const payload = {
       name: 'test name',
       description: 'test description',
+      sku_code: '12345678',
     }
 
     const result = await serialize(
       {
         type: 'test_types',
-        attributes: ['name', 'description'],
+        attributes: ['name', 'description', 'sku_code'],
         relationships: {},
       },
       payload,

@@ -48,6 +48,7 @@ export const serialize = async <T, U>(
   }
 
   const serializer = new Serializer(config.type, {
+    keyForAttribute: 'snake_case',
     attributes: config.attributes as string[],
   })
   const serialized = serializer.serialize(attributes)
