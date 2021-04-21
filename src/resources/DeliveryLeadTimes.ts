@@ -4,6 +4,8 @@ import {
   createResource,
   Resource,
 } from '../resource'
+import { AttachmentInstance } from './Attachments'
+import { ShippingMethodInstance } from './ShippingMethods'
 
 export interface DeliveryLeadTimeAttributes {
   min_hours: number
@@ -14,8 +16,8 @@ export interface DeliveryLeadTimeAttributes {
 
 export interface DeliveryLeadTimeRelationships {
   stock_location: any // TODO: improve this type
-  shipping_method: any // TODO: improve this type
-  attachments: any[] // TODO: improve this type
+  shipping_method: ShippingMethodInstance
+  attachments: AttachmentInstance[]
 }
 
 export type DeliveryLeadTimeInstance = ConcreteResourceInstance<

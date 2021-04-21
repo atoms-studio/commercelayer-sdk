@@ -4,6 +4,8 @@ import {
   createResource,
   Resource,
 } from '../resource'
+import { AttachmentInstance } from './Attachments'
+import { PriceListInstance } from './PriceLists'
 import { SkuInstance } from './Skus'
 
 export interface PriceAttributes {
@@ -18,9 +20,9 @@ export interface PriceAttributes {
 }
 
 export interface PriceRelationships {
-  price_list: any // TODO: improve this type
+  price_list: PriceListInstance
   sku: SkuInstance
-  attachments: any[] // TODO: improve this type
+  attachments: AttachmentInstance[]
 }
 
 export type PriceInstance = ConcreteResourceInstance<
@@ -46,9 +48,9 @@ export const PricesConfig: ResourceConfig<
   ],
 
   relationships: {
-    price_list: 'price_lists', // TODO: check relationship type
-    sku: 'skus', // TODO: check relationship type
-    attachments: 'attachments', // TODO: check relationship type
+    price_list: 'price_lists',
+    sku: 'skus',
+    attachments: 'attachments',
   },
 }
 
