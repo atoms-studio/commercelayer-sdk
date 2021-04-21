@@ -52,7 +52,7 @@ export interface Resource<T, U, V = ConcreteResourceInstance<T, U>> {
   create: (
     attributes: AttributesPayload<T>,
     relationships?: RelationshipsPayload<U>,
-  ) => Promise<T>
+  ) => Promise<V>
   update: (
     id: string,
     attributes: AttributesPayload<T>,
