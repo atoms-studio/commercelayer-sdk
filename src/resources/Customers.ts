@@ -6,6 +6,7 @@ import {
 } from '../resource'
 import { AttachmentInstance } from './Attachments'
 import { OrderInstance } from './Orders'
+import { ReturnInstance } from './Returns'
 
 export interface CustomerAttributes {
   email: string
@@ -20,7 +21,7 @@ export interface CustomerRelationships {
   customer_payment_sources: any[] // TODO: improve this type
   customer_subscriptions: any[] // TODO: improve this type
   orders: OrderInstance[]
-  returns: any[] // TODO: improve this type
+  returns: ReturnInstance[]
   attachments: AttachmentInstance[]
 }
 

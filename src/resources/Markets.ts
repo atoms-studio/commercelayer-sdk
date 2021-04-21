@@ -18,7 +18,7 @@ export interface MarketAttributes {
 
 export interface MarketRelationships {
   merchant: any // TODO: improve this type
-  price_list: PriceListInstance // TODO: improve this type
+  price_list: PriceListInstance
   inventory_model: any // TODO: improve this type
   customer_group: any // TODO: improve this type
   attachments: AttachmentInstance[]

@@ -7,6 +7,11 @@ import {
 import { AttachmentInstance } from './Attachments'
 import { MarketInstance } from './Markets'
 
+interface GiftCardBalanceLog {
+  date: string
+  amount_cents: number
+}
+
 export interface GiftCardAttributes {
   status: string
   code: string
@@ -20,7 +25,7 @@ export interface GiftCardAttributes {
   balance_max_cents: string
   balance_max_float: number
   formatted_balance_max: string
-  balance_log: any // TODO: improve this type
+  balance_log: GiftCardBalanceLog[]
   single_use: boolean
   rechargeable: boolean
   image_url: string

@@ -7,6 +7,7 @@ import {
 import { ShippingCategoryInstance } from './ShippingCategories'
 import { PriceInstance } from './Prices'
 import { DeliveryLeadTimeInstance } from './DeliveryLeadTimes'
+import { AttachmentInstance } from './Attachments'
 
 export interface InventoryDeliveryLeadTimesShippingMethod {
   name: string
@@ -52,7 +53,7 @@ export interface SkuRelationships {
   stock_items?: any[]
   delivery_lead_times?: DeliveryLeadTimeInstance[]
   sku_options?: any[]
-  attachments?: any[]
+  attachments?: AttachmentInstance[]
 }
 
 export type SkuInstance = ConcreteResourceInstance<

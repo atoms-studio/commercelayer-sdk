@@ -142,7 +142,7 @@ export interface OrderRelationships {
   payment_method: PaymentMethodInstance
   payment_source: any // TODO: improve this type
   line_items: LineItemInstance[]
-  shipments: ShipmentInstance[] // TODO: improve this type
+  shipments: ShipmentInstance[]
   transactions: any[] // TODO: improve this type
   authorizations: any[] // TODO: improve this type
   captures: any[] // TODO: improve this type

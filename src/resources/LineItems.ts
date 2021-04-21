@@ -49,7 +49,7 @@ export interface LineItemRelationships {
     | AdjustmentInstance
     | GiftCardInstance // TODO: missing promotions
   line_item_options: any[] // TODO: improve this type
-  shipment_line_items: LineItemInstance[] // TODO: improve this type
+  shipment_line_items: LineItemInstance[]
   stock_transfers: any[] // TODO: improve this type
 }
 

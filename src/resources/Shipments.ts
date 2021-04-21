@@ -9,7 +9,24 @@ import { AttachmentInstance } from './Attachments'
 import { DeliveryLeadTimeInstance } from './DeliveryLeadTimes'
 import { LineItemInstance } from './LineItems'
 import { OrderInstance } from './Orders'
+import { ShippingCategoryInstance } from './ShippingCategories'
 import { ShippingMethodInstance } from './ShippingMethods'
+
+interface ShipmentRate {
+  id: string
+  rate: string
+  object: string
+  carrier: string
+  service: string
+  currency: string
+  shipment_id: string
+  delivery_days: number
+  list_currency: any
+  retail_currency: any
+  est_delivery_days: number
+  carrier_account_id: string
+  delivery_date_guaranteed: any
+}
 
 export interface ShipmentAttributes {
   number: string
@@ -26,7 +43,7 @@ export interface ShipmentAttributes {
   _ship: boolean
   _get_rates: boolean
   selected_rate_id: string
-  rates: any // TODO: improve this type
+  rates: ShipmentRate[]
   _purchase: boolean
   purchase_error_code: string
   purchase_error_message: string
@@ -39,7 +56,7 @@ export interface ShipmentAttributes {
 
 export interface ShipmentRelationships {
   order: OrderInstance
-  shipping_category: any // TODO: improve this type
+  shipping_category: ShippingCategoryInstance
   stock_location: any // TODO: improve this type
   origin_address: AddressInstance
   shipping_address: AddressInstance
