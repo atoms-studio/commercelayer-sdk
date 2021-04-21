@@ -1,9 +1,10 @@
 import { white } from 'chalk'
-import { existsSync, writeFileSync } from 'fs'
+import { existsSync, writeFileSync, appendFileSync } from 'fs'
 import pluralize from 'pluralize'
 import { JSDOM } from 'jsdom'
 import axios from 'axios'
 import { snakeCase } from 'lodash'
+import { exec } from 'child_process'
 
 const pluralCustomRules: Record<string, string> = {
   Skus: 'Sku',
@@ -140,6 +141,14 @@ export const ${resourceName}: Resource<
   writeFileSync(path, template, 'UTF8')
 }
 
+const addExports = () => {
+  appendFileSync(
+    `src/index.ts`,
+    `export { ${resourceName}, ${singular}Instance } from './resources/${resourceName}'
+`,
+  )
+}
+
 const resourceSlug = snakeCase(resourceName)
 const url = `https://docs.commercelayer.io/api/resources/${resourceSlug}`
 console.log(white.bgBlueBright.bold(` Fetching ${url}`))
@@ -204,7 +213,11 @@ axios
       attributesInterface,
       relationshipsInterface,
     )
+    addExports()
     console.log(white.bgGreen.bold(` SUCCESS: created resource ${path} `))
+
+    console.log(`Linting files...`)
+    exec('yarn lint')
   })
   .catch((err) => {
     printError(err.message)
