@@ -69,11 +69,11 @@ export const loginAsCustomer = async (
   let expires = 0
   /* istanbul ignore else */
   if (data.access_token) {
-    expires = Date.now() + data.expires_in
+    expires = Date.now() + data.expires_in * 1000
     currentCustomerData.token = data.access_token
     currentCustomerData.refreshToken = data.refresh_token
     currentCustomerData.customer = null
-    currentCustomerData.expires = Date.now() + data.expires_in
+    currentCustomerData.expires = expires
   }
 
   return {

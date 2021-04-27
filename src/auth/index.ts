@@ -1,6 +1,12 @@
 import { setMarket, getMarket } from './market'
 import { loginAsGuest } from './guest'
-import { loginAsCustomer, isCustomerLoggedIn, logoutCustomer } from './customer'
+import { getToken } from './cache'
+import {
+  loginAsCustomer,
+  isCustomerLoggedIn,
+  logoutCustomer,
+  getCustomerToken,
+} from './customer'
 
 export const Auth = {
   setMarket,
@@ -9,4 +15,6 @@ export const Auth = {
   loginAsCustomer,
   isCustomerLoggedIn,
   logoutCustomer,
+  getToken,
+  getCustomerToken,
 }
