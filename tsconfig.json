@@ -70,5 +70,5 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true
   },
-  "exclude": ["node_modules", "dist", "rollup.config.js", "__tests__", "scripts", "vite.config.ts", "examples"]
+  "exclude": ["node_modules", "dist", "rollup.config.js", "__tests__", "scripts", "vite.config.ts", "examples", "cypress"]
 }
