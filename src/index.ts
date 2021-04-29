@@ -37,3 +37,4 @@ export {
 } from './resources/ShippingMethods'
 export { Attachments, AttachmentInstance } from './resources/Attachments'
 export { Returns, ReturnInstance } from './resources/Returns'
+export { WireTransfers, WireTransferInstance } from './resources/WireTransfers'
