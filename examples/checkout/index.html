@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+  </head>
+  <body class="bg-gray-100">
+    <h2>Shipping Address</h2>
+    <form id="shipping-address">
+      <input type="text" name="first_name" placeholder="first name" /><br>
+      <input type="text" name="last_name" placeholder="last name" /><br>
+      <input type="text" name="line_1" placeholder="address" /><br>
+      <input type="text" name="city" placeholder="city" /><br>
+      <input type="text" name="zip_code" placeholder="post code" /><br>
+      <input type="text" name="state_code" placeholder="state code" /><br>
+      <input type="text" name="country_code" placeholder="country code" /><br>
+      <input type="text" name="phone" placeholder="phone" /><br><br>
+      <button type="submit">Set shipping address</button>
+    </form>
+
+    <h2>Shipments</h2>
+    <div id="shipments"></div>
+
+
+    <h2>Payments</h2>
+    <div id="payments"></div>
+
+    <h2>Order status</h2>
+    <div id="order-status"></div>
+
+    <script>window.global = window;</script>
+    <script type="module" src="./index.ts"></script>
+  </body>
+</html>
+
