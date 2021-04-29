@@ -15,8 +15,8 @@ module.exports = {
     "plugin:cypress/recommended"
   ],
   ignorePatterns: [
-    "/**/dist/*.js",
-    "/**/dist/*.d.ts",
+    "/**/dist/**/*.js",
+    "/**/dist/**/*.d.ts",
     "rollup.config.js",
     ".eslintrc.js",
     "/**/*.html",
