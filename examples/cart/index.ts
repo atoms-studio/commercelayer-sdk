@@ -12,12 +12,17 @@ init({
   clientId: import.meta.env.VITE_CL_CLIENT_ID,
 })
 
+const ready = () => {
+  document.querySelector('#ready').textContent = 'ready'
+}
+
 let skuCode: string
 let order: OrderInstance
 Auth.setMarket(Number(import.meta.env.VITE_CL_PRIMARY_MARKET_ID)).then(() => {
   Promise.all([Skus.findBy({}), Orders.create({})]).then(([sku, ord]) => {
     skuCode = sku.code
     order = ord
+    ready()
   })
 })
 
@@ -80,14 +85,13 @@ document.getElementById('add-to-cart').addEventListener('click', () => {
       _update_quantity: true,
     },
     {
+      include: ['order', 'order.line_items', 'order.line_items.item'],
+    },
+    {
       order,
     },
-  ).then(() => {
-    Orders.find(order.id, {
-      include: ['line_items', 'line_items.item'],
-    }).then((ord) => {
-      order = ord
-      setCartContents()
-    })
+  ).then((lineItem) => {
+    order = lineItem.order
+    setCartContents()
   })
 })

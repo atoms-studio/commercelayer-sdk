@@ -19,22 +19,32 @@ let skuCode: string
 let order: OrderInstance
 let shippingAddress
 
+const ready = () => {
+  document.querySelector('#ready').textContent = 'ready'
+}
+
+const orderIncludes = [
+  'line_items',
+  'line_items.item',
+  'shipments',
+  'shipments.available_shipping_methods',
+  'available_payment_methods',
+  'payment_method',
+  'shipping_address',
+  'billing_address',
+]
+
+const setOrder = (ord) => {
+  order = ord
+  console.log(ord)
+  return ord
+}
+
 const fetchOrder = () => {
   return Orders.find(order.id, {
-    include: [
-      'line_items',
-      'line_items.item',
-      'shipments',
-      'shipments.available_shipping_methods',
-      'available_payment_methods',
-      'payment_method',
-      'shipping_address',
-      'billing_address',
-    ],
+    include: orderIncludes,
   }).then((ord) => {
-    order = ord
-    console.log(ord)
-    return ord
+    return setOrder(ord)
   })
 }
 
@@ -56,12 +66,14 @@ Auth.setMarket(Number(import.meta.env.VITE_CL_PRIMARY_MARKET_ID))
         quantity: 1,
         _update_quantity: true,
       },
+      {},
       {
         order,
       },
     )
   })
   .then(fetchOrder)
+  .then(ready)
 
 document.querySelector('#shipping-address').addEventListener('submit', (e) => {
   e.preventDefault()
@@ -81,6 +93,9 @@ document.querySelector('#shipping-address').addEventListener('submit', (e) => {
           // _billing_address_clone_id: shippingAddress.id,
         },
         {
+          include: orderIncludes,
+        },
+        {
           shipping_address: shippingAddress,
         },
       )
@@ -88,7 +103,7 @@ document.querySelector('#shipping-address').addEventListener('submit', (e) => {
     // .then(() => {
     //   return new Promise((r) => setTimeout(r, 5000))
     // })
-    .then(fetchOrder)
+    .then(setOrder)
     .then(() => {
       document.querySelector('#shipments').innerHTML = order.shipments
         .map((shipment) => {
@@ -118,6 +133,7 @@ document.addEventListener('submit', (e) => {
     Shipments.update(
       shipmentId,
       {},
+      {},
       {
         shipping_method: form.elements['shipping_method'].value,
       },
@@ -142,12 +158,16 @@ document.addEventListener('submit', (e) => {
       order.id,
       {},
       {
+        include: orderIncludes,
+      },
+      {
         payment_method: paymentMethodId,
       },
     )
-      .then(fetchOrder)
+      .then(setOrder)
       .then(() => {
         return WireTransfers.create(
+          {},
           {},
           {
             order,
@@ -155,11 +175,15 @@ document.addEventListener('submit', (e) => {
         )
       })
       .then(() => {
-        return Orders.update(order.id, {
-          _place: true,
-        })
+        return Orders.update(
+          order.id,
+          {
+            _place: true,
+          },
+          { include: orderIncludes },
+        )
       })
-      .then(fetchOrder)
+      .then(setOrder)
       .then(() => {
         document.querySelector('#order-status').textContent = order.status
       })
