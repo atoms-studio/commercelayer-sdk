@@ -6,6 +6,7 @@ import {
   create,
   update,
   RequestQuery,
+  RequestParameters,
 } from './api'
 import { getType, isObject } from './utils'
 
@@ -51,11 +52,13 @@ export interface Resource<T, U, V = ConcreteResourceInstance<T, U>> {
   findAll: (query: RequestQuery) => Promise<ResourcePagination<V>>
   create: (
     attributes: AttributesPayload<T>,
+    query?: RequestParameters,
     relationships?: RelationshipsPayload<U>,
   ) => Promise<V>
   update: (
     id: string,
     attributes: AttributesPayload<T>,
+    query?: RequestParameters,
     relationships?: RelationshipsPayload<U>,
   ) => Promise<V>
   delete: (id: string) => Promise<void>
@@ -165,24 +168,26 @@ export const createResource = <T, U>(
 
     create(
       attributes: AttributesPayload<T>,
+      query?: RequestParameters,
       relationships?: RelationshipsPayload<U>,
     ) {
       requireAttributes(attributes, config)
       checkRelationships(relationships, config)
 
-      return create(attributes, relationships || {}, config)
+      return create(attributes, query || {}, relationships || {}, config)
     },
 
     update(
       id: string,
       attributes: AttributesPayload<T>,
+      query?: RequestParameters,
       relationships?: RelationshipsPayload<U>,
     ) {
       requireId(id, config)
       requireAttributes(attributes, config)
       checkRelationships(relationships, config)
 
-      return update(id, attributes, relationships || {}, config)
+      return update(id, attributes, query || {}, relationships || {}, config)
     },
 
     delete(id: string): Promise<void> {

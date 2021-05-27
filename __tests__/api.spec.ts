@@ -487,6 +487,7 @@ describe('api', () => {
           name: 'asd',
           description: 'asdasd',
         },
+        {},
         {
           order: {
             type: 'orders',
@@ -534,6 +535,7 @@ describe('api', () => {
           name: 'asd',
           description: 'asdasd',
         },
+        {},
         {
           order: '12345',
         },
@@ -578,6 +580,7 @@ describe('api', () => {
           name: 'another title',
           description: 'another description',
         },
+        {},
         {
           order: {
             type: 'orders',
@@ -622,7 +625,7 @@ describe('api', () => {
 
     it('deserializes data', async () => {
       mockRequestWithResponse(singleSku)
-      const res = await create({}, {}, dummyConfig)
+      const res = await create({}, {}, {}, dummyConfig)
 
       const attributes = Object.keys(singleSku.data.attributes)
       const relationships = ['prices']
@@ -645,7 +648,7 @@ describe('api', () => {
 
       const fn = async () => {
         try {
-          await create({}, {}, dummyConfig)
+          await create({}, {}, {}, dummyConfig)
           return null
         } catch (error) {
           return error
@@ -672,6 +675,7 @@ describe('api', () => {
           name: 'asd',
           description: 'asdasd',
         },
+        {},
         {
           order: {
             type: 'orders',
@@ -721,6 +725,7 @@ describe('api', () => {
           name: 'asd',
           description: 'asdasd',
         },
+        {},
         {
           order: '098765',
         },
@@ -767,6 +772,7 @@ describe('api', () => {
           name: 'another title',
           description: 'another description',
         },
+        {},
         {
           order: {
             type: 'orders',
@@ -812,7 +818,7 @@ describe('api', () => {
 
     it('deserializes data', async () => {
       mockRequestWithResponse(singleSku)
-      const res = await update('12345', {}, {}, dummyConfig)
+      const res = await update('12345', {}, {}, {}, dummyConfig)
 
       const attributes = Object.keys(singleSku.data.attributes)
       const relationships = ['prices']
@@ -835,7 +841,7 @@ describe('api', () => {
 
       const fn = async () => {
         try {
-          await update('12345', {}, {}, dummyConfig)
+          await update('12345', {}, {}, {}, dummyConfig)
           return null
         } catch (error) {
           return error

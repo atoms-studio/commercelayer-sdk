@@ -286,25 +286,25 @@ describe('resource', () => {
         const res = createDummyResource()
 
         expect(async () => {
-          await res.create({}, 1 as any)
+          await res.create({}, {}, 1 as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received number`,
         )
 
         expect(async () => {
-          await res.create({}, [] as any)
+          await res.create({}, {}, [] as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received array`,
         )
 
         expect(async () => {
-          await res.create({}, 'asdasd' as any)
+          await res.create({}, {}, 'asdasd' as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received string`,
         )
 
         expect(async () => {
-          await res.create({}, true as any)
+          await res.create({}, {}, true as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received boolean`,
         )
@@ -316,7 +316,7 @@ describe('resource', () => {
           test: '1234',
         }
         await res.create(attrs)
-        expect(create).toHaveBeenLastCalledWith(attrs, {}, dummyConfig)
+        expect(create).toHaveBeenLastCalledWith(attrs, {}, {}, dummyConfig)
       })
 
       it('calls api.create with attributes and relationships', async () => {
@@ -327,9 +327,10 @@ describe('resource', () => {
         const relationships = {
           otherTest: '5678',
         }
-        await res.create(attrs, relationships)
+        await res.create(attrs, {}, relationships)
         expect(create).toHaveBeenLastCalledWith(
           attrs,
+          {},
           relationships,
           dummyConfig,
         )
@@ -399,25 +400,25 @@ describe('resource', () => {
         const res = createDummyResource()
 
         expect(async () => {
-          await res.update('asd', {}, 1 as any)
+          await res.update('asd', {}, {}, 1 as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received number`,
         )
 
         expect(async () => {
-          await res.update('asd', {}, [] as any)
+          await res.update('asd', {}, {}, [] as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received array`,
         )
 
         expect(async () => {
-          await res.update('asd', {}, 'asdasd' as any)
+          await res.update('asd', {}, {}, 'asdasd' as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received string`,
         )
 
         expect(async () => {
-          await res.update('asd', {}, true as any)
+          await res.update('asd', {}, {}, true as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received boolean`,
         )
@@ -429,7 +430,13 @@ describe('resource', () => {
           test: '1234',
         }
         await res.update('asd', attrs)
-        expect(update).toHaveBeenLastCalledWith('asd', attrs, {}, dummyConfig)
+        expect(update).toHaveBeenLastCalledWith(
+          'asd',
+          attrs,
+          {},
+          {},
+          dummyConfig,
+        )
       })
 
       it('calls api.update with id, attributes and relationships', async () => {
@@ -440,10 +447,11 @@ describe('resource', () => {
         const relationships = {
           otherTest: '5678',
         }
-        await res.update('asd', attrs, relationships)
+        await res.update('asd', attrs, {}, relationships)
         expect(update).toHaveBeenLastCalledWith(
           'asd',
           attrs,
+          {},
           relationships,
           dummyConfig,
         )

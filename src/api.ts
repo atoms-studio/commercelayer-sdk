@@ -14,13 +14,18 @@ import { isCustomerLoggedIn, getCustomerToken } from './auth/customer'
 
 export type RequestMethod = 'get' | 'post' | 'patch' | 'delete'
 
-export interface RequestQuery {
+export interface RequestParameters {
   include?: string[]
   fields?: Record<string, string[]>
+}
+
+export interface RequestFiltering {
   sort?: string[]
   page?: { size: number; number: number }
   filter?: Record<string, string | number>
 }
+
+export type RequestQuery = RequestParameters & RequestFiltering
 
 export const createRequestParams = (
   query: RequestQuery,
@@ -156,11 +161,12 @@ export const destroy = async <T, U>(
 
 export const create = async <T, U>(
   attributes: AttributesPayload<T>,
+  query: RequestParameters,
   relationships: RelationshipsPayload<U>,
   config: ResourceConfig<T, U>,
 ): Promise<ConcreteResourceInstance<T, U>> => {
   const body = await serialize(config, attributes, relationships)
-  const request = createRequest(`/api/${config.type}`, 'post', {}, body)
+  const request = createRequest(`/api/${config.type}`, 'post', query, body)
 
   try {
     const { data } = await request
@@ -173,6 +179,7 @@ export const create = async <T, U>(
 export const update = async <T, U>(
   id: string,
   attributes: AttributesPayload<T>,
+  query: RequestParameters,
   relationships: RelationshipsPayload<U>,
   config: ResourceConfig<T, U>,
 ): Promise<ConcreteResourceInstance<T, U>> => {
@@ -182,7 +189,12 @@ export const update = async <T, U>(
   })
 
   const body = await serialize(config, attributes, relationships)
-  const request = createRequest(`/api/${config.type}/${id}`, 'patch', {}, body)
+  const request = createRequest(
+    `/api/${config.type}/${id}`,
+    'patch',
+    query,
+    body,
+  )
 
   try {
     const { data } = await request
