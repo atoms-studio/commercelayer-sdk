@@ -38,3 +38,4 @@ export {
 export { Attachments, AttachmentInstance } from './resources/Attachments'
 export { Returns, ReturnInstance } from './resources/Returns'
 export { WireTransfers, WireTransferInstance } from './resources/WireTransfers'
+export { Refunds, RefundInstance } from './resources/Refunds'
