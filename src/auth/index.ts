@@ -6,6 +6,7 @@ import {
   isCustomerLoggedIn,
   logoutCustomer,
   getCustomerToken,
+  useCustomerToken,
 } from './customer'
 
 export const Auth = {
@@ -17,4 +18,5 @@ export const Auth = {
   logoutCustomer,
   getToken,
   getCustomerToken,
+  useCustomerToken,
 }

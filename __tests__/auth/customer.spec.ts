@@ -6,6 +6,7 @@ import {
   isCustomerLoggedIn,
   getCustomerToken,
   refreshCustomer,
+  useCustomerToken,
 } from '../../src/auth/customer'
 import { initConfig, __resetConfig } from '../../src/config'
 import { mockAuthResponse } from '../utils'
@@ -233,6 +234,63 @@ describe('auth:customer', () => {
     currentCustomerData.refreshToken = '456'
 
     const result = await refreshCustomer()
+    expect(result).toEqual({
+      customer: null,
+      token: 'your-access-token',
+      refreshToken: 'your-refresh-token',
+      expires: expect.any(Number),
+    })
+    expect(currentCustomerData).toEqual({
+      customer: null,
+      token: 'your-access-token',
+      refreshToken: 'your-refresh-token',
+      expires: expect.any(Number),
+    })
+  })
+
+  it('uses a saved customer token', async () => {
+    expect(currentCustomerData).toEqual({
+      customer: null,
+      token: '',
+      refreshToken: '',
+      expires: 0,
+    })
+
+    initConfig({
+      host: 'asda',
+      clientId: 'asdasd',
+    })
+    const createdAt = Date.now() - 60 * 1000
+    mockAuthResponse({
+      access_token: 'your-access-token',
+      token_type: 'bearer',
+      expires_in: 7200,
+      refresh_token: 'your-refresh-token',
+      scope: 'market:7778',
+      created_at: createdAt,
+      owner_id: 'zxcVBnMASd',
+      owner_type: 'customer',
+    })
+
+    await setMarket([77738])
+
+    const badResult = await useCustomerToken(
+      'your-access-token',
+      'your-refresh-token',
+      'market:123',
+    )
+    expect(badResult).toEqual({
+      customer: null,
+      token: '',
+      refreshToken: '',
+      expires: 0,
+    })
+
+    const result = await useCustomerToken(
+      'your-access-token',
+      'your-refresh-token',
+      'market:77738',
+    )
     expect(result).toEqual({
       customer: null,
       token: 'your-access-token',

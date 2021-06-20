@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getScope } from './market'
+import { getScope, getMarket } from './market'
 import { getConfig } from '../config'
 import { TokenCacheEntry } from './cache'
 
@@ -57,31 +57,30 @@ export const loginAsCustomer = async (
     throw new Error('You must first set a market')
   }
 
-  // We dont use try..catch as auth errors must be handled by consumers
-  const { data } = await axios.post(`${config.host}/oauth/token`, {
-    grant_type: 'password',
-    client_id: config.clientId,
-    username,
-    password,
-    scope,
-  })
+  try {
+    const { data } = await axios.post(`${config.host}/oauth/token`, {
+      grant_type: 'password',
+      client_id: config.clientId,
+      username,
+      password,
+      scope,
+    })
 
-  let expires = 0
-  /* istanbul ignore else */
-  if (data.access_token) {
-    expires = Date.now() + data.expires_in * 1000
     currentCustomerData.token = data.access_token
     currentCustomerData.refreshToken = data.refresh_token
     currentCustomerData.customer = null
-    currentCustomerData.expires = expires
+    currentCustomerData.expires = Date.now() + data.expires_in * 1000
+  } catch (err) /* istanbul ignore next */ {
+    // Reset auth data and rethrow the error
+    currentCustomerData.customer = null
+    currentCustomerData.token = ''
+    currentCustomerData.refreshToken = ''
+    currentCustomerData.expires = 0
+
+    throw err
   }
 
-  return {
-    customer: null,
-    token: data.access_token,
-    refreshToken: data.refresh_token,
-    expires,
-  }
+  return currentCustomerData
 }
 
 export const refreshCustomer = async (): Promise<CustomerData> => {
@@ -99,27 +98,52 @@ export const refreshCustomer = async (): Promise<CustomerData> => {
     }
   }
 
-  // We dont use try..catch as auth errors must be handled by consumers
-  const { data } = await axios.post(`${config.host}/oauth/token`, {
-    grant_type: 'refresh_token',
-    client_id: config.clientId,
-    refresh_token: currentCustomerData.refreshToken,
-  })
+  try {
+    const { data } = await axios.post(`${config.host}/oauth/token`, {
+      grant_type: 'refresh_token',
+      client_id: config.clientId,
+      refresh_token: currentCustomerData.refreshToken,
+    })
 
-  let expires = 0
-  /* istanbul ignore else */
-  if (data.access_token) {
-    expires = Date.now() + data.expires_in
     currentCustomerData.token = data.access_token
     currentCustomerData.refreshToken = data.refresh_token
     currentCustomerData.customer = null
     currentCustomerData.expires = Date.now() + data.expires_in
+  } catch (err) /* istanbul ignore next */ {
+    // Reset auth data and rethrow the error
+    currentCustomerData.customer = null
+    currentCustomerData.token = ''
+    currentCustomerData.refreshToken = ''
+    currentCustomerData.expires = 0
+
+    throw err
   }
 
-  return {
+  return currentCustomerData
+}
+
+export const useCustomerToken = async (
+  accessToken: string,
+  refreshToken: string,
+  scope: string,
+): Promise<CustomerData> => {
+  const authData = {
     customer: null,
-    token: data.access_token,
-    refreshToken: data.refresh_token,
-    expires,
+    token: '',
+    refreshToken: '',
+    expires: 0,
   }
+
+  // Scopes must match
+  if (scope !== getScope()) {
+    return authData
+  }
+
+  // Temporarily set auth data
+  currentCustomerData.token = accessToken
+  currentCustomerData.refreshToken = refreshToken
+  currentCustomerData.customer = null
+  currentCustomerData.expires = Date.now() + 5 * 1000
+
+  return await refreshCustomer()
 }
