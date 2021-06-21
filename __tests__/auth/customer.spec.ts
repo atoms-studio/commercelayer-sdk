@@ -6,7 +6,7 @@ import {
   isCustomerLoggedIn,
   getCustomerToken,
   refreshCustomer,
-  useCustomerToken,
+  useCustomerSession,
 } from '../../src/auth/customer'
 import { initConfig, __resetConfig } from '../../src/config'
 import { mockAuthResponse } from '../utils'
@@ -274,7 +274,7 @@ describe('auth:customer', () => {
 
     await setMarket([77738])
 
-    const badResult = await useCustomerToken(
+    const badResult = await useCustomerSession(
       'your-access-token',
       'your-refresh-token',
       'market:123',
@@ -286,7 +286,7 @@ describe('auth:customer', () => {
       expires: 0,
     })
 
-    const result = await useCustomerToken(
+    const result = await useCustomerSession(
       'your-access-token',
       'your-refresh-token',
       'market:77738',

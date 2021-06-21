@@ -122,7 +122,7 @@ export const refreshCustomer = async (): Promise<CustomerData> => {
   return currentCustomerData
 }
 
-export const useCustomerToken = async (
+export const useCustomerSession = async (
   accessToken: string,
   refreshToken: string,
   scope: string,
