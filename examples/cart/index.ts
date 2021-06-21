@@ -19,7 +19,12 @@ const ready = () => {
 let skuCode: string
 let order: OrderInstance
 Auth.setMarket(Number(import.meta.env.VITE_CL_PRIMARY_MARKET_ID)).then(() => {
-  Promise.all([Skus.findBy({}), Orders.create({})]).then(([sku, ord]) => {
+  Promise.all([
+    Skus.findBy({}),
+    Orders.create({
+      attributes: {},
+    }),
+  ]).then(([sku, ord]) => {
     skuCode = sku.code
     order = ord
     ready()
@@ -61,7 +66,9 @@ const updateQuantity = (id: string, quantity = 1) => {
   let promise
   if (quantity > 0) {
     promise = LineItems.update(id, {
-      quantity,
+      attributes: {
+        quantity,
+      },
     })
   } else {
     promise = LineItems.delete(id)
@@ -78,19 +85,19 @@ const updateQuantity = (id: string, quantity = 1) => {
 }
 
 document.getElementById('add-to-cart').addEventListener('click', () => {
-  LineItems.create(
-    {
+  LineItems.create({
+    attributes: {
       sku_code: skuCode,
       quantity: 1,
       _update_quantity: true,
     },
-    {
+    query: {
       include: ['order', 'order.line_items', 'order.line_items.item'],
     },
-    {
+    relationships: {
       order,
     },
-  ).then((lineItem) => {
+  }).then((lineItem) => {
     order = lineItem.order
     setCartContents()
   })

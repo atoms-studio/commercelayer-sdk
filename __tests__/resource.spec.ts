@@ -247,10 +247,18 @@ describe('resource', () => {
 
         expect(async () => {
           await res.create('' as any)
-        }).rejects.toThrow(`[test_types] Missing resource attributes`)
+        }).rejects.toThrow(
+          `[test_types] Invalid resource params, expected object, received string`,
+        )
 
         expect(async () => {
           await res.create(null as any)
+        }).rejects.toThrow(
+          `[test_types] Invalid resource params, expected object, received null`,
+        )
+
+        expect(async () => {
+          await res.create({} as any)
         }).rejects.toThrow(`[test_types] Missing resource attributes`)
       })
 
@@ -258,25 +266,33 @@ describe('resource', () => {
         const res = createDummyResource()
 
         expect(async () => {
-          await res.create(1 as any)
+          await res.create({
+            attributes: 1 as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource attributes, expected object, received number`,
         )
 
         expect(async () => {
-          await res.create([] as any)
+          await res.create({
+            attributes: [] as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource attributes, expected object, received array`,
         )
 
         expect(async () => {
-          await res.create('asdasd' as any)
+          await res.create({
+            attributes: 'aasd' as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource attributes, expected object, received string`,
         )
 
         expect(async () => {
-          await res.create(true as any)
+          await res.create({
+            attributes: true as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource attributes, expected object, received boolean`,
         )
@@ -286,25 +302,37 @@ describe('resource', () => {
         const res = createDummyResource()
 
         expect(async () => {
-          await res.create({}, {}, 1 as any)
+          await res.create({
+            attributes: {},
+            relationships: 1 as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received number`,
         )
 
         expect(async () => {
-          await res.create({}, {}, [] as any)
+          await res.create({
+            attributes: {},
+            relationships: [] as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received array`,
         )
 
         expect(async () => {
-          await res.create({}, {}, 'asdasd' as any)
+          await res.create({
+            attributes: {},
+            relationships: 'asdasd' as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received string`,
         )
 
         expect(async () => {
-          await res.create({}, {}, true as any)
+          await res.create({
+            attributes: {},
+            relationships: true as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received boolean`,
         )
@@ -312,33 +340,44 @@ describe('resource', () => {
 
       it('calls api.create with attributes', async () => {
         const res = createDummyResource()
-        const attrs = {
-          test: '1234',
+        const params = {
+          attributes: {
+            test: '1234',
+          },
         }
-        await res.create(attrs)
-        expect(create).toHaveBeenLastCalledWith(attrs, {}, {}, dummyConfig)
+        await res.create(params)
+        expect(create).toHaveBeenLastCalledWith(
+          params.attributes,
+          {},
+          {},
+          dummyConfig,
+        )
       })
 
       it('calls api.create with attributes and relationships', async () => {
         const res = createDummyResource()
-        const attrs = {
-          test: '1234',
+        const params = {
+          attributes: {
+            test: '1234',
+          },
+          relationships: {
+            otherTest: '5678',
+          },
         }
-        const relationships = {
-          otherTest: '5678',
-        }
-        await res.create(attrs, {}, relationships)
+        await res.create(params)
         expect(create).toHaveBeenLastCalledWith(
-          attrs,
+          params.attributes,
           {},
-          relationships,
+          params.relationships,
           dummyConfig,
         )
       })
 
       it('returns the result of api.create', async () => {
         const res = createDummyResource()
-        const value = await res.create({})
+        const value = await res.create({
+          attributes: {},
+        })
         expect(value).toEqual('create')
       })
     })
@@ -348,11 +387,15 @@ describe('resource', () => {
         const res = createDummyResource()
 
         expect(async () => {
-          await res.update('', {})
+          await res.update('', {
+            attributes: {},
+          })
         }).rejects.toThrow(`[test_types] Missing resource id`)
 
         expect(async () => {
-          await res.update(null as any, {})
+          await res.update(null as any, {
+            attributes: {},
+          })
         }).rejects.toThrow(`[test_types] Missing resource id`)
       })
 
@@ -400,25 +443,37 @@ describe('resource', () => {
         const res = createDummyResource()
 
         expect(async () => {
-          await res.update('asd', {}, {}, 1 as any)
+          await res.update('asd', {
+            attributes: {},
+            relationships: 1 as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received number`,
         )
 
         expect(async () => {
-          await res.update('asd', {}, {}, [] as any)
+          await res.update('asd', {
+            attributes: {},
+            relationships: [] as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received array`,
         )
 
         expect(async () => {
-          await res.update('asd', {}, {}, 'asdasd' as any)
+          await res.update('asd', {
+            attributes: {},
+            relationships: 'asdasd' as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received string`,
         )
 
         expect(async () => {
-          await res.update('asd', {}, {}, true as any)
+          await res.update('asd', {
+            attributes: {},
+            relationships: true as any,
+          })
         }).rejects.toThrow(
           `[test_types] Invalid resource relationships, expected object, received boolean`,
         )
@@ -426,13 +481,15 @@ describe('resource', () => {
 
       it('calls api.update with id and attributes', async () => {
         const res = createDummyResource()
-        const attrs = {
-          test: '1234',
+        const params = {
+          attributes: {
+            test: '1234',
+          },
         }
-        await res.update('asd', attrs)
+        await res.update('asd', params)
         expect(update).toHaveBeenLastCalledWith(
           'asd',
-          attrs,
+          params.attributes,
           {},
           {},
           dummyConfig,
@@ -441,25 +498,29 @@ describe('resource', () => {
 
       it('calls api.update with id, attributes and relationships', async () => {
         const res = createDummyResource()
-        const attrs = {
-          test: '1234',
+        const params = {
+          attributes: {
+            test: '1234',
+          },
+          relationships: {
+            otherTest: '5678',
+          },
         }
-        const relationships = {
-          otherTest: '5678',
-        }
-        await res.update('asd', attrs, {}, relationships)
+        await res.update('asd', params)
         expect(update).toHaveBeenLastCalledWith(
           'asd',
-          attrs,
+          params.attributes,
           {},
-          relationships,
+          params.relationships,
           dummyConfig,
         )
       })
 
       it('returns the result of api.update', async () => {
         const res = createDummyResource()
-        const value = await res.update('asd', {})
+        const value = await res.update('asd', {
+          attributes: {},
+        })
         expect(value).toEqual('update')
       })
     })

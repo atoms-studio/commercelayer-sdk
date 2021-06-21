@@ -46,21 +46,18 @@ export interface ResourcePagination<T> {
   hasMore: boolean
 }
 
+export interface ResourceWriteParams<T, U> {
+  attributes: AttributesPayload<T>
+  relationships?: RelationshipsPayload<U>
+  query?: RequestParameters
+}
+
 export interface Resource<T, U, V = ConcreteResourceInstance<T, U>> {
   find: (id: string, query?: RequestQuery) => Promise<V>
   findBy: (query: RequestQuery) => Promise<V | null>
   findAll: (query: RequestQuery) => Promise<ResourcePagination<V>>
-  create: (
-    attributes: AttributesPayload<T>,
-    query?: RequestParameters,
-    relationships?: RelationshipsPayload<U>,
-  ) => Promise<V>
-  update: (
-    id: string,
-    attributes: AttributesPayload<T>,
-    query?: RequestParameters,
-    relationships?: RelationshipsPayload<U>,
-  ) => Promise<V>
+  create: (params: ResourceWriteParams<T, U>) => Promise<V>
+  update: (id: string, params: ResourceWriteParams<T, U>) => Promise<V>
   delete: (id: string) => Promise<void>
 }
 
@@ -166,28 +163,51 @@ export const createResource = <T, U>(
       return findAll<T, U>(query, config)
     },
 
-    create(
-      attributes: AttributesPayload<T>,
-      query?: RequestParameters,
-      relationships?: RelationshipsPayload<U>,
-    ) {
-      requireAttributes(attributes, config)
-      checkRelationships(relationships, config)
+    create(params: ResourceWriteParams<T, U>) {
+      if (!params || typeof params !== 'object') {
+        throw new Error(
+          `[${
+            config.type
+          }] Invalid resource params, expected object, received ${getType(
+            params,
+          )}`,
+        )
+      }
 
-      return create(attributes, query || {}, relationships || {}, config)
+      requireAttributes(params.attributes, config)
+      checkRelationships(params.relationships, config)
+
+      return create(
+        params.attributes,
+        params.query || {},
+        params.relationships || {},
+        config,
+      )
     },
 
-    update(
-      id: string,
-      attributes: AttributesPayload<T>,
-      query?: RequestParameters,
-      relationships?: RelationshipsPayload<U>,
-    ) {
+    update(id: string, params: ResourceWriteParams<T, U>) {
       requireId(id, config)
-      requireAttributes(attributes, config)
-      checkRelationships(relationships, config)
 
-      return update(id, attributes, query || {}, relationships || {}, config)
+      if (!params || typeof params !== 'object') {
+        throw new Error(
+          `[${
+            config.type
+          }] Invalid resource params, expected object, received ${getType(
+            params,
+          )}`,
+        )
+      }
+
+      requireAttributes(params.attributes, config)
+      checkRelationships(params.relationships, config)
+
+      return update(
+        id,
+        params.attributes,
+        params.query || {},
+        params.relationships || {},
+        config,
+      )
     },
 
     delete(id: string): Promise<void> {

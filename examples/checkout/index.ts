@@ -52,7 +52,7 @@ Auth.setMarket(Number(import.meta.env.VITE_CL_PRIMARY_MARKET_ID))
   .then(() =>
     Promise.all([
       Skus.findBy({}),
-      Orders.create({ customer_email: 'test@example.com' }),
+      Orders.create({ attributes: { customer_email: 'test@example.com' } }),
     ]),
   )
   .then(([sku, ord]) => {
@@ -60,17 +60,16 @@ Auth.setMarket(Number(import.meta.env.VITE_CL_PRIMARY_MARKET_ID))
     order = ord
   })
   .then(() => {
-    LineItems.create(
-      {
+    LineItems.create({
+      attributes: {
         sku_code: skuCode,
         quantity: 1,
         _update_quantity: true,
       },
-      {},
-      {
+      relationships: {
         order,
       },
-    )
+    })
   })
   .then(fetchOrder)
   .then(ready)
@@ -81,24 +80,23 @@ document.querySelector('#shipping-address').addEventListener('submit', (e) => {
   const form = e.target as HTMLFormElement
   const data = new FormData(form)
 
-  Addresses.create(Object.fromEntries(data))
+  Addresses.create({ attributes: Object.fromEntries(data) })
     .then((addr) => {
       shippingAddress = addr
     })
     .then(() => {
-      return Orders.update(
-        order.id,
-        {
+      return Orders.update(order.id, {
+        attributes: {
           _billing_address_same_as_shipping: true,
           // _billing_address_clone_id: shippingAddress.id,
         },
-        {
+        query: {
           include: orderIncludes,
         },
-        {
+        relationships: {
           shipping_address: shippingAddress,
         },
-      )
+      })
     })
     // .then(() => {
     //   return new Promise((r) => setTimeout(r, 5000))
@@ -130,14 +128,12 @@ document.addEventListener('submit', (e) => {
   if (form.id.startsWith('shipment-')) {
     const shipmentId = form.id.replace('shipment-', '')
     console.log(shipmentId)
-    Shipments.update(
-      shipmentId,
-      {},
-      {},
-      {
+    Shipments.update(shipmentId, {
+      attributes: {},
+      relationships: {
         shipping_method: form.elements['shipping_method'].value,
       },
-    )
+    })
       .then(fetchOrder)
       .then(() => {
         document.querySelector('#payments').innerHTML = `
@@ -154,34 +150,31 @@ document.addEventListener('submit', (e) => {
       })
   } else if (form.id === 'payment-methods') {
     const paymentMethodId = form.elements['payment_method'].value
-    Orders.update(
-      order.id,
-      {},
-      {
+    Orders.update(order.id, {
+      attributes: {},
+      query: {
         include: orderIncludes,
       },
-      {
+      relationships: {
         payment_method: paymentMethodId,
       },
-    )
+    })
       .then(setOrder)
       .then(() => {
-        return WireTransfers.create(
-          {},
-          {},
-          {
+        return WireTransfers.create({
+          attributes: {},
+          relationships: {
             order,
           },
-        )
+        })
       })
       .then(() => {
-        return Orders.update(
-          order.id,
-          {
+        return Orders.update(order.id, {
+          attributes: {
             _place: true,
           },
-          { include: orderIncludes },
-        )
+          query: { include: orderIncludes },
+        })
       })
       .then(setOrder)
       .then(() => {
