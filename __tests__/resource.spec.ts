@@ -404,11 +404,15 @@ describe('resource', () => {
 
         expect(async () => {
           await res.update('asd', '' as any)
-        }).rejects.toThrow(`[test_types] Missing resource attributes`)
+        }).rejects.toThrow(
+          `[test_types] Invalid resource params, expected object, received string`,
+        )
 
         expect(async () => {
           await res.update('asd', null as any)
-        }).rejects.toThrow(`[test_types] Missing resource attributes`)
+        }).rejects.toThrow(
+          `[test_types] Invalid resource params, expected object, received null`,
+        )
       })
 
       it('throws an error if attributes is not an object', async () => {
@@ -417,25 +421,25 @@ describe('resource', () => {
         expect(async () => {
           await res.update('asd', 1 as any)
         }).rejects.toThrow(
-          `[test_types] Invalid resource attributes, expected object, received number`,
+          `[test_types] Invalid resource params, expected object, received number`,
         )
 
         expect(async () => {
           await res.update('asd', [] as any)
         }).rejects.toThrow(
-          `[test_types] Invalid resource attributes, expected object, received array`,
+          `[test_types] Invalid resource params, expected object, received array`,
         )
 
         expect(async () => {
           await res.update('asd', 'asdasd' as any)
         }).rejects.toThrow(
-          `[test_types] Invalid resource attributes, expected object, received string`,
+          `[test_types] Invalid resource params, expected object, received string`,
         )
 
         expect(async () => {
           await res.update('asd', true as any)
         }).rejects.toThrow(
-          `[test_types] Invalid resource attributes, expected object, received boolean`,
+          `[test_types] Invalid resource params, expected object, received boolean`,
         )
       })
 

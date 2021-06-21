@@ -164,7 +164,7 @@ export const createResource = <T, U>(
     },
 
     create(params: ResourceWriteParams<T, U>) {
-      if (!params || typeof params !== 'object') {
+      if (!params || getType(params) !== 'object') {
         throw new Error(
           `[${
             config.type
@@ -188,7 +188,7 @@ export const createResource = <T, U>(
     update(id: string, params: ResourceWriteParams<T, U>) {
       requireId(id, config)
 
-      if (!params || typeof params !== 'object') {
+      if (!params || getType(params) !== 'object') {
         throw new Error(
           `[${
             config.type
