@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { cacheToken, getToken } from './cache'
-import { getScope } from './market'
+import { getScope } from './session'
 import { getConfig } from '../config'
 
 export interface GuestResponse {

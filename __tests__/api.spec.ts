@@ -249,6 +249,10 @@ describe('api', () => {
         access_token: 'qwerty',
         refresh_token: 'asdasd',
         expires_in: 7200,
+        scope: 'market:1',
+        created_at: Date.now() - 60 * 1000,
+        owner_id: 'zxcVBnMASd',
+        owner_type: 'customer',
       })
       await loginAsCustomer('asd', 'asdad')
       const customerConfig = await createRequest('/test', 'get')

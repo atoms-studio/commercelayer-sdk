@@ -19,6 +19,10 @@ const dummyConfig = {
 const createDummyResource = () => createResource(dummyConfig)
 
 describe('resource', () => {
+  // afterEach(() => {
+  //   ;(createRequest as any) = _originalCreateRequest
+  // })
+
   describe('commonResourceFields', () => {
     it('is a predefined list of attributes', () => {
       expect(commonResourceFields).toEqual([

@@ -1,11 +1,9 @@
-import { logoutCustomer } from './customer'
+import { resetSession, getCurrentMarkets, setCurrentMarkets } from './session'
 import { loginAsGuest } from './guest'
-
-let currentMarkets: number[] = []
 
 /* istanbul ignore next */
 export const __resetMarket = (): void => {
-  currentMarkets = []
+  setCurrentMarkets([])
 }
 
 export const setMarket = async (marketId: number | number[]): Promise<void> => {
@@ -16,13 +14,11 @@ export const setMarket = async (marketId: number | number[]): Promise<void> => {
     markets = [marketId]
   }
 
-  // Always assign a copy, otherwise consumer's modifications
-  // on the input parameter would alter the value
-  currentMarkets = markets.slice()
+  setCurrentMarkets(markets)
 
   // Changing markets invalidates customer tokens
   // so we need to log them out
-  logoutCustomer()
+  resetSession()
 
   // Changing markets also invalidates the current guest token
   // so we need to get a new one ( or use the cached version )
@@ -30,7 +26,4 @@ export const setMarket = async (marketId: number | number[]): Promise<void> => {
 }
 
 // Always return a copy so consumers cannot alter directly
-export const getMarket = (): number[] => currentMarkets.slice()
-
-export const getScope = (): string =>
-  currentMarkets.map((market) => `market:${market}`).join(' ')
+export const getMarket = (): number[] => getCurrentMarkets()

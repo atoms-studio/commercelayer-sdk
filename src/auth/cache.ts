@@ -1,4 +1,4 @@
-import { getMarket } from './market'
+import { getCurrentMarkets } from './session'
 
 export interface TokenCacheEntry {
   token: string
@@ -7,7 +7,7 @@ export interface TokenCacheEntry {
 
 export const tokenCache: Map<string, TokenCacheEntry> = new Map()
 
-export const cacheKey = (): string => getMarket().join(',')
+export const cacheKey = (): string => getCurrentMarkets().join(',')
 
 export const cacheToken = (token: string, expires: number): void => {
   tokenCache.set(cacheKey(), {

@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 import { initRequest, getBaseRequest } from '../src/request'
+import customerResponse from './responses/customer.json'
 
 export const mockRequestWithConfig = (): AxiosInstance => {
   initRequest('http://www.google.com')
@@ -28,12 +29,21 @@ export const mockRequestWithResponse = (
   initRequest('http://www.google.com')
   const baseRequest = getBaseRequest()
 
-  ;(baseRequest.request as any) = jest.fn(() =>
-    Promise.resolve({
+  ;(baseRequest.request as any) = jest.fn((params) => {
+    // Requests for profile always return this result for auth mocks
+    if (params.url.includes('/api/customers')) {
+      return Promise.resolve({
+        data: customerResponse,
+        status: 200,
+      })
+    }
+
+    return Promise.resolve({
       data: response,
       status,
-    }),
-  )
+      headers: params.headers,
+    })
+  })
 
   return baseRequest
 }
@@ -91,4 +101,5 @@ export const mockAuthResponse = (response: any) => {
       status: 200,
     })
   })
+  mockRequestWithResponse({})
 }

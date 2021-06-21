@@ -1,4 +1,5 @@
 import { __resetMarket, setMarket } from '../../src/auth/market'
+import { createRequest } from '../../src/api'
 import {
   loginAsCustomer,
   currentCustomerData,
@@ -7,12 +8,14 @@ import {
   getCustomerToken,
   refreshCustomer,
   useCustomerSession,
+  getProfile,
 } from '../../src/auth/customer'
 import { initConfig, __resetConfig } from '../../src/config'
 import { mockAuthResponse } from '../utils'
 import axios from 'axios'
 
 const _originalPost = axios.post
+const _originalCreateRequest = createRequest
 
 describe('auth:customer', () => {
   beforeEach(() => {
@@ -22,6 +25,7 @@ describe('auth:customer', () => {
 
   afterEach(() => {
     ;(axios.post as any) = _originalPost
+    ;(createRequest as any) = _originalCreateRequest
     logoutCustomer()
   })
 
@@ -61,9 +65,10 @@ describe('auth:customer', () => {
     await setMarket(1)
 
     const response = await loginAsCustomer('asd', 'asd')
+    expect(response).toHaveProperty('id', 'zxcVBnMASd')
     expect(response).toHaveProperty('token', 'your-access-token')
     expect(response).toHaveProperty('refreshToken', 'your-refresh-token')
-    expect(response).toHaveProperty('customer', null)
+    expect(response).toHaveProperty('customer', expect.any(Object))
     expect(response).toHaveProperty('expires')
 
     // Expect date expiration to be within a 5% of the expected value
@@ -92,7 +97,8 @@ describe('auth:customer', () => {
 
     await loginAsCustomer('asdasd', 'asdasd')
     expect(currentCustomerData).toEqual({
-      customer: null,
+      id: 'zxcVBnMASd',
+      customer: expect.any(Object),
       token: 'your-access-token',
       refreshToken: 'your-refresh-token',
       expires: expect.any(Number),
@@ -119,7 +125,8 @@ describe('auth:customer', () => {
 
     await loginAsCustomer('asdasd', 'asdasd')
     expect(currentCustomerData).toEqual({
-      customer: null,
+      id: 'zxcVBnMASd',
+      customer: expect.any(Object),
       token: 'your-access-token',
       refreshToken: 'your-refresh-token',
       expires: expect.any(Number),
@@ -128,6 +135,7 @@ describe('auth:customer', () => {
     logoutCustomer()
 
     expect(currentCustomerData).toEqual({
+      id: '',
       customer: null,
       token: '',
       refreshToken: '',
@@ -194,6 +202,7 @@ describe('auth:customer', () => {
 
   it('refreshes customer token', async () => {
     expect(currentCustomerData).toEqual({
+      id: '',
       customer: null,
       token: '',
       refreshToken: '',
@@ -224,6 +233,7 @@ describe('auth:customer', () => {
 
     const badResult = await refreshCustomer()
     expect(badResult).toEqual({
+      id: '',
       customer: null,
       token: '',
       refreshToken: '',
@@ -235,13 +245,15 @@ describe('auth:customer', () => {
 
     const result = await refreshCustomer()
     expect(result).toEqual({
-      customer: null,
+      id: 'zxcVBnMASd',
+      customer: expect.any(Object),
       token: 'your-access-token',
       refreshToken: 'your-refresh-token',
       expires: expect.any(Number),
     })
     expect(currentCustomerData).toEqual({
-      customer: null,
+      id: 'zxcVBnMASd',
+      customer: expect.any(Object),
       token: 'your-access-token',
       refreshToken: 'your-refresh-token',
       expires: expect.any(Number),
@@ -250,6 +262,7 @@ describe('auth:customer', () => {
 
   it('uses a saved customer token', async () => {
     expect(currentCustomerData).toEqual({
+      id: '',
       customer: null,
       token: '',
       refreshToken: '',
@@ -280,6 +293,7 @@ describe('auth:customer', () => {
       'market:123',
     )
     expect(badResult).toEqual({
+      id: '',
       customer: null,
       token: '',
       refreshToken: '',
@@ -292,16 +306,64 @@ describe('auth:customer', () => {
       'market:77738',
     )
     expect(result).toEqual({
-      customer: null,
+      id: 'zxcVBnMASd',
+      customer: expect.any(Object),
       token: 'your-access-token',
       refreshToken: 'your-refresh-token',
       expires: expect.any(Number),
     })
     expect(currentCustomerData).toEqual({
-      customer: null,
+      id: 'zxcVBnMASd',
+      customer: expect.any(Object),
       token: 'your-access-token',
       refreshToken: 'your-refresh-token',
       expires: expect.any(Number),
     })
+  })
+
+  it('returns the current customer', async () => {
+    expect(currentCustomerData).toEqual({
+      id: '',
+      customer: null,
+      token: '',
+      refreshToken: '',
+      expires: 0,
+    })
+
+    expect(getProfile()).toEqual(null)
+
+    initConfig({
+      host: 'asda',
+      clientId: 'asdasd',
+    })
+    const createdAt = Date.now() - 60 * 1000
+    mockAuthResponse({
+      access_token: 'your-access-token',
+      token_type: 'bearer',
+      expires_in: 7200,
+      refresh_token: 'your-refresh-token',
+      scope: 'market:1',
+      created_at: createdAt,
+      owner_id: 'zxcVBnMASd',
+      owner_type: 'customer',
+    })
+    await setMarket(1)
+
+    await loginAsCustomer('asd', 'asd')
+
+    expect(currentCustomerData).toEqual({
+      id: 'zxcVBnMASd',
+      customer: expect.any(Object),
+      token: 'your-access-token',
+      refreshToken: 'your-refresh-token',
+      expires: expect.any(Number),
+    })
+
+    expect(getProfile()).toEqual(
+      expect.objectContaining({
+        status: 'repeat',
+        has_password: true,
+      }),
+    )
   })
 })

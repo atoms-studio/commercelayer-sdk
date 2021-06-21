@@ -1,46 +1,25 @@
 import axios from 'axios'
-import { getScope, getMarket } from './market'
 import { getConfig } from '../config'
-import { TokenCacheEntry } from './cache'
+import {
+  getScope,
+  currentCustomerData,
+  getCustomerToken,
+  resetSession,
+  isCustomerLoggedIn,
+} from './session'
+import { Customers, CustomerInstance } from '../resources/Customers'
 
+export { isCustomerLoggedIn, getCustomerToken, currentCustomerData }
 export interface CustomerData {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  customer: any
+  id: string
+  customer: CustomerInstance | null
   token: string
   refreshToken: string
   expires: number
 }
 
-export const currentCustomerData: CustomerData = {
-  customer: null,
-  token: '',
-  refreshToken: '',
-  expires: 0,
-}
-
 export const logoutCustomer = (): void => {
-  currentCustomerData.customer = null
-  currentCustomerData.token = ''
-  currentCustomerData.refreshToken = ''
-  currentCustomerData.expires = 0
-}
-
-export const isCustomerLoggedIn = (): boolean => {
-  return !!(currentCustomerData.token && currentCustomerData.refreshToken)
-}
-
-export const getCustomerToken = (): TokenCacheEntry => {
-  if (currentCustomerData.expires <= Date.now()) {
-    return {
-      token: '',
-      expires: 0,
-    }
-  }
-
-  return {
-    token: currentCustomerData.token,
-    expires: currentCustomerData.expires,
-  }
+  resetSession()
 }
 
 export const loginAsCustomer = async (
@@ -66,17 +45,16 @@ export const loginAsCustomer = async (
       scope,
     })
 
+    currentCustomerData.id = data.owner_id
     currentCustomerData.token = data.access_token
     currentCustomerData.refreshToken = data.refresh_token
     currentCustomerData.customer = null
     currentCustomerData.expires = Date.now() + data.expires_in * 1000
+
+    await loadProfile()
   } catch (err) /* istanbul ignore next */ {
     // Reset auth data and rethrow the error
-    currentCustomerData.customer = null
-    currentCustomerData.token = ''
-    currentCustomerData.refreshToken = ''
-    currentCustomerData.expires = 0
-
+    logoutCustomer()
     throw err
   }
 
@@ -91,6 +69,7 @@ export const refreshCustomer = async (): Promise<CustomerData> => {
 
   if (!isCustomerLoggedIn()) {
     return {
+      id: '',
       customer: null,
       token: '',
       refreshToken: '',
@@ -105,17 +84,16 @@ export const refreshCustomer = async (): Promise<CustomerData> => {
       refresh_token: currentCustomerData.refreshToken,
     })
 
+    currentCustomerData.id = data.owner_id
     currentCustomerData.token = data.access_token
     currentCustomerData.refreshToken = data.refresh_token
     currentCustomerData.customer = null
     currentCustomerData.expires = Date.now() + data.expires_in
+
+    await loadProfile()
   } catch (err) /* istanbul ignore next */ {
     // Reset auth data and rethrow the error
-    currentCustomerData.customer = null
-    currentCustomerData.token = ''
-    currentCustomerData.refreshToken = ''
-    currentCustomerData.expires = 0
-
+    logoutCustomer()
     throw err
   }
 
@@ -128,6 +106,7 @@ export const useCustomerSession = async (
   scope: string,
 ): Promise<CustomerData> => {
   const authData = {
+    id: '',
     customer: null,
     token: '',
     refreshToken: '',
@@ -140,10 +119,22 @@ export const useCustomerSession = async (
   }
 
   // Temporarily set auth data
+  currentCustomerData.id = ''
   currentCustomerData.token = accessToken
   currentCustomerData.refreshToken = refreshToken
   currentCustomerData.customer = null
   currentCustomerData.expires = Date.now() + 5 * 1000
 
   return await refreshCustomer()
+}
+
+export const loadProfile = async (): Promise<void> => {
+  /* istanbul ignore else */
+  if (isCustomerLoggedIn()) {
+    currentCustomerData.customer = await Customers.find(currentCustomerData.id)
+  }
+}
+
+export const getProfile = (): CustomerInstance | null => {
+  return currentCustomerData.customer
 }

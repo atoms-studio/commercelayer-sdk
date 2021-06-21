@@ -17,6 +17,9 @@ document.getElementById('market1-get-token').addEventListener('click', () => {
       document.getElementById(
         'customer1-is-logged-in',
       ).textContent = Auth.isCustomerLoggedIn() ? 'true' : 'false'
+      document.getElementById('customer1-profile').textContent = JSON.stringify(
+        Auth.getProfile(),
+      )
     })
   })
 })
@@ -30,6 +33,8 @@ document.getElementById('market2-get-token').addEventListener('click', () => {
       document.getElementById(
         'customer2-is-logged-in',
       ).textContent = Auth.isCustomerLoggedIn() ? 'true' : 'false'
+      document.getElementById('customer2-profile').textContent =
+        JSON.stringify(Auth.getProfile()) || 'null'
     },
   )
 })

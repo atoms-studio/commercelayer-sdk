@@ -10,7 +10,7 @@ import {
 } from './resource'
 import { handleApiErrors } from './errors'
 import { getToken } from './auth/cache'
-import { isCustomerLoggedIn, getCustomerToken } from './auth/customer'
+import { isCustomerLoggedIn, getCustomerToken } from './auth/session'
 
 export type RequestMethod = 'get' | 'post' | 'patch' | 'delete'
 

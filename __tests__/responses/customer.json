@@ -1,0 +1,64 @@
+{
+  "data": {
+    "id": "OopZhdvNWQ",
+    "type": "customers",
+    "links": {
+      "self": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ"
+    },
+    "attributes": {
+      "email": "asd@asd.com",
+      "status": "repeat",
+      "has_password": true,
+      "created_at": "2020-12-31T09:58:45.120Z",
+      "updated_at": "2021-06-21T10:38:46.788Z",
+      "reference": "15012802215044",
+      "reference_origin": "",
+      "metadata": {}
+    },
+    "relationships": {
+      "customer_group": {
+        "links": {
+          "self": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/relationships/customer_group",
+          "related": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/customer_group"
+        }
+      },
+      "customer_addresses": {
+        "links": {
+          "self": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/relationships/customer_addresses",
+          "related": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/customer_addresses"
+        }
+      },
+      "customer_payment_sources": {
+        "links": {
+          "self": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/relationships/customer_payment_sources",
+          "related": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/customer_payment_sources"
+        }
+      },
+      "customer_subscriptions": {
+        "links": {
+          "self": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/relationships/customer_subscriptions",
+          "related": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/customer_subscriptions"
+        }
+      },
+      "orders": {
+        "links": {
+          "self": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/relationships/orders",
+          "related": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/orders"
+        }
+      },
+      "returns": {
+        "links": {
+          "self": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/relationships/returns",
+          "related": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/returns"
+        }
+      },
+      "attachments": {
+        "links": {
+          "self": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/relationships/attachments",
+          "related": "https://brioni.commercelayer.io/api/customers/OopZhdvNWQ/attachments"
+        }
+      }
+    },
+    "meta": { "mode": "test", "organization_id": "ORKmVFlwaX" }
+  }
+}

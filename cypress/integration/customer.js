@@ -7,10 +7,12 @@ describe('Customer', () => {
     cy.get('#market1-get-token').click()
     cy.get('#customer1-token').should('not.be.empty')
     cy.get('#customer1-is-logged-in').should('have.text', 'true')
+    cy.get('#customer1-profile').should('not.be.empty')
 
     cy.get('#market2-get-token').click()
     cy.get('#guest-token').should('not.be.empty')
     cy.get('#customer2-token').should('be.empty')
     cy.get('#customer2-is-logged-in').should('have.text', 'false')
+    cy.get('#customer2-profile').should('have.text', 'null')
   })
 })

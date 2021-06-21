@@ -1,10 +1,6 @@
-import {
-  __resetMarket,
-  setMarket,
-  getMarket,
-  getScope,
-} from '../../src/auth/market'
-import { logoutCustomer } from '../../src/auth/customer'
+import { __resetMarket, setMarket, getMarket } from '../../src/auth/market'
+import { getScope } from '../../src/auth/session'
+import { resetSession } from '../../src/auth/session'
 import { loginAsGuest } from '../../src/auth/guest'
 import { initConfig, __resetConfig } from '../../src/config'
 import { mockAuthResponse } from '../utils'
@@ -64,12 +60,12 @@ describe('auth:market', () => {
   })
 
   it('logs out current customer when changing market', async () => {
-    const originalFn = logoutCustomer
-    ;(logoutCustomer as any) = jest.fn()
+    const originalFn = resetSession
+    ;(resetSession as any) = jest.fn()
 
     await setMarket(918)
-    expect(logoutCustomer).toHaveBeenCalledTimes(1)
-    ;(logoutCustomer as any) = originalFn
+    expect(resetSession).toHaveBeenCalledTimes(1)
+    ;(resetSession as any) = originalFn
   })
 
   it('retrieves the guest token when changing market', async () => {
