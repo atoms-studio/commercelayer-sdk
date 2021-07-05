@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { getBaseRequest } from './request'
+import { getBaseRequest } from './config'
 import { serialize, deserialize } from './serializer'
 import {
   ResourceConfig,

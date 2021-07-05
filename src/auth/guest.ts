@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { cacheToken, getToken } from './cache'
+import { cacheToken, getToken, removeCurrentToken } from './cache'
 import { getScope } from './session'
-import { getConfig } from '../config'
+import { getConfig, getWritableConfig } from '../config'
 
 export interface GuestResponse {
   token: string
@@ -41,3 +41,12 @@ export const loginAsGuest = async (): Promise<GuestResponse> => {
     expires,
   }
 }
+
+export const refreshGuest = async (): Promise<GuestResponse> => {
+  console.log('called')
+  removeCurrentToken()
+  return await loginAsGuest()
+}
+
+const writableConfig = getWritableConfig()
+writableConfig.refreshGuestTokenFn = refreshGuest

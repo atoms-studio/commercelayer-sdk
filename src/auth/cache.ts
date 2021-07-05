@@ -16,6 +16,11 @@ export const cacheToken = (token: string, expires: number): void => {
   })
 }
 
+/* istanbul ignore next */
+export const removeCurrentToken = (): void => {
+  tokenCache.delete(cacheKey())
+}
+
 export const getToken = (): TokenCacheEntry => {
   const key = cacheKey()
   const cachedValue = tokenCache.get(key)

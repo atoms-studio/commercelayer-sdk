@@ -1,5 +1,5 @@
 import { initConfig, config, defaultConfig, getConfig } from '../src/config'
-import { getBaseRequest } from '../src/request'
+import { getBaseRequest, isRefreshTokenError } from '../src/config'
 
 describe('config', () => {
   describe('initConfig', () => {
@@ -25,7 +25,11 @@ describe('config', () => {
         clientId: 'asd',
         refreshTokens: defaultConfig.refreshTokens,
         refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: defaultConfig.cookies,
+        isCustomerLoggedInFn: defaultConfig.isCustomerLoggedInFn,
+        refreshCustomerTokenFn: defaultConfig.refreshCustomerTokenFn,
+        refreshGuestTokenFn: defaultConfig.refreshCustomerTokenFn,
       })
 
       initConfig({
@@ -38,7 +42,11 @@ describe('config', () => {
         clientId: 'asd',
         refreshTokens: false,
         refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: defaultConfig.cookies,
+        isCustomerLoggedInFn: defaultConfig.isCustomerLoggedInFn,
+        refreshCustomerTokenFn: defaultConfig.refreshCustomerTokenFn,
+        refreshGuestTokenFn: defaultConfig.refreshCustomerTokenFn,
       })
 
       initConfig({
@@ -52,7 +60,11 @@ describe('config', () => {
         clientId: 'asd',
         refreshTokens: false,
         refreshTokensAttempts: 4,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: defaultConfig.cookies,
+        isCustomerLoggedInFn: defaultConfig.isCustomerLoggedInFn,
+        refreshCustomerTokenFn: defaultConfig.refreshCustomerTokenFn,
+        refreshGuestTokenFn: defaultConfig.refreshCustomerTokenFn,
       })
 
       initConfig({
@@ -67,11 +79,15 @@ describe('config', () => {
         clientId: 'asd',
         refreshTokens: false,
         refreshTokensAttempts: 4,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: {
           customer_token: false,
           customer_refresh_token: false,
           scopes: false,
         },
+        isCustomerLoggedInFn: defaultConfig.isCustomerLoggedInFn,
+        refreshCustomerTokenFn: defaultConfig.refreshCustomerTokenFn,
+        refreshGuestTokenFn: defaultConfig.refreshCustomerTokenFn,
       })
 
       initConfig({
@@ -88,11 +104,15 @@ describe('config', () => {
         clientId: 'asd',
         refreshTokens: true,
         refreshTokensAttempts: 4,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: {
           customer_token: 'yes',
           customer_refresh_token: defaultConfig.cookies.customer_refresh_token,
           scopes: defaultConfig.cookies.scopes,
         },
+        isCustomerLoggedInFn: defaultConfig.isCustomerLoggedInFn,
+        refreshCustomerTokenFn: defaultConfig.refreshCustomerTokenFn,
+        refreshGuestTokenFn: defaultConfig.refreshCustomerTokenFn,
       })
 
       initConfig({
@@ -100,6 +120,7 @@ describe('config', () => {
         clientId: 'asd',
         refreshTokens: true,
         refreshTokensAttempts: 4,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: {
           customer_token: 'yes',
         },
@@ -109,11 +130,15 @@ describe('config', () => {
         clientId: 'asd',
         refreshTokens: true,
         refreshTokensAttempts: 4,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: {
           customer_token: 'yes',
           customer_refresh_token: defaultConfig.cookies.customer_refresh_token,
           scopes: defaultConfig.cookies.scopes,
         },
+        isCustomerLoggedInFn: defaultConfig.isCustomerLoggedInFn,
+        refreshCustomerTokenFn: defaultConfig.refreshCustomerTokenFn,
+        refreshGuestTokenFn: defaultConfig.refreshCustomerTokenFn,
       })
 
       initConfig({
@@ -130,12 +155,22 @@ describe('config', () => {
         clientId: 'asd',
         refreshTokens: true,
         refreshTokensAttempts: 4,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: {
           customer_token: defaultConfig.cookies.customer_token,
           customer_refresh_token: defaultConfig.cookies.customer_refresh_token,
           scopes: defaultConfig.cookies.scopes,
         },
+        isCustomerLoggedInFn: defaultConfig.isCustomerLoggedInFn,
+        refreshCustomerTokenFn: defaultConfig.refreshCustomerTokenFn,
+        refreshGuestTokenFn: defaultConfig.refreshCustomerTokenFn,
       })
+
+      expect(config.onRefreshError(new Error('asd'))).toEqual(undefined)
+      expect(defaultConfig.isCustomerLoggedInFn()).toBe(false)
+
+      expect(() => defaultConfig.refreshCustomerTokenFn()).not.toThrow()
+      expect(() => defaultConfig.refreshGuestTokenFn()).not.toThrow()
     })
 
     it('passes host to request', () => {
@@ -164,6 +199,133 @@ describe('config', () => {
       initConfig(cfg)
 
       expect(getConfig()).toEqual(config)
+    })
+  })
+
+  describe('isRefresTokenError', () => {
+    it('tells if its a refresh token error', () => {
+      expect(
+        isRefreshTokenError({
+          response: undefined,
+          config: {},
+          isAxiosError: true,
+          toJSON: () => ({}),
+          name: '',
+          message: '',
+        }),
+      ).toBe(false)
+
+      expect(
+        isRefreshTokenError({
+          response: {
+            status: 404,
+            data: null,
+            statusText: '',
+            headers: {},
+            config: {},
+          },
+          config: {},
+          isAxiosError: true,
+          toJSON: () => ({}),
+          name: '',
+          message: '',
+        }),
+      ).toBe(false)
+
+      expect(
+        isRefreshTokenError({
+          response: {
+            status: 401,
+            data: null,
+            statusText: '',
+            headers: {},
+            config: {},
+          },
+          config: {},
+          isAxiosError: true,
+          toJSON: () => ({}),
+          name: '',
+          message: '',
+        }),
+      ).toBe(false)
+
+      expect(
+        isRefreshTokenError({
+          response: {
+            status: 401,
+            data: {},
+            statusText: '',
+            headers: {},
+            config: {},
+          },
+          config: {},
+          isAxiosError: true,
+          toJSON: () => ({}),
+          name: '',
+          message: '',
+        }),
+      ).toBe(false)
+
+      expect(
+        isRefreshTokenError({
+          response: {
+            status: 401,
+            data: {
+              errors: null,
+            },
+            statusText: '',
+            headers: {},
+            config: {},
+          },
+          config: {},
+          isAxiosError: true,
+          toJSON: () => ({}),
+          name: '',
+          message: '',
+        }),
+      ).toBe(false)
+
+      expect(
+        isRefreshTokenError({
+          response: {
+            status: 401,
+            data: {
+              errors: [],
+            },
+            statusText: '',
+            headers: {},
+            config: {},
+          },
+          config: {},
+          isAxiosError: true,
+          toJSON: () => ({}),
+          name: '',
+          message: '',
+        }),
+      ).toBe(false)
+
+      expect(
+        isRefreshTokenError({
+          response: {
+            status: 401,
+            data: {
+              errors: [
+                {
+                  code: 'INVALID_TOKEN',
+                },
+              ],
+            },
+            statusText: '',
+            headers: {},
+            config: {},
+          },
+          config: {},
+          isAxiosError: true,
+          toJSON: () => ({}),
+          name: '',
+          message: '',
+        }),
+      ).toBe(true)
     })
   })
 })

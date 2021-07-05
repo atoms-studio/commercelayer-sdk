@@ -1,4 +1,4 @@
-import { initRequest, getBaseRequest } from '../src/request'
+import { initRequest, getBaseRequest } from '../src/config'
 
 describe('request', () => {
   it('throws an error with an empty request', () => {
@@ -9,7 +9,23 @@ describe('request', () => {
 
   it('creates an axios instance after calling init', () => {
     const baseURL = 'http://www.google.com'
-    initRequest(baseURL)
+    initRequest({
+      host: baseURL,
+      clientId: '',
+      refreshTokens: false,
+      refreshTokensAttempts: 5,
+      onRefreshError: (err) => {
+        //
+      },
+      cookies: {} as any,
+      isCustomerLoggedInFn: () => false,
+      refreshCustomerTokenFn: async () => {
+        return {} as any
+      },
+      refreshGuestTokenFn: async () => {
+        return {} as any
+      },
+    })
 
     const request = getBaseRequest()
 

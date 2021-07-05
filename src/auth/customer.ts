@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getConfig } from '../config'
+import { getConfig, getWritableConfig } from '../config'
 import {
   getScope,
   currentCustomerData,
@@ -138,3 +138,8 @@ export const loadProfile = async (): Promise<void> => {
 export const getProfile = (): CustomerInstance | null => {
   return currentCustomerData.customer
 }
+
+const writableConfig = getWritableConfig()
+/* instanbul ignore next */
+writableConfig.isCustomerLoggedInFn = isCustomerLoggedIn
+writableConfig.refreshCustomerTokenFn = refreshCustomer
