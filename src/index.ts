@@ -39,3 +39,11 @@ export { Attachments, AttachmentInstance } from './resources/Attachments'
 export { Returns, ReturnInstance } from './resources/Returns'
 export { WireTransfers, WireTransferInstance } from './resources/WireTransfers'
 export { Refunds, RefundInstance } from './resources/Refunds'
+export {
+  StripePayments,
+  StripePaymentInstance,
+} from './resources/StripePayments'
+export {
+  PaymentGateways,
+  PaymentGatewayInstance,
+} from './resources/PaymentGateways'
