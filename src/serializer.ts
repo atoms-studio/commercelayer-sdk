@@ -59,6 +59,12 @@ export const serialize = async <T, U>(
     serialized.data.attributes = {}
   }
 
+  // Add metadata if original attributes contain it.
+  // For some reason jsonapi-serializer strips the key
+  if (attributes.metadata && !serialized.data.attributes.metadata) {
+    serialized.data.attributes.metadata = attributes.metadata
+  }
+
   // Manually add relationships to the serialized payload.
   // Serializing relationships seems broken in jsonapi-serializer
   const relationshipKeys = Object.keys(relationships)

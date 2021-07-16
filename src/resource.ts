@@ -28,6 +28,11 @@ export interface CommonResourceAttributes {
 
 export type AttributesPayload<T> = {
   [K in keyof T]?: T[K]
+} & {
+  reference?: string
+  reference_origin?: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  metadata?: Record<string, any>
 }
 
 export type RelationshipsPayload<T> = {

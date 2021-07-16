@@ -33,6 +33,9 @@ describe('serializer', () => {
       name: 'test name',
       description: 'test description',
       sku_code: '12345678',
+      metadata: {
+        asd: 'asdasd',
+      },
     }
 
     const result = await serialize(
