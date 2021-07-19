@@ -29,6 +29,7 @@
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
+    "@release-it/conventional-changelog": "^3.0.1",
     "@types/jest": "^26.0.21",
     "@types/jsdom": "^16.2.10",
     "@types/jsonapi-serializer": "^3.6.3",
