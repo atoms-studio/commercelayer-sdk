@@ -11,7 +11,8 @@
     "dev": "vite",
     "build": "rollup -c",
     "create:resource": "ts-node --project scripts/tsconfig.json scripts/create-resource.ts",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "release": "release-it"
   },
   "main": "dist/commercelayer-sdk.cjs.js",
   "module": "dist/commercelayer-sdk.esm.js",
@@ -48,6 +49,7 @@
     "lodash": "^4.17.21",
     "pluralize": "^8.0.0",
     "prettier": "^2.2.1",
+    "release-it": "^14.10.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.34.2",
     "rollup-plugin-typescript2": "^0.29.0",
