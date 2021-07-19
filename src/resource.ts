@@ -24,6 +24,7 @@ export interface CommonResourceAttributes {
   metadata: Record<string, any>
   created_at: string
   updated_at: string
+  type: string
 }
 
 export type AttributesPayload<T> = {
@@ -38,6 +39,8 @@ export type AttributesPayload<T> = {
 export type RelationshipsPayload<T> = {
   [K in keyof T]?: T[K] | string
 }
+
+export type RelatedResourceInstance = CommonResourceAttributes
 
 export type ConcreteResourceInstance<T, U> = CommonResourceAttributes & T & U
 

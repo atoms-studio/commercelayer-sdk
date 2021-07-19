@@ -8,6 +8,7 @@ describe('Customer', () => {
     cy.get('#customer1-token').should('not.be.empty')
     cy.get('#customer1-is-logged-in').should('have.text', 'true')
     cy.get('#customer1-profile').should('not.be.empty')
+    cy.get('#customer1-order-count').should('not.be.empty')
 
     cy.get('#market2-get-token').click()
     cy.get('#guest-token').should('not.be.empty')

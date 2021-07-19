@@ -14,6 +14,10 @@ const deserializer = new Deserializer({
 export const deserialize = async (data: Record<string, any>): Promise<any> => {
   const deserialized = await deserializer.deserialize(data)
 
+  if (data.data.type && !deserialized.type) {
+    deserialized.type = data.data.type
+  }
+
   if (Array.isArray(deserialized)) {
     return {
       items: deserialized,

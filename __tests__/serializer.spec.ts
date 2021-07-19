@@ -10,6 +10,7 @@ describe('serializer', () => {
       'id',
       'prices',
       'meta',
+      'type',
       ...Object.keys(singleSku.data.attributes),
     ].sort()
 
