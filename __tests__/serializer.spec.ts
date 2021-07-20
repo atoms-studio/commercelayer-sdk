@@ -37,12 +37,21 @@ describe('serializer', () => {
       metadata: {
         asd: 'asdasd',
       },
+      reference: 'test ref',
+      reference_origin: 'ref_origin',
     }
 
     const result = await serialize(
       {
         type: 'test_types',
-        attributes: ['name', 'description', 'sku_code'],
+        attributes: [
+          'name',
+          'description',
+          'sku_code',
+          'metadata',
+          'reference',
+          'reference_origin',
+        ],
         relationships: {},
       },
       payload,

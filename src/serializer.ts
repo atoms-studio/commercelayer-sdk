@@ -3,6 +3,7 @@ import {
   ResourceConfig,
   AttributesPayload,
   RelationshipsPayload,
+  commonPayloadAttributes,
 } from './resource'
 import { getType, isObject } from './utils'
 
@@ -53,7 +54,7 @@ export const serialize = async <T, U>(
 
   const serializer = new Serializer(config.type, {
     keyForAttribute: 'snake_case',
-    attributes: config.attributes as string[],
+    attributes: (config.attributes as string[]).concat(commonPayloadAttributes),
   })
   const serialized = serializer.serialize(attributes)
 
@@ -61,12 +62,6 @@ export const serialize = async <T, U>(
   // This is needed if an empty set of attributes is passed
   if (!serialized.data.attributes) {
     serialized.data.attributes = {}
-  }
-
-  // Add metadata if original attributes contain it.
-  // For some reason jsonapi-serializer strips the key
-  if (attributes.metadata && !serialized.data.attributes.metadata) {
-    serialized.data.attributes.metadata = attributes.metadata
   }
 
   // Manually add relationships to the serialized payload.
