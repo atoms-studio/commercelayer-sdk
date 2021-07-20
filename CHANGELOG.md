@@ -1,3 +1,10 @@
+## [0.1.0-alpha.7](https://github.com/atoms-studio/commercelayer-sdk/compare/0.1.0-alpha.6...0.1.0-alpha.7) (2021-07-20)
+
+
+### Bug Fixes
+
+* **api:** allow common resource attributes in create/update payloads ([ea731c1](https://github.com/atoms-studio/commercelayer-sdk/commit/ea731c15b7064c7bc248a25f19f0e173543abc49))
+
 ## 0.1.0-alpha.6 (2021-07-19)
 
 
