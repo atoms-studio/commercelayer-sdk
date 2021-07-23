@@ -3,6 +3,7 @@ import {
   ResourceConfig,
   AttributesPayload,
   RelationshipsPayload,
+  commonPayloadAttributes,
 } from './resource'
 import { getType, isObject } from './utils'
 
@@ -13,6 +14,10 @@ const deserializer = new Deserializer({
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const deserialize = async (data: Record<string, any>): Promise<any> => {
   const deserialized = await deserializer.deserialize(data)
+
+  if (data.data.type && !deserialized.type) {
+    deserialized.type = data.data.type
+  }
 
   if (Array.isArray(deserialized)) {
     return {
@@ -49,7 +54,7 @@ export const serialize = async <T, U>(
 
   const serializer = new Serializer(config.type, {
     keyForAttribute: 'snake_case',
-    attributes: config.attributes as string[],
+    attributes: (config.attributes as string[]).concat(commonPayloadAttributes),
   })
   const serialized = serializer.serialize(attributes)
 

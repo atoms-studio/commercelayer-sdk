@@ -1,4 +1,4 @@
-import { init, Auth } from '@atoms-studio/commercelayer-sdk'
+import { init, Auth, Orders } from '@atoms-studio/commercelayer-sdk'
 
 init({
   host: import.meta.env.VITE_CL_DOMAIN,
@@ -10,7 +10,7 @@ document.getElementById('market1-get-token').addEventListener('click', () => {
     Auth.loginAsCustomer(
       (document.getElementById('customer-email') as HTMLInputElement).value,
       (document.getElementById('customer-password') as HTMLInputElement).value,
-    ).then(() => {
+    ).then(({ customer }) => {
       document.getElementById(
         'customer1-token',
       ).textContent = Auth.getCustomerToken().token
@@ -20,6 +20,14 @@ document.getElementById('market1-get-token').addEventListener('click', () => {
       document.getElementById('customer1-profile').textContent = JSON.stringify(
         Auth.getProfile(),
       )
+
+      Orders.findAll({
+        relatedTo: customer,
+      }).then((data) => {
+        document.getElementById(
+          'customer1-order-count',
+        ).textContent = data.total.toString()
+      })
     })
   })
 })

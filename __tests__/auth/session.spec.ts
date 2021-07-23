@@ -6,9 +6,9 @@ import {
   tokenCache,
   cacheToken,
   getToken,
-} from '../../src/auth/cache'
+} from '../../src/auth/session'
 
-describe('auth:cache', () => {
+describe('auth:session', () => {
   beforeEach(() => {
     __resetMarket()
     initConfig({

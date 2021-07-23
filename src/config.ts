@@ -4,6 +4,7 @@ import { GuestResponse } from './auth/guest'
 export interface InternalConfig {
   host: string
   clientId: string
+  clientSecret: string
   refreshTokens: boolean
   refreshTokensAttempts: number
   onRefreshError: (error: Error) => void | Promise<void>
@@ -19,7 +20,8 @@ export interface InternalConfig {
 
 export interface Config {
   host: string
-  clientId: string
+  clientId?: string
+  clientSecret?: string
   refreshTokens?: boolean
   refreshTokensAttempts?: number
   onRefreshError?: (error: Error) => void | Promise<void>
@@ -35,6 +37,7 @@ export interface Config {
 export const defaultConfig: Readonly<InternalConfig> = {
   host: '',
   clientId: '',
+  clientSecret: '',
   refreshTokens: true,
   refreshTokensAttempts: 5,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -58,6 +61,7 @@ export const defaultConfig: Readonly<InternalConfig> = {
 export const config: InternalConfig = {
   host: defaultConfig.host,
   clientId: defaultConfig.clientId,
+  clientSecret: defaultConfig.clientSecret,
   refreshTokens: defaultConfig.refreshTokens,
   refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -85,7 +89,8 @@ export const __resetConfig = (): void => {
 
 export const initConfig = (providedConfig: Config): void => {
   config.host = providedConfig.host
-  config.clientId = providedConfig.clientId
+  config.clientId = providedConfig.clientId || ''
+  config.clientSecret = providedConfig.clientSecret || ''
   config.refreshTokens = !!providedConfig.refreshTokens
   config.refreshTokensAttempts = Number(providedConfig.refreshTokensAttempts)
   config.onRefreshError =
@@ -123,10 +128,6 @@ export const initConfig = (providedConfig: Config): void => {
 
   if (!config.host) {
     throw new Error('Missing host')
-  }
-
-  if (!config.clientId) {
-    throw new Error('Missing client id')
   }
 
   if (isNaN(config.refreshTokensAttempts)) {

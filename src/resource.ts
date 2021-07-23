@@ -24,15 +24,25 @@ export interface CommonResourceAttributes {
   metadata: Record<string, any>
   created_at: string
   updated_at: string
+  type: string
+}
+export interface CommonPayloadAttributes {
+  reference?: string
+  reference_origin?: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  metadata?: Record<string, any>
 }
 
 export type AttributesPayload<T> = {
   [K in keyof T]?: T[K]
-}
+} &
+  CommonPayloadAttributes
 
 export type RelationshipsPayload<T> = {
   [K in keyof T]?: T[K] | string
 }
+
+export type RelatedResourceInstance = CommonResourceAttributes
 
 export type ConcreteResourceInstance<T, U> = CommonResourceAttributes & T & U
 
@@ -68,6 +78,12 @@ export const commonResourceFields: (keyof CommonResourceAttributes)[] = [
   'metadata',
   'created_at',
   'updated_at',
+]
+
+export const commonPayloadAttributes: (keyof CommonPayloadAttributes)[] = [
+  'reference',
+  'reference_origin',
+  'metadata',
 ]
 
 const requireId = <T, U>(id: string, config: ResourceConfig<T, U>): void => {

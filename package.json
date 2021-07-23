@@ -1,6 +1,6 @@
 {
   "name": "@atoms-studio/commercelayer-sdk",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.8",
   "repository": "git@github.com:atoms-studio/commercelayer-sdk.git",
   "author": "atoms.studio",
   "license": "MIT",
@@ -11,7 +11,8 @@
     "dev": "vite",
     "build": "rollup -c",
     "create:resource": "ts-node --project scripts/tsconfig.json scripts/create-resource.ts",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "release": "release-it"
   },
   "main": "dist/commercelayer-sdk.cjs.js",
   "module": "dist/commercelayer-sdk.esm.js",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
+    "@release-it/conventional-changelog": "^3.0.1",
     "@types/jest": "^26.0.21",
     "@types/jsdom": "^16.2.10",
     "@types/jsonapi-serializer": "^3.6.3",
@@ -48,6 +50,7 @@
     "lodash": "^4.17.21",
     "pluralize": "^8.0.0",
     "prettier": "^2.2.1",
+    "release-it": "^14.10.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.34.2",
     "rollup-plugin-typescript2": "^0.29.0",
@@ -60,5 +63,9 @@
   "dependencies": {
     "axios": "^0.21.1",
     "jsonapi-serializer": "^3.6.7"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

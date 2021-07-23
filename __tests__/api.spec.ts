@@ -1,6 +1,7 @@
 import {
   createRequestParams,
   createRequest,
+  getRelatedPrefix,
   find,
   findBy,
   findAll,
@@ -264,6 +265,38 @@ describe('api', () => {
     })
   })
 
+  describe('getRelatedPrefix', () => {
+    it('returns an empty string if no resource is passed', () => {
+      expect(getRelatedPrefix()).toBe('')
+    })
+
+    it('throws an error if the resource has no id', () => {
+      expect(() =>
+        getRelatedPrefix({
+          type: 'asd',
+        } as any),
+      ).toThrow('Resource id is missing in related resource')
+    })
+
+    it('throws an error if the resource has no type', () => {
+      expect(() =>
+        getRelatedPrefix({
+          type: '',
+          id: 'asdad',
+        } as any),
+      ).toThrow('Resource type is missing in related resource')
+    })
+
+    it('returns the url prefix of the resource', () => {
+      expect(
+        getRelatedPrefix({
+          type: 'orders',
+          id: '12345',
+        } as any),
+      ).toBe('orders/12345/')
+    })
+  })
+
   describe('find', () => {
     it('passes parameters to request', async () => {
       mockCreateRequest()
@@ -277,6 +310,22 @@ describe('api', () => {
         '/api/skus/12345',
         'get',
         query,
+      )
+
+      const relatedQuery = {
+        include: ['123', '456'],
+        relatedTo: {
+          type: 'orders',
+          id: '98765',
+        } as any,
+      }
+
+      await find('12345', relatedQuery, dummyConfig)
+
+      expect(createRequest).toHaveBeenLastCalledWith(
+        '/api/orders/98765/skus/12345',
+        'get',
+        relatedQuery,
       )
     })
 
@@ -329,8 +378,22 @@ describe('api', () => {
       }
 
       await findAll(query, dummyConfig)
-
       expect(createRequest).toHaveBeenLastCalledWith('/api/skus', 'get', query)
+
+      const relatedQuery = {
+        include: ['123', '456'],
+        relatedTo: {
+          type: 'orders',
+          id: '98765',
+        } as any,
+      }
+
+      await findAll(relatedQuery, dummyConfig)
+      expect(createRequest).toHaveBeenLastCalledWith(
+        '/api/orders/98765/skus',
+        'get',
+        relatedQuery,
+      )
     })
 
     it('returns all results from the response', async () => {
@@ -387,8 +450,22 @@ describe('api', () => {
       }
 
       await findBy(query, dummyConfig)
-
       expect(createRequest).toHaveBeenLastCalledWith('/api/skus', 'get', query)
+
+      const relatedQuery = {
+        include: ['123', '456'],
+        relatedTo: {
+          type: 'orders',
+          id: '98765',
+        } as any,
+      }
+
+      await findBy(relatedQuery, dummyConfig)
+      expect(createRequest).toHaveBeenLastCalledWith(
+        '/api/orders/98765/skus',
+        'get',
+        relatedQuery,
+      )
     })
 
     it('returns the first result from the response', async () => {

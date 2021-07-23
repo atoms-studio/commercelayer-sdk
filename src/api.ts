@@ -7,10 +7,10 @@ import {
   ResourcePagination,
   AttributesPayload,
   RelationshipsPayload,
+  RelatedResourceInstance,
 } from './resource'
 import { handleApiErrors } from './errors'
-import { getToken } from './auth/cache'
-import { isCustomerLoggedIn, getCustomerToken } from './auth/session'
+import { getCurrentToken } from './auth/session'
 
 export type RequestMethod = 'get' | 'post' | 'patch' | 'delete'
 
@@ -23,6 +23,7 @@ export interface RequestFiltering {
   sort?: string[]
   page?: { size: number; number: number }
   filter?: Record<string, string | number>
+  relatedTo?: RelatedResourceInstance
 }
 
 export type RequestQuery = RequestParameters & RequestFiltering
@@ -80,7 +81,7 @@ export const createRequest = (
   data?: Record<string, any>,
 ): Promise<AxiosResponse> => {
   const baseRequest = getBaseRequest()
-  const { token } = isCustomerLoggedIn() ? getCustomerToken() : getToken()
+  const { token } = getCurrentToken()
 
   return baseRequest.request({
     method,
@@ -95,12 +96,33 @@ export const createRequest = (
   })
 }
 
+export const getRelatedPrefix = (
+  resource?: RelatedResourceInstance,
+): string => {
+  if (!resource) {
+    return ''
+  }
+
+  if (!resource.type) {
+    throw new Error('Resource type is missing in related resource')
+  }
+  if (!resource.id) {
+    throw new Error('Resource id is missing in related resource')
+  }
+  return `${resource.type}/${resource.id}/`
+}
+
 export const find = async <T, U>(
   id: string,
   query: RequestQuery,
   config: ResourceConfig<T, U>,
 ): Promise<ConcreteResourceInstance<T, U>> => {
-  const request = createRequest(`/api/${config.type}/${id}`, 'get', query)
+  const prefix = getRelatedPrefix(query.relatedTo)
+  const request = createRequest(
+    `/api/${prefix}${config.type}/${id}`,
+    'get',
+    query,
+  )
 
   try {
     const { data } = await request
@@ -114,7 +136,8 @@ export const findAll = async <T, U>(
   query: RequestQuery,
   config: ResourceConfig<T, U>,
 ): Promise<ResourcePagination<ConcreteResourceInstance<T, U>>> => {
-  const request = createRequest(`/api/${config.type}`, 'get', query)
+  const prefix = getRelatedPrefix(query.relatedTo)
+  const request = createRequest(`/api/${prefix}${config.type}`, 'get', query)
 
   try {
     const { data } = await request
