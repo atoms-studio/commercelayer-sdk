@@ -1,3 +1,10 @@
+## [0.1.0-alpha.8](https://github.com/atoms-studio/commercelayer-sdk/compare/0.1.0-alpha.7...0.1.0-alpha.8) (2021-07-23)
+
+
+### Features
+
+* **auth:** add integration support ([e3d5509](https://github.com/atoms-studio/commercelayer-sdk/commit/e3d5509d44d0e38ba3e33b2cf6c7f6859134fd1d))
+
 ## [0.1.0-alpha.7](https://github.com/atoms-studio/commercelayer-sdk/compare/0.1.0-alpha.6...0.1.0-alpha.7) (2021-07-20)
 
 
