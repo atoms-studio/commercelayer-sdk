@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getConfig } from '../config'
 import {
   getScope,
   TokenResponse,
@@ -6,9 +7,8 @@ import {
   getToken,
   setTokenType,
 } from './session'
-import { getConfig } from '../config'
 
-export const loginAsGuest = async (): Promise<TokenResponse> => {
+export const loginAsIntegration = async (): Promise<TokenResponse> => {
   const config = getConfig()
   if (!config.host) {
     throw new Error('You must call "init" before using any Auth method')
@@ -18,12 +18,11 @@ export const loginAsGuest = async (): Promise<TokenResponse> => {
     throw new Error('Missing client id')
   }
 
-  const scope = getScope()
-  if (!scope) {
-    throw new Error('You must first set a market')
+  if (!config.clientSecret) {
+    throw new Error('Missing client secret')
   }
 
-  setTokenType('sales_channel')
+  setTokenType('integration')
 
   // Check if a token is already available
   const cachedValue = getToken()
@@ -31,10 +30,11 @@ export const loginAsGuest = async (): Promise<TokenResponse> => {
     return cachedValue
   }
 
-  // We dont use try..catch as auth errors must be handled by consumers
+  const scope = getScope()
   const { data } = await axios.post(`${config.host}/oauth/token`, {
     grant_type: 'client_credentials',
     client_id: config.clientId,
+    client_secret: config.clientSecret,
     scope,
   })
 

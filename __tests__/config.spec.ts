@@ -9,13 +9,25 @@ describe('config', () => {
       }).toThrow('Missing host')
     })
 
-    it('throws an error if clientId is missing', () => {
-      expect(() => {
-        initConfig({ host: 'asd' } as any)
-      }).toThrow('Missing client id')
-    })
+    // it('throws an error if clientId is missing', () => {
+    //   expect(() => {
+    //     initConfig({ host: 'asd' } as any)
+    //   }).toThrow('Missing client id')
+    // })
 
     it('uses default values for missing options', () => {
+      initConfig({
+        host: 'asdasd',
+      })
+      expect(config).toEqual({
+        host: 'asdasd',
+        clientId: '',
+        clientSecret: '',
+        refreshTokens: defaultConfig.refreshTokens,
+        refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
+        cookies: defaultConfig.cookies,
+      })
+
       initConfig({
         host: 'asdasd',
         clientId: 'asd',
@@ -23,6 +35,21 @@ describe('config', () => {
       expect(config).toEqual({
         host: 'asdasd',
         clientId: 'asd',
+        clientSecret: '',
+        refreshTokens: defaultConfig.refreshTokens,
+        refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
+        cookies: defaultConfig.cookies,
+      })
+
+      initConfig({
+        host: 'asdasd',
+        clientId: 'asd',
+        clientSecret: 'asd2',
+      })
+      expect(config).toEqual({
+        host: 'asdasd',
+        clientId: 'asd',
+        clientSecret: 'asd2',
         refreshTokens: defaultConfig.refreshTokens,
         refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
         cookies: defaultConfig.cookies,
@@ -36,6 +63,7 @@ describe('config', () => {
       expect(config).toEqual({
         host: 'asdasd',
         clientId: 'asd',
+        clientSecret: '',
         refreshTokens: false,
         refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
         cookies: defaultConfig.cookies,
@@ -50,6 +78,7 @@ describe('config', () => {
       expect(config).toEqual({
         host: 'asdasd',
         clientId: 'asd',
+        clientSecret: '',
         refreshTokens: false,
         refreshTokensAttempts: 4,
         cookies: defaultConfig.cookies,
@@ -65,6 +94,7 @@ describe('config', () => {
       expect(config).toEqual({
         host: 'asdasd',
         clientId: 'asd',
+        clientSecret: '',
         refreshTokens: false,
         refreshTokensAttempts: 4,
         cookies: {
@@ -86,6 +116,7 @@ describe('config', () => {
       expect(config).toEqual({
         host: 'asdasd',
         clientId: 'asd',
+        clientSecret: '',
         refreshTokens: true,
         refreshTokensAttempts: 4,
         cookies: {
@@ -107,6 +138,7 @@ describe('config', () => {
       expect(config).toEqual({
         host: 'asdasd',
         clientId: 'asd',
+        clientSecret: '',
         refreshTokens: true,
         refreshTokensAttempts: 4,
         cookies: {
@@ -128,6 +160,7 @@ describe('config', () => {
       expect(config).toEqual({
         host: 'asdasd',
         clientId: 'asd',
+        clientSecret: '',
         refreshTokens: true,
         refreshTokensAttempts: 4,
         cookies: {

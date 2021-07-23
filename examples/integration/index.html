@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Integration app</title>
+    <style>pre { word-break: break-all; white-space: normal; }</style>
+  </head>
+  <body class="bg-gray-100">
+    <div>
+      <h2>No-market integration token</h2>
+      <button type="button" id="no-market-get-token">Get no-market token</button>
+      <pre id="no-market-integration-token"></pre>
+    </div>
+    <div>
+      <h2>Market1 integration token</h2>
+      <button type="button" id="market1-get-token">Get market1 token</button>
+      <pre id="market1-integration-token"></pre>
+    </div>
+    <div>
+      <h2>Market2 integration token</h2>
+      <button type="button" id="market2-get-token">Get market2 token</button>
+      <pre id="market2-integration-token"></pre>
+    </div>
+    <div>
+      <h2>Market1 clone integration token</h2>
+      <button type="button" id="market1-clone-get-token">Get market1 cached token</button>
+      <pre id="market1-clone-integration-token"></pre>
+    </div>
+    <script>window.global = window;</script>
+    <script type="module" src="./index.ts"></script>
+  </body>
+</html>

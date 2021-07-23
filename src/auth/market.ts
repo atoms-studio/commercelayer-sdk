@@ -1,5 +1,11 @@
-import { resetSession, getCurrentMarkets, setCurrentMarkets } from './session'
+import {
+  resetSession,
+  getCurrentMarkets,
+  setCurrentMarkets,
+  getTokenType,
+} from './session'
 import { loginAsGuest } from './guest'
+import { loginAsIntegration } from './integration'
 
 /* istanbul ignore next */
 export const __resetMarket = (): void => {
@@ -20,9 +26,13 @@ export const setMarket = async (marketId: number | number[]): Promise<void> => {
   // so we need to log them out
   resetSession()
 
-  // Changing markets also invalidates the current guest token
+  // Changing markets also invalidates the current token
   // so we need to get a new one ( or use the cached version )
-  await loginAsGuest()
+  if (getTokenType() === 'integration') {
+    await loginAsIntegration()
+  } else {
+    await loginAsGuest()
+  }
 }
 
 // Always return a copy so consumers cannot alter directly

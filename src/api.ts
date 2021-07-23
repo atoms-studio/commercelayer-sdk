@@ -10,8 +10,7 @@ import {
   RelatedResourceInstance,
 } from './resource'
 import { handleApiErrors } from './errors'
-import { getToken } from './auth/cache'
-import { isCustomerLoggedIn, getCustomerToken } from './auth/session'
+import { getCurrentToken } from './auth/session'
 
 export type RequestMethod = 'get' | 'post' | 'patch' | 'delete'
 
@@ -82,7 +81,7 @@ export const createRequest = (
   data?: Record<string, any>,
 ): Promise<AxiosResponse> => {
   const baseRequest = getBaseRequest()
-  const { token } = isCustomerLoggedIn() ? getCustomerToken() : getToken()
+  const { token } = getCurrentToken()
 
   return baseRequest.request({
     method,
