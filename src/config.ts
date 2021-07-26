@@ -1,6 +1,5 @@
-import axios, { AxiosInstance, AxiosError } from 'axios'
-import { CustomerData } from './auth/customer'
-import { GuestResponse } from './auth/guest'
+import axios, { AxiosInstance } from 'axios'
+import { CommonPayloadAttributes } from './resource'
 export interface InternalConfig {
   host: string
   clientId: string
@@ -8,9 +7,6 @@ export interface InternalConfig {
   refreshTokens: boolean
   refreshTokensAttempts: number
   onRefreshError: (error: Error) => void | Promise<void>
-  isCustomerLoggedInFn: () => boolean
-  refreshCustomerTokenFn: () => Promise<CustomerData>
-  refreshGuestTokenFn: () => Promise<GuestResponse>
   cookies: {
     scopes: string | false
     customer_token: string | false
@@ -39,22 +35,15 @@ export const defaultConfig: Readonly<InternalConfig> = {
   clientId: '',
   clientSecret: '',
   refreshTokens: true,
-  refreshTokensAttempts: 5,
+  refreshTokensAttempts: 3,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onRefreshError: (error: Error) => {
+  onRefreshError: /* istanbul ignore next */ (error: Error) => {
     // Do nothing by default
   },
   cookies: {
     scopes: 'cl_scopes',
     customer_token: 'cl_customer_token',
     customer_refresh_token: 'cl_customer_refresh_token',
-  },
-  isCustomerLoggedInFn: () => false,
-  refreshCustomerTokenFn: () => {
-    return Promise.resolve({} as any)
-  },
-  refreshGuestTokenFn: async () => {
-    return Promise.resolve({} as any)
   },
 }
 
@@ -65,7 +54,7 @@ export const config: InternalConfig = {
   refreshTokens: defaultConfig.refreshTokens,
   refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onRefreshError: (error: Error) => {
+  onRefreshError: /* istanbul ignore next */ (error: Error) => {
     // Do nothing by default
   },
   cookies: {
@@ -77,9 +66,6 @@ export const config: InternalConfig = {
       string | false
     >).customer_refresh_token,
   },
-  isCustomerLoggedInFn: defaultConfig.isCustomerLoggedInFn,
-  refreshCustomerTokenFn: defaultConfig.refreshCustomerTokenFn,
-  refreshGuestTokenFn: defaultConfig.refreshCustomerTokenFn,
 }
 
 /* istanbul ignore next */
@@ -137,81 +123,23 @@ export const initConfig = (providedConfig: Config): void => {
   initRequest(config)
 }
 
-export const getConfig = (): Readonly<Config> => config
-export const getWritableConfig = (): InternalConfig => config
+export const getConfig = (): Readonly<InternalConfig> => config
 
-let baseRequest: AxiosInstance | null = null
+export const baseRequest: AxiosInstance = axios.create({
+  baseURL: '',
+  timeout: 5000,
+  headers: {
+    Accept: 'application/vnd.api+json',
+    'Content-Type': 'application/vnd.api+json',
+  },
+})
 
 export const initRequest = (config: InternalConfig): void => {
-  baseRequest = axios.create({
-    baseURL: config.host,
-    timeout: 5000,
-    headers: {
-      Accept: 'application/vnd.api+json',
-      'Content-Type': 'application/vnd.api+json',
-    },
-  })
-
-  /* istanbul ignore next */
-  baseRequest.interceptors.response.use(
-    (response) => {
-      return response
-    },
-    async (error: AxiosError) => {
-      if (!isRefreshTokenError(error)) {
-        throw error
-      }
-
-      if (!config.refreshTokens) {
-        await config.onRefreshError(error)
-        throw error
-      }
-
-      const retries = (error.config as any).__retryAttempts || 0
-      if (retries < config.refreshTokensAttempts) {
-        const isCustomerSignedIn = config.isCustomerLoggedInFn()
-        let authData: GuestResponse | CustomerData
-
-        try {
-          if (isCustomerSignedIn) {
-            authData = await config.refreshCustomerTokenFn()
-          } else {
-            authData = await config.refreshGuestTokenFn()
-          }
-        } catch (err) {
-          config.onRefreshError(error)
-          throw error
-        }
-
-        ;(error.config as any).__retryAttempts++
-        error.config.headers.Authorization = `Bearer ${authData.token}`
-
-        return await axios.request(error.config)
-      } else {
-        config.onRefreshError(error)
-        throw error
-      }
-    },
-  )
+  baseRequest.defaults.baseURL = config.host
 }
 
-export const getBaseRequest = (): AxiosInstance => {
-  if (!baseRequest) {
-    throw new Error('You must call "init" before using any resource method')
-  }
-
-  return baseRequest
-}
-
-export const isRefreshTokenError = /* istanbul ignore next */ (
-  error: AxiosError,
-): boolean => {
-  return !!(
-    error.response &&
-    error.response.status === 401 &&
-    error.response.data &&
-    error.response.data.errors &&
-    error.response.data.errors.length &&
-    error.response.data.errors[0].code === 'INVALID_TOKEN'
-  )
-}
+export const commonPayloadAttributes: (keyof CommonPayloadAttributes)[] = [
+  'reference',
+  'reference_origin',
+  'metadata',
+]

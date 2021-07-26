@@ -1,8 +1,10 @@
-import { setMarket, getMarket } from './market'
-import { getScope, getToken } from './session'
-import { loginAsGuest } from './guest'
-import { loginAsIntegration } from './integration'
 import {
+  getScope,
+  getToken,
+  loginAsIntegration,
+  loginAsGuest,
+  setMarket,
+  getMarket,
   loginAsCustomer,
   isCustomerLoggedIn,
   logoutCustomer,
@@ -10,7 +12,8 @@ import {
   useCustomerSession,
   loadProfile,
   getProfile,
-} from './customer'
+  cacheToken,
+} from './session'
 
 export const Auth = {
   setMarket,
@@ -26,4 +29,5 @@ export const Auth = {
   useCustomerSession,
   loadProfile,
   getProfile,
+  __setCurrentToken: cacheToken,
 }

@@ -1,6 +1,6 @@
-import { __resetMarket, setMarket } from '../../src/auth/market'
+import { __resetMarket, setMarket } from '../../src/auth/session'
 import { tokenCache, getTokenType } from '../../src/auth/session'
-import { loginAsGuest, refreshGuest } from '../../src/auth/guest'
+import { loginAsGuest, refreshGuest } from '../../src/auth/session'
 import { initConfig, __resetConfig } from '../../src/config'
 import { mockAuthResponse } from '../utils'
 import axios from 'axios'
@@ -48,7 +48,7 @@ describe('auth:guest', () => {
     expect(() => loginAsGuest()).rejects.toThrow('You must first set a market')
   })
 
-  it('returns a GuestResponse', async () => {
+  it('returns a TokenResponse', async () => {
     initConfig({
       host: 'asda',
       clientId: 'asdasd',

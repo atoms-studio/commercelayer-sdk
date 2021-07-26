@@ -22,9 +22,9 @@ import multipleSkus from './responses/multiple-skus.json'
 import unauthorized from './responses/401-unauthorized.json'
 import { commonResourceFields } from '../src/resource'
 import { ResourceError } from '../src/errors'
-import { setMarket } from '../src/auth/market'
+import { setMarket } from '../src/auth/session'
 import { initConfig } from '../src/config'
-import { loginAsCustomer } from '../src/auth/customer'
+import { loginAsCustomer } from '../src/auth/session'
 
 const _originalCreateRequest = createRequest
 

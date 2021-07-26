@@ -1,9 +1,9 @@
 import { Deserializer, Serializer } from 'jsonapi-serializer'
+import { commonPayloadAttributes } from './config'
 import {
   ResourceConfig,
   AttributesPayload,
   RelationshipsPayload,
-  commonPayloadAttributes,
 } from './resource'
 import { getType, isObject } from './utils'
 

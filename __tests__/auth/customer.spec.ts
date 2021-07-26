@@ -1,4 +1,4 @@
-import { __resetMarket, setMarket } from '../../src/auth/market'
+import { __resetMarket, setMarket } from '../../src/auth/session'
 import { createRequest } from '../../src/api'
 import {
   loginAsCustomer,
@@ -9,7 +9,7 @@ import {
   refreshCustomer,
   useCustomerSession,
   getProfile,
-} from '../../src/auth/customer'
+} from '../../src/auth/session'
 import { initConfig, __resetConfig } from '../../src/config'
 import { mockAuthResponse } from '../utils'
 import axios from 'axios'

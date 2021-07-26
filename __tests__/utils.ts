@@ -1,27 +1,19 @@
-import axios, { AxiosInstance } from 'axios'
-import { initRequest, getBaseRequest } from '../src/config'
+import axios, { AxiosError, AxiosInstance } from 'axios'
+import { initRequest, baseRequest } from '../src/config'
 import customerResponse from './responses/customer.json'
 
 export const mockRequestWithConfig = (): AxiosInstance => {
   initRequest({
     host: 'http://www.google.com',
     clientId: '',
+    clientSecret: '',
     refreshTokens: false,
     refreshTokensAttempts: 5,
     onRefreshError: (err) => {
       //
     },
     cookies: {} as any,
-    isCustomerLoggedInFn: () => false,
-    refreshCustomerTokenFn: async () => {
-      return {} as any
-    },
-    refreshGuestTokenFn: async () => {
-      return {} as any
-    },
   })
-  const baseRequest = getBaseRequest()
-
   ;(baseRequest.request as any) = jest.fn((config) => Promise.resolve(config))
 
   return baseRequest
@@ -32,22 +24,14 @@ export const mockRequestWithUri = (): AxiosInstance => {
   initRequest({
     host: baseURL,
     clientId: '',
+    clientSecret: '',
     refreshTokens: false,
     refreshTokensAttempts: 5,
     onRefreshError: (err) => {
       //
     },
     cookies: {} as any,
-    isCustomerLoggedInFn: () => false,
-    refreshCustomerTokenFn: async () => {
-      return {} as any
-    },
-    refreshGuestTokenFn: async () => {
-      return {} as any
-    },
   })
-  const baseRequest = getBaseRequest()
-
   ;(baseRequest.request as any) = jest.fn((config) =>
     Promise.resolve(axios.getUri(config)),
   )
@@ -63,22 +47,14 @@ export const mockRequestWithResponse = (
   initRequest({
     host: baseURL,
     clientId: '',
+    clientSecret: '',
     refreshTokens: false,
     refreshTokensAttempts: 5,
     onRefreshError: (err) => {
       //
     },
     cookies: {} as any,
-    isCustomerLoggedInFn: () => false,
-    refreshCustomerTokenFn: async () => {
-      return {} as any
-    },
-    refreshGuestTokenFn: async () => {
-      return {} as any
-    },
   })
-  const baseRequest = getBaseRequest()
-
   ;(baseRequest.request as any) = jest.fn((params) => {
     // Requests for profile always return this result for auth mocks
     if (params.url.includes('/api/customers')) {
@@ -103,22 +79,14 @@ export const mockRequestWithEcho = (): AxiosInstance => {
   initRequest({
     host: baseURL,
     clientId: '',
+    clientSecret: '',
     refreshTokens: false,
     refreshTokensAttempts: 5,
     onRefreshError: (err) => {
       //
     },
     cookies: {} as any,
-    isCustomerLoggedInFn: () => false,
-    refreshCustomerTokenFn: async () => {
-      return {} as any
-    },
-    refreshGuestTokenFn: async () => {
-      return {} as any
-    },
   })
-  const baseRequest = getBaseRequest()
-
   ;(baseRequest.request as any) = jest.fn((config) =>
     Promise.resolve({
       data: config.data,
@@ -137,22 +105,14 @@ export const mockRequestWithError = (
   initRequest({
     host: baseURL,
     clientId: '',
+    clientSecret: '',
     refreshTokens: false,
     refreshTokensAttempts: 5,
     onRefreshError: (err) => {
       //
     },
     cookies: {} as any,
-    isCustomerLoggedInFn: () => false,
-    refreshCustomerTokenFn: async () => {
-      return {} as any
-    },
-    refreshGuestTokenFn: async () => {
-      return {} as any
-    },
   })
-  const baseRequest = getBaseRequest()
-
   ;(baseRequest.request as any) = jest.fn(() =>
     Promise.reject({
       response: {
@@ -186,4 +146,10 @@ export const mockAuthResponse = (response: any) => {
     })
   })
   mockRequestWithResponse({})
+}
+
+export const mockRequestWithCustomError = (error: AxiosError) => {
+  ;(axios.request as any) = jest.fn(() => {
+    return Promise.reject(error)
+  })
 }
