@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { getBaseRequest } from './request'
+import { baseRequest } from './config'
 import { serialize, deserialize } from './serializer'
 import {
   ResourceConfig,
@@ -80,7 +80,6 @@ export const createRequest = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data?: Record<string, any>,
 ): Promise<AxiosResponse> => {
-  const baseRequest = getBaseRequest()
   const { token } = getCurrentToken()
 
   return baseRequest.request({

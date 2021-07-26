@@ -1,5 +1,10 @@
-import { initConfig, config, defaultConfig, getConfig } from '../src/config'
-import { getBaseRequest } from '../src/request'
+import {
+  initConfig,
+  config,
+  defaultConfig,
+  getConfig,
+  baseRequest,
+} from '../src/config'
 
 describe('config', () => {
   describe('initConfig', () => {
@@ -25,6 +30,7 @@ describe('config', () => {
         clientSecret: '',
         refreshTokens: defaultConfig.refreshTokens,
         refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: defaultConfig.cookies,
       })
 
@@ -38,6 +44,7 @@ describe('config', () => {
         clientSecret: '',
         refreshTokens: defaultConfig.refreshTokens,
         refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: defaultConfig.cookies,
       })
 
@@ -52,6 +59,7 @@ describe('config', () => {
         clientSecret: 'asd2',
         refreshTokens: defaultConfig.refreshTokens,
         refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: defaultConfig.cookies,
       })
 
@@ -66,6 +74,7 @@ describe('config', () => {
         clientSecret: '',
         refreshTokens: false,
         refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: defaultConfig.cookies,
       })
 
@@ -81,6 +90,7 @@ describe('config', () => {
         clientSecret: '',
         refreshTokens: false,
         refreshTokensAttempts: 4,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: defaultConfig.cookies,
       })
 
@@ -97,6 +107,7 @@ describe('config', () => {
         clientSecret: '',
         refreshTokens: false,
         refreshTokensAttempts: 4,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: {
           customer_token: false,
           customer_refresh_token: false,
@@ -119,6 +130,7 @@ describe('config', () => {
         clientSecret: '',
         refreshTokens: true,
         refreshTokensAttempts: 4,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: {
           customer_token: 'yes',
           customer_refresh_token: defaultConfig.cookies.customer_refresh_token,
@@ -131,6 +143,7 @@ describe('config', () => {
         clientId: 'asd',
         refreshTokens: true,
         refreshTokensAttempts: 4,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: {
           customer_token: 'yes',
         },
@@ -141,6 +154,7 @@ describe('config', () => {
         clientSecret: '',
         refreshTokens: true,
         refreshTokensAttempts: 4,
+        onRefreshError: defaultConfig.onRefreshError,
         cookies: {
           customer_token: 'yes',
           customer_refresh_token: defaultConfig.cookies.customer_refresh_token,
@@ -155,18 +169,6 @@ describe('config', () => {
         refreshTokensAttempts: 4,
         cookies: {
           customer_token: '',
-        },
-      })
-      expect(config).toEqual({
-        host: 'asdasd',
-        clientId: 'asd',
-        clientSecret: '',
-        refreshTokens: true,
-        refreshTokensAttempts: 4,
-        cookies: {
-          customer_token: defaultConfig.cookies.customer_token,
-          customer_refresh_token: defaultConfig.cookies.customer_refresh_token,
-          scopes: defaultConfig.cookies.scopes,
         },
       })
     })
@@ -182,8 +184,7 @@ describe('config', () => {
         },
       })
 
-      const req = getBaseRequest()
-      expect(req.defaults.baseURL).toBe('asdasd')
+      expect(baseRequest.defaults.baseURL).toBe('asdasd')
     })
   })
 

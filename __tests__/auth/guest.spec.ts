@@ -1,6 +1,6 @@
-import { __resetMarket, setMarket } from '../../src/auth/market'
+import { __resetMarket, setMarket } from '../../src/auth/session'
 import { tokenCache, getTokenType } from '../../src/auth/session'
-import { loginAsGuest } from '../../src/auth/guest'
+import { loginAsGuest, refreshGuest } from '../../src/auth/session'
 import { initConfig, __resetConfig } from '../../src/config'
 import { mockAuthResponse } from '../utils'
 import axios from 'axios'
@@ -48,7 +48,7 @@ describe('auth:guest', () => {
     expect(() => loginAsGuest()).rejects.toThrow('You must first set a market')
   })
 
-  it('returns a GuestResponse', async () => {
+  it('returns a TokenResponse', async () => {
     initConfig({
       host: 'asda',
       clientId: 'asdasd',
@@ -113,5 +113,29 @@ describe('auth:guest', () => {
 
     await loginAsGuest()
     expect(axios.post).toHaveBeenCalledTimes(1)
+  })
+
+  it('refreshes a guest token', async () => {
+    initConfig({
+      host: 'asda',
+      clientId: 'asdasd',
+    })
+    const createdAt = Date.now() - 60 * 1000
+    mockAuthResponse({
+      access_token: 'your-access-token',
+      token_type: 'bearer',
+      expires_in: 7200,
+      scope: 'market:1234',
+      created_at: createdAt,
+    })
+    await setMarket(1)
+
+    const response = await refreshGuest()
+    expect(response).toHaveProperty('token', 'your-access-token')
+    expect(response).toHaveProperty('expires')
+
+    // Expect date expiration to be within a 5% of the expected value
+    expect(response.expires).toBeLessThan((Date.now() + 7200) * 1.05)
+    expect(response.expires).toBeGreaterThan((Date.now() + 7200) / 1.05)
   })
 })

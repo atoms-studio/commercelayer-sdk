@@ -80,12 +80,6 @@ export const commonResourceFields: (keyof CommonResourceAttributes)[] = [
   'updated_at',
 ]
 
-export const commonPayloadAttributes: (keyof CommonPayloadAttributes)[] = [
-  'reference',
-  'reference_origin',
-  'metadata',
-]
-
 const requireId = <T, U>(id: string, config: ResourceConfig<T, U>): void => {
   if (!id) {
     throw new Error(`[${config.type}] Missing resource id`)

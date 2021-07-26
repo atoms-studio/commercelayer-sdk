@@ -1,10 +1,10 @@
-import { __resetMarket, setMarket } from '../../src/auth/market'
+import { __resetMarket, setMarket } from '../../src/auth/session'
 import {
   tokenCache,
   getTokenType,
   INTEGRATION_PREFIX,
 } from '../../src/auth/session'
-import { loginAsIntegration } from '../../src/auth/integration'
+import { loginAsIntegration } from '../../src/auth/session'
 import { initConfig, __resetConfig } from '../../src/config'
 import { mockAuthResponse } from '../utils'
 import axios from 'axios'

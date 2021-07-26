@@ -1,3 +1,5 @@
+![npm (scoped)](https://img.shields.io/npm/v/@atoms-studio/commercelayer-sdk)
+![npm](https://img.shields.io/npm/dm/@atoms-studio/commercelayer-sdk)
 [![Build Status](https://github.com//atoms-studio/commercelayer-sdk/workflows/Node.js%20CI/badge.svg)](https://github.com/atoms-studio/commercelayer-sdk/actions)
 [![codecov](https://codecov.io/gh/atoms-studio/commercelayer-sdk/branch/main/graph/badge.svg?token=PYZQB331CP)](https://codecov.io/gh/atoms-studio/commercelayer-sdk)
 
@@ -39,8 +41,8 @@ yarn add @atoms-studio/commercelayer-sdk
 import { init, Auth, Orders, Skus } from '@atoms-studio/commercelayer-sdk'
 
 init({
-  host: '<your cl domain>.commercelayer.io',
-  clientId: '<your cl client id>,
+  host: 'https://<your cl domain>.commercelayer.io',
+  clientId: '<your cl client id>',
 })
 
 await Auth.setMarket(1234)
@@ -48,18 +50,17 @@ await Auth.setMarket(1234)
 const order = await Orders.create()
 
 const sku = await Skus.findBy({
-  code: '12345678,
+  code: '12345678',
   include: ['prices'],
 })
 
-await LineItems.create(
-  {
+await LineItems.create({
+  attributes: {
     sku_code: sku.code,
     quantity: 1,
   },
-  {},
-  {
-    order,
-  },
-)
+  relationships: {
+    order
+  }
+})
 ```

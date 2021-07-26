@@ -1,11 +1,12 @@
-import { initRequest } from './request'
-
+import axios, { AxiosInstance } from 'axios'
+import { CommonPayloadAttributes } from './resource'
 export interface InternalConfig {
   host: string
   clientId: string
   clientSecret: string
   refreshTokens: boolean
   refreshTokensAttempts: number
+  onRefreshError: (error: Error) => void | Promise<void>
   cookies: {
     scopes: string | false
     customer_token: string | false
@@ -19,6 +20,7 @@ export interface Config {
   clientSecret?: string
   refreshTokens?: boolean
   refreshTokensAttempts?: number
+  onRefreshError?: (error: Error) => void | Promise<void>
   cookies?:
     | {
         scopes?: string | false
@@ -33,7 +35,11 @@ export const defaultConfig: Readonly<InternalConfig> = {
   clientId: '',
   clientSecret: '',
   refreshTokens: true,
-  refreshTokensAttempts: 5,
+  refreshTokensAttempts: 3,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onRefreshError: /* istanbul ignore next */ (error: Error) => {
+    // Do nothing by default
+  },
   cookies: {
     scopes: 'cl_scopes',
     customer_token: 'cl_customer_token',
@@ -47,6 +53,10 @@ export const config: InternalConfig = {
   clientSecret: defaultConfig.clientSecret,
   refreshTokens: defaultConfig.refreshTokens,
   refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onRefreshError: /* istanbul ignore next */ (error: Error) => {
+    // Do nothing by default
+  },
   cookies: {
     scopes: (defaultConfig.cookies as Record<string, string | false>).scopes,
     customer_token: (defaultConfig.cookies as Record<string, string | false>)
@@ -69,6 +79,8 @@ export const initConfig = (providedConfig: Config): void => {
   config.clientSecret = providedConfig.clientSecret || ''
   config.refreshTokens = !!providedConfig.refreshTokens
   config.refreshTokensAttempts = Number(providedConfig.refreshTokensAttempts)
+  config.onRefreshError =
+    providedConfig.onRefreshError || defaultConfig.onRefreshError
 
   if (typeof providedConfig.refreshTokens === 'boolean') {
     config.refreshTokens = providedConfig.refreshTokens
@@ -108,7 +120,26 @@ export const initConfig = (providedConfig: Config): void => {
     config.refreshTokensAttempts = defaultConfig.refreshTokensAttempts
   }
 
-  initRequest(config.host)
+  initRequest(config)
 }
 
-export const getConfig = (): Readonly<Config> => config
+export const getConfig = (): Readonly<InternalConfig> => config
+
+export const baseRequest: AxiosInstance = axios.create({
+  baseURL: '',
+  timeout: 5000,
+  headers: {
+    Accept: 'application/vnd.api+json',
+    'Content-Type': 'application/vnd.api+json',
+  },
+})
+
+export const initRequest = (config: InternalConfig): void => {
+  baseRequest.defaults.baseURL = config.host
+}
+
+export const commonPayloadAttributes: (keyof CommonPayloadAttributes)[] = [
+  'reference',
+  'reference_origin',
+  'metadata',
+]
