@@ -9,12 +9,6 @@ A lightweight, opinionated CommerceLayer SDK built for fast delivery of e-commer
 
 <br>
 
-## Docs
-
-[Go to the documentation website](https://atoms-studio.github.io/commercelayer-sdk)
-
-<br>
-
 ### Why
 The official CommerceLayer SDK is a great multi-purpose library, however we realized that it was missing a few functionalities that we had to reimplement in every project we worked on.
 <br>
@@ -42,48 +36,3 @@ Tokens are cached by their scope and expiration date, avoiding rate limiting err
 
 #### Seamless multi-market switching
 Switch between multiple markets and automatically create new auth tokens for that market.
-
-<br>
-
-## Installation
-
-```bash
-npm i @atoms-studio/commercelayer-sdk
-```
-```bash
-yarn add @atoms-studio/commercelayer-sdk
-```
-
-## Quick start
-
-```ts
-import { init, Auth, Orders, Skus } from '@atoms-studio/commercelayer-sdk'
-
-init({
-  host: 'https://<your cl domain>.commercelayer.io',
-  clientId: '<your cl client id>',
-})
-
-await Auth.setMarket(1234)
-
-const order = await Orders.create()
-
-const sku = await Skus.findBy({
-  code: '12345678',
-  include: ['prices'],
-})
-
-await LineItems.create({
-  attributes: {
-    sku_code: sku.code,
-    quantity: 1,
-  },
-  relationships: {
-    order
-  }
-})
-```
-
-## License
-
-[MIT](/LICENSE)

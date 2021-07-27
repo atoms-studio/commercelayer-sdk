@@ -12,7 +12,10 @@
     "build": "rollup -c",
     "create:resource": "ts-node --project scripts/tsconfig.json scripts/create-resource.ts",
     "cy:open": "cypress open",
-    "release": "release-it"
+    "release": "release-it",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
   },
   "main": "dist/commercelayer-sdk.cjs.js",
   "module": "dist/commercelayer-sdk.esm.js",
@@ -58,7 +61,8 @@
     "ts-jest": "^26.5.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3",
-    "vite": "^2.2.1"
+    "vite": "^2.2.1",
+    "vitepress": "^0.15.6"
   },
   "dependencies": {
     "axios": "^0.21.1",
