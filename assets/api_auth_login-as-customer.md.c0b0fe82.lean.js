@@ -1,0 +1,1 @@
+import{o as n,c as s,a}from"./app.3b2c3a90.js";const t='{"title":"Auth.loginAsCustomer","description":"","frontmatter":{},"relativePath":"api/auth/login-as-customer.md","lastUpdated":1627388748139}',o={},p=a('',4);o.render=function(a,t,o,e,c,i){return n(),s("div",null,[p])};export default o;export{t as __pageData};

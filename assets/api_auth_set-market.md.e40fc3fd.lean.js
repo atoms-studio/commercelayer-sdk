@@ -1,0 +1,1 @@
+import{o as n,c as s,a}from"./app.3b2c3a90.js";const t='{"title":"Auth.setMarket","description":"","frontmatter":{},"relativePath":"api/auth/set-market.md","lastUpdated":1627385500174}',p={},e=a('',6);p.render=function(a,t,p,o,c,u){return n(),s("div",null,[e])};export default p;export{t as __pageData};

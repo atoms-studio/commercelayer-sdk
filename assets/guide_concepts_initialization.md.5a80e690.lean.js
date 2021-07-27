@@ -1,0 +1,1 @@
+import{o as n,c as a,a as t}from"./app.3b2c3a90.js";const s='{"title":"Initialization","description":"","frontmatter":{},"relativePath":"guide/concepts/initialization.md","lastUpdated":1627389660153}',i={},e=t('',4);i.render=function(t,s,i,o,p,c){return n(),a("div",null,[e])};export default i;export{s as __pageData};
