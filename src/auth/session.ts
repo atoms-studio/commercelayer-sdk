@@ -392,17 +392,8 @@ export const useCustomerSession = async (
   refreshToken: string,
   scope: string,
 ): Promise<SessionData> => {
-  const authData = {
-    id: '',
-    customer: null,
-    token: '',
-    refreshToken: '',
-    expires: 0,
-  }
-
-  // Scopes must match
-  if (scope !== getScope()) {
-    return authData
+  if (!accessToken || !refreshToken || scope !== getScope()) {
+    throw new Error('Invalid session data')
   }
 
   // Temporarily set auth data
