@@ -1,3 +1,16 @@
+## [1.0.0-beta.1](https://github.com/atoms-studio/commercelayer-sdk/compare/0.1.0-alpha.8...1.0.0-beta.1) (2021-08-12)
+
+
+### Features
+
+* **auth:** throw error when restoring invalid session data ([9768af5](https://github.com/atoms-studio/commercelayer-sdk/commit/9768af5d22f4f7f23ad1cfe39015b4f0e5227b53))
+* **resources:** add CustomerPasswordResets, OrderCopies, OrderSubscriptions ([a3e579a](https://github.com/atoms-studio/commercelayer-sdk/commit/a3e579a288c007ec4e82346c8e8f40a60c65a7d7))
+
+
+### Bug Fixes
+
+* **tests:** expect error on invalid session data ([fcec7e7](https://github.com/atoms-studio/commercelayer-sdk/commit/fcec7e7d1cd762627391b97b555435e78613accf))
+
 ## [0.1.0-alpha.8](https://github.com/atoms-studio/commercelayer-sdk/compare/0.1.0-alpha.7...0.1.0-alpha.8) (2021-07-23)
 
 
