@@ -47,3 +47,12 @@ export {
   PaymentGateways,
   PaymentGatewayInstance,
 } from './resources/PaymentGateways'
+export {
+  CustomerPasswordResets,
+  CustomerPasswordResetInstance,
+} from './resources/CustomerPasswordResets'
+export { OrderCopies, OrderCopyInstance } from './resources/OrderCopies'
+export {
+  OrderSubscriptions,
+  OrderSubscriptionInstance,
+} from './resources/OrderSubscriptions'
