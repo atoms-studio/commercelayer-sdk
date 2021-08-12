@@ -287,18 +287,13 @@ describe('auth:customer', () => {
 
     await setMarket([77738])
 
-    const badResult = await useCustomerSession(
-      'your-access-token',
-      'your-refresh-token',
-      'market:123',
-    )
-    expect(badResult).toEqual({
-      id: '',
-      customer: null,
-      token: '',
-      refreshToken: '',
-      expires: 0,
-    })
+    expect(async () => {
+      await useCustomerSession(
+        'your-access-token',
+        'your-refresh-token',
+        'market:123',
+      )
+    }).rejects.toThrow('Invalid session data')
 
     const result = await useCustomerSession(
       'your-access-token',
