@@ -1,3 +1,16 @@
+## [1.0.0-beta.2](https://github.com/atoms-studio/commercelayer-sdk/compare/1.0.0-beta.1...1.0.0-beta.2) (2021-08-17)
+
+
+### Features
+
+* **examples:** update to new create/update parameters ([fe8c2bc](https://github.com/atoms-studio/commercelayer-sdk/commit/fe8c2bc127ec14d2cdd2515a09c0447af851350f))
+* **resources:** allow omitting attributes for create and update ([3bb85f3](https://github.com/atoms-studio/commercelayer-sdk/commit/3bb85f3c054b6e787d40ab99f29442265950e3c6))
+
+
+### Bug Fixes
+
+* **auth:** correct customer token expiration after refresh ([97ec0ec](https://github.com/atoms-studio/commercelayer-sdk/commit/97ec0ecccddbd1fde7f925590068fb1903690367))
+
 ## [1.0.0-beta.1](https://github.com/atoms-studio/commercelayer-sdk/compare/0.1.0-alpha.8...1.0.0-beta.1) (2021-08-12)
 
 
