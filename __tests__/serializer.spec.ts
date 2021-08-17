@@ -86,7 +86,7 @@ describe('serializer', () => {
   })
 
   it('throws an error with invalid attributes', async () => {
-    expect(async () => {
+    await expect(async () => {
       await serialize(
         {
           type: 'test_types',
@@ -100,7 +100,7 @@ describe('serializer', () => {
       'Invalid resource attributes, expected object, received null',
     )
 
-    expect(async () => {
+    await expect(async () => {
       await serialize(
         {
           type: 'test_types',
@@ -114,7 +114,7 @@ describe('serializer', () => {
       'Invalid resource attributes, expected object, received number',
     )
 
-    expect(async () => {
+    await expect(async () => {
       await serialize(
         {
           type: 'test_types',
@@ -128,7 +128,7 @@ describe('serializer', () => {
       'Invalid resource attributes, expected object, received string',
     )
 
-    expect(async () => {
+    await expect(async () => {
       await serialize(
         {
           type: 'test_types',
@@ -144,7 +144,7 @@ describe('serializer', () => {
   })
 
   it('throws an error with invalid relationships', async () => {
-    expect(async () => {
+    await expect(async () => {
       await serialize(
         {
           type: 'test_types',
@@ -158,7 +158,7 @@ describe('serializer', () => {
       'Invalid resource relationships, expected object, received null',
     )
 
-    expect(async () => {
+    await expect(async () => {
       await serialize(
         {
           type: 'test_types',
@@ -172,7 +172,7 @@ describe('serializer', () => {
       'Invalid resource relationships, expected object, received number',
     )
 
-    expect(async () => {
+    await expect(async () => {
       await serialize(
         {
           type: 'test_types',
@@ -186,7 +186,7 @@ describe('serializer', () => {
       'Invalid resource relationships, expected object, received string',
     )
 
-    expect(async () => {
+    await expect(async () => {
       await serialize(
         {
           type: 'test_types',

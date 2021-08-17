@@ -391,7 +391,7 @@ describe('getRefreshTokenInterceptor', () => {
   it('rethrows non-refresh-token errors', async () => {
     const [_, onError] = getRefreshTokenInterceptor(getConfig())
     const error = new Error('standard error')
-    expect(async () => {
+    await expect(async () => {
       await onError(error)
     }).rejects.toThrowError(error.message)
   })
@@ -406,7 +406,7 @@ describe('getRefreshTokenInterceptor', () => {
 
     const [_, onError] = getRefreshTokenInterceptor(getConfig())
     const error = createRefreshError()
-    expect(async () => {
+    await expect(async () => {
       await onError(error)
     }).rejects.toThrowError(error)
   })
@@ -429,7 +429,7 @@ describe('getRefreshTokenInterceptor', () => {
       attempts: 2,
     })
     mockRequestWithCustomError(error)
-    expect(async () => {
+    await expect(async () => {
       await onError(error)
     }).rejects.toThrowError(error)
     expect(config.onRefreshError).toHaveBeenCalledTimes(1)

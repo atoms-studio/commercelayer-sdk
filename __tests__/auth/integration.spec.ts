@@ -29,27 +29,31 @@ describe('auth:integration', () => {
     ;(axios.post as any) = _originalPost
   })
 
-  it('throws an error if used before initializing the config', () => {
-    expect(() => loginAsIntegration()).rejects.toThrow(
+  it('throws an error if used before initializing the config', async () => {
+    await expect(() => loginAsIntegration()).rejects.toThrow(
       'You must call "init" before using any Auth method',
     )
   })
 
-  it('throws an error if used without a client id', () => {
+  it('throws an error if used without a client id', async () => {
     initConfig({
       host: 'asda',
     })
 
-    expect(() => loginAsIntegration()).rejects.toThrow('Missing client id')
+    await expect(() => loginAsIntegration()).rejects.toThrow(
+      'Missing client id',
+    )
   })
 
-  it('throws an error if used without a client secret', () => {
+  it('throws an error if used without a client secret', async () => {
     initConfig({
       host: 'asda',
       clientId: 'asdasd',
     })
 
-    expect(() => loginAsIntegration()).rejects.toThrow('Missing client secret')
+    await expect(() => loginAsIntegration()).rejects.toThrow(
+      'Missing client secret',
+    )
   })
 
   it('returns a TokenResponse', async () => {

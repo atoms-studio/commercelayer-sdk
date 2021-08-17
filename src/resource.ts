@@ -57,7 +57,7 @@ export interface ResourcePagination<T> {
 }
 
 export interface ResourceWriteParams<T, U> {
-  attributes: AttributesPayload<T>
+  attributes?: AttributesPayload<T>
   relationships?: RelationshipsPayload<U>
   query?: RequestParameters
 }
@@ -66,7 +66,7 @@ export interface Resource<T, U, V = ConcreteResourceInstance<T, U>> {
   find: (id: string, query?: RequestQuery) => Promise<V>
   findBy: (query: RequestQuery) => Promise<V | null>
   findAll: (query: RequestQuery) => Promise<ResourcePagination<V>>
-  create: (params: ResourceWriteParams<T, U>) => Promise<V>
+  create: (params?: ResourceWriteParams<T, U>) => Promise<V>
   update: (id: string, params: ResourceWriteParams<T, U>) => Promise<V>
   delete: (id: string) => Promise<void>
 }
@@ -109,15 +109,11 @@ const requireQuery = <T, U>(
   checkQuery(query, config)
 }
 
-const requireAttributes = <T, U>(
-  attributes: AttributesPayload<T>,
+const checkAttributes = <T, U>(
+  attributes: AttributesPayload<T> | undefined,
   config: ResourceConfig<T, U>,
 ): void => {
-  if (!attributes) {
-    throw new Error(`[${config.type}] Missing resource attributes`)
-  }
-
-  if (!isObject(attributes)) {
+  if (attributes && !isObject(attributes)) {
     throw new Error(
       `[${
         config.type
@@ -173,7 +169,7 @@ export const createResource = <T, U>(
       return findAll<T, U>(query, config)
     },
 
-    create(params: ResourceWriteParams<T, U>) {
+    create(params: ResourceWriteParams<T, U> = {}) {
       if (!params || getType(params) !== 'object') {
         throw new Error(
           `[${
@@ -184,11 +180,11 @@ export const createResource = <T, U>(
         )
       }
 
-      requireAttributes(params.attributes, config)
+      checkAttributes(params.attributes, config)
       checkRelationships(params.relationships, config)
 
       return create(
-        params.attributes,
+        params.attributes || {},
         params.query || {},
         params.relationships || {},
         config,
@@ -208,12 +204,12 @@ export const createResource = <T, U>(
         )
       }
 
-      requireAttributes(params.attributes, config)
+      checkAttributes(params.attributes, config)
       checkRelationships(params.relationships, config)
 
       return update(
         id,
-        params.attributes,
+        params.attributes || {},
         params.query || {},
         params.relationships || {},
         config,

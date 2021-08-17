@@ -25,18 +25,18 @@ describe('auth:guest', () => {
     ;(axios.post as any) = _originalPost
   })
 
-  it('throws an error if used before initializing the config', () => {
-    expect(() => loginAsGuest()).rejects.toThrow(
+  it('throws an error if used before initializing the config', async () => {
+    await expect(() => loginAsGuest()).rejects.toThrow(
       'You must call "init" before using any Auth method',
     )
   })
 
-  it('throws an error if used without a client id', () => {
+  it('throws an error if used without a client id', async () => {
     initConfig({
       host: 'asda',
     })
 
-    expect(() => loginAsGuest()).rejects.toThrow('Missing client id')
+    await expect(() => loginAsGuest()).rejects.toThrow('Missing client id')
   })
 
   it('throws an error if used before setting a market', () => {

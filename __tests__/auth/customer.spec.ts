@@ -29,19 +29,19 @@ describe('auth:customer', () => {
     logoutCustomer()
   })
 
-  it('throws an error if used before initializing the config', () => {
-    expect(() => loginAsCustomer('asd', 'asd')).rejects.toThrow(
+  it('throws an error if used before initializing the config', async () => {
+    await expect(() => loginAsCustomer('asd', 'asd')).rejects.toThrow(
       'You must call "init" before using any Auth method',
     )
   })
 
-  it('throws an error if used before setting a market', () => {
+  it('throws an error if used before setting a market', async () => {
     initConfig({
       host: 'asda',
       clientId: 'asdasd',
     })
 
-    expect(() => loginAsCustomer('asd', 'asd')).rejects.toThrow(
+    await expect(() => loginAsCustomer('asd', 'asd')).rejects.toThrow(
       'You must first set a market',
     )
   })

@@ -38,12 +38,12 @@ describe('resource', () => {
 
   describe('createResource', () => {
     beforeAll(() => {
-      ;(find as any) = jest.fn(() => 'find')
-      ;(findAll as any) = jest.fn(() => 'findAll')
-      ;(findBy as any) = jest.fn(() => 'findBy')
-      ;(create as any) = jest.fn(() => 'create')
-      ;(update as any) = jest.fn(() => 'update')
-      ;(destroy as any) = jest.fn(() => 'destroy')
+      ;(find as any) = jest.fn(() => Promise.resolve('find'))
+      ;(findAll as any) = jest.fn(() => Promise.resolve('findAll'))
+      ;(findBy as any) = jest.fn(() => Promise.resolve('findBy'))
+      ;(create as any) = jest.fn(() => Promise.resolve('create'))
+      ;(update as any) = jest.fn(() => Promise.resolve('update'))
+      ;(destroy as any) = jest.fn(() => Promise.resolve('destroy'))
     })
 
     afterAll(() => {
@@ -72,11 +72,11 @@ describe('resource', () => {
       it('throws an error if id is missing', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.find('')
         }).rejects.toThrow(`[test_types] Missing resource id`)
 
-        expect(async () => {
+        await expect(async () => {
           await res.find(null as any)
         }).rejects.toThrow(`[test_types] Missing resource id`)
       })
@@ -84,25 +84,25 @@ describe('resource', () => {
       it('throws an error if query exists and is not an object', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.find('asd', 1 as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received number`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.find('asd', [] as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received array`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.find('asd', 'asdasd' as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received string`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.find('asd', true as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received boolean`,
@@ -135,11 +135,11 @@ describe('resource', () => {
       it('throws an error if query is missing', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.findBy('' as any)
         }).rejects.toThrow(`[test_types] Missing resource query`)
 
-        expect(async () => {
+        await expect(async () => {
           await res.findBy(null as any)
         }).rejects.toThrow(`[test_types] Missing resource query`)
       })
@@ -147,25 +147,25 @@ describe('resource', () => {
       it('throws an error if query exists and is not an object', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.findBy(1 as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received number`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.findBy([] as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received array`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.findBy('asdasd' as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received string`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.findBy(true as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received boolean`,
@@ -192,11 +192,11 @@ describe('resource', () => {
       it('throws an error if query is missing', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.findAll('' as any)
         }).rejects.toThrow(`[test_types] Missing resource query`)
 
-        expect(async () => {
+        await expect(async () => {
           await res.findAll(null as any)
         }).rejects.toThrow(`[test_types] Missing resource query`)
       })
@@ -204,25 +204,25 @@ describe('resource', () => {
       it('throws an error if query exists and is not an object', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.findAll(1 as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received number`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.findAll([] as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received array`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.findAll('asdasd' as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received string`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.findAll(true as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource query, expected object, received boolean`,
@@ -246,30 +246,33 @@ describe('resource', () => {
     })
 
     describe('create', () => {
-      it('throws an error if attributes are missing', async () => {
+      it('does not throw an error if params are missing', async () => {
+        const res = createDummyResource()
+        await expect(res.create()).resolves.toEqual('create')
+      })
+
+      it('throws an error if params is not an object', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.create('' as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource params, expected object, received string`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.create(null as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource params, expected object, received null`,
         )
 
-        expect(async () => {
-          await res.create({} as any)
-        }).rejects.toThrow(`[test_types] Missing resource attributes`)
+        await expect(res.create({})).resolves.toEqual('create')
       })
 
       it('throws an error if attributes is not an object', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.create({
             attributes: 1 as any,
           })
@@ -277,7 +280,7 @@ describe('resource', () => {
           `[test_types] Invalid resource attributes, expected object, received number`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.create({
             attributes: [] as any,
           })
@@ -285,7 +288,7 @@ describe('resource', () => {
           `[test_types] Invalid resource attributes, expected object, received array`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.create({
             attributes: 'aasd' as any,
           })
@@ -293,7 +296,7 @@ describe('resource', () => {
           `[test_types] Invalid resource attributes, expected object, received string`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.create({
             attributes: true as any,
           })
@@ -305,7 +308,7 @@ describe('resource', () => {
       it('throws an error if relationships exists and is not an object', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.create({
             attributes: {},
             relationships: 1 as any,
@@ -314,7 +317,7 @@ describe('resource', () => {
           `[test_types] Invalid resource relationships, expected object, received number`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.create({
             attributes: {},
             relationships: [] as any,
@@ -323,7 +326,7 @@ describe('resource', () => {
           `[test_types] Invalid resource relationships, expected object, received array`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.create({
             attributes: {},
             relationships: 'asdasd' as any,
@@ -332,7 +335,7 @@ describe('resource', () => {
           `[test_types] Invalid resource relationships, expected object, received string`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.create({
             attributes: {},
             relationships: true as any,
@@ -390,13 +393,13 @@ describe('resource', () => {
       it('throws an error if id is missing', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.update('', {
             attributes: {},
           })
         }).rejects.toThrow(`[test_types] Missing resource id`)
 
-        expect(async () => {
+        await expect(async () => {
           await res.update(null as any, {
             attributes: {},
           })
@@ -406,13 +409,13 @@ describe('resource', () => {
       it('throws an error if attributes are missing', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.update('asd', '' as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource params, expected object, received string`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.update('asd', null as any)
         }).rejects.toThrow(
           `[test_types] Invalid resource params, expected object, received null`,
@@ -422,35 +425,51 @@ describe('resource', () => {
       it('throws an error if attributes is not an object', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
-          await res.update('asd', 1 as any)
+        await expect(async () => {
+          await res.update('asd', {
+            attributes: 1 as any,
+          })
         }).rejects.toThrow(
-          `[test_types] Invalid resource params, expected object, received number`,
+          `[test_types] Invalid resource attributes, expected object, received number`,
         )
 
-        expect(async () => {
-          await res.update('asd', [] as any)
+        await expect(async () => {
+          await res.update('asd', {
+            attributes: [] as any,
+          })
         }).rejects.toThrow(
-          `[test_types] Invalid resource params, expected object, received array`,
+          `[test_types] Invalid resource attributes, expected object, received array`,
         )
 
-        expect(async () => {
-          await res.update('asd', 'asdasd' as any)
+        await expect(async () => {
+          await res.update('asd', {
+            attributes: 'aasd' as any,
+          })
         }).rejects.toThrow(
-          `[test_types] Invalid resource params, expected object, received string`,
+          `[test_types] Invalid resource attributes, expected object, received string`,
         )
 
-        expect(async () => {
-          await res.update('asd', true as any)
+        await expect(async () => {
+          await res.update('asd', {
+            attributes: true as any,
+          })
         }).rejects.toThrow(
-          `[test_types] Invalid resource params, expected object, received boolean`,
+          `[test_types] Invalid resource attributes, expected object, received boolean`,
         )
+
+        await expect(
+          res.update('asd', {
+            attributes: {},
+          }),
+        ).resolves.toEqual('update')
+
+        await expect(res.update('asd', {})).resolves.toEqual('update')
       })
 
       it('throws an error if relationships exists and is not an object', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.update('asd', {
             attributes: {},
             relationships: 1 as any,
@@ -459,7 +478,7 @@ describe('resource', () => {
           `[test_types] Invalid resource relationships, expected object, received number`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.update('asd', {
             attributes: {},
             relationships: [] as any,
@@ -468,7 +487,7 @@ describe('resource', () => {
           `[test_types] Invalid resource relationships, expected object, received array`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.update('asd', {
             attributes: {},
             relationships: 'asdasd' as any,
@@ -477,7 +496,7 @@ describe('resource', () => {
           `[test_types] Invalid resource relationships, expected object, received string`,
         )
 
-        expect(async () => {
+        await expect(async () => {
           await res.update('asd', {
             attributes: {},
             relationships: true as any,
@@ -537,11 +556,11 @@ describe('resource', () => {
       it('throws an error if id is missing', async () => {
         const res = createDummyResource()
 
-        expect(async () => {
+        await expect(async () => {
           await res.delete('')
         }).rejects.toThrow(`[test_types] Missing resource id`)
 
-        expect(async () => {
+        await expect(async () => {
           await res.delete(null as any)
         }).rejects.toThrow(`[test_types] Missing resource id`)
       })
