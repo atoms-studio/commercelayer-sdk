@@ -129,7 +129,6 @@ document.addEventListener('submit', (e) => {
     const shipmentId = form.id.replace('shipment-', '')
     console.log(shipmentId)
     Shipments.update(shipmentId, {
-      attributes: {},
       relationships: {
         shipping_method: form.elements['shipping_method'].value,
       },
@@ -151,7 +150,6 @@ document.addEventListener('submit', (e) => {
   } else if (form.id === 'payment-methods') {
     const paymentMethodId = form.elements['payment_method'].value
     Orders.update(order.id, {
-      attributes: {},
       query: {
         include: orderIncludes,
       },
@@ -162,7 +160,6 @@ document.addEventListener('submit', (e) => {
       .then(setOrder)
       .then(() => {
         return WireTransfers.create({
-          attributes: {},
           relationships: {
             order,
           },

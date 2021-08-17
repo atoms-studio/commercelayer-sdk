@@ -12,6 +12,7 @@
     "build": "rollup -c",
     "create:resource": "ts-node --project scripts/tsconfig.json scripts/create-resource.ts",
     "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "release": "release-it",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",

@@ -19,12 +19,7 @@ const ready = () => {
 let skuCode: string
 let order: OrderInstance
 Auth.setMarket(Number(import.meta.env.VITE_CL_PRIMARY_MARKET_ID)).then(() => {
-  Promise.all([
-    Skus.findBy({}),
-    Orders.create({
-      attributes: {},
-    }),
-  ]).then(([sku, ord]) => {
+  Promise.all([Skus.findBy({}), Orders.create()]).then(([sku, ord]) => {
     skuCode = sku.code
     order = ord
     ready()

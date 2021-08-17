@@ -1,4 +1,4 @@
-import { init, Auth, Orders } from '@atoms-studio/commercelayer-sdk'
+import { init, Auth } from '@atoms-studio/commercelayer-sdk'
 
 init({
   host: import.meta.env.VITE_CL_DOMAIN,
