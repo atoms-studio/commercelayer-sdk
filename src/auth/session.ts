@@ -375,7 +375,7 @@ export const refreshCustomer = async (): Promise<SessionData> => {
     currentCustomerData.token = data.access_token
     currentCustomerData.refreshToken = data.refresh_token
     currentCustomerData.customer = null
-    currentCustomerData.expires = Date.now() + data.expires_in
+    currentCustomerData.expires = Date.now() + data.expires_in * 1000
 
     await loadProfile()
   } catch (err) /* istanbul ignore next */ {
