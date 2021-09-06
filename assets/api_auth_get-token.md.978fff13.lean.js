@@ -1,0 +1,1 @@
+import{o as n,c as s,a}from"./app.016600e8.js";const t='{"title":"Auth.getToken","description":"","frontmatter":{},"relativePath":"api/auth/get-token.md","lastUpdated":1627386512109}',e={},p=a('',4);e.render=function(a,t,e,o,c,i){return n(),s("div",null,[p])};export default e;export{t as __pageData};

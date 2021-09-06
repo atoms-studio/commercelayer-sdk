@@ -1,0 +1,1 @@
+import{o as n,c as s,a}from"./app.016600e8.js";const t='{"title":"[resource].create","description":"","frontmatter":{},"relativePath":"api/create.md","lastUpdated":1630920939323}',e={},p=a('',4);e.render=function(a,t,e,o,c,r){return n(),s("div",null,[p])};export default e;export{t as __pageData};

@@ -1,1 +1,0 @@
-import{o as n,c as s,a}from"./app.3b2c3a90.js";const t='{"title":"Auth.loginAsIntegration","description":"","frontmatter":{},"relativePath":"api/auth/login-as-integration.md","lastUpdated":1627388717474}',o={},p=a('',4);o.render=function(a,t,o,e,i,c){return n(),s("div",null,[p])};export default o;export{t as __pageData};

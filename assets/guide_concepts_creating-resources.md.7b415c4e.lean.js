@@ -1,1 +1,0 @@
-import{o as n,c as s,a}from"./app.3b2c3a90.js";const t='{"title":"Creating resources","description":"","frontmatter":{},"relativePath":"guide/concepts/creating-resources.md","lastUpdated":1627379335366}',e={},p=a('',4);e.render=function(a,t,e,o,c,r){return n(),s("div",null,[p])};export default e;export{t as __pageData};

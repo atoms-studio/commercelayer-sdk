@@ -1,1 +1,0 @@
-import{o as n,c as s,a}from"./app.3b2c3a90.js";const t='{"title":"Initialization API","description":"","frontmatter":{},"relativePath":"api/init.md","lastUpdated":1627389514805}',o={},e=a('',6);o.render=function(a,t,o,p,r,c){return n(),s("div",null,[e])};export default o;export{t as __pageData};

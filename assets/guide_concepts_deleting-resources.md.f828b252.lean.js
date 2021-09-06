@@ -1,0 +1,1 @@
+import{o as e,c as s,a as n}from"./app.016600e8.js";const a='{"title":"Deleting resources","description":"","frontmatter":{},"relativePath":"guide/concepts/deleting-resources.md","lastUpdated":1627379327512}',t={},o=n('',4);t.render=function(n,a,t,r,p,c){return e(),s("div",null,[o])};export default t;export{a as __pageData};

@@ -1,0 +1,1 @@
+import{o as n,c as a,a as s}from"./app.016600e8.js";const t='{"title":"[resource].findAll","description":"","frontmatter":{},"relativePath":"api/find-all.md","lastUpdated":1630920839945}',o={},e=s('',4);o.render=function(s,t,o,p,u,l){return n(),a("div",null,[e])};export default o;export{t as __pageData};

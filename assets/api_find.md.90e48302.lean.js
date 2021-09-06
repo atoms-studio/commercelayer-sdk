@@ -1,0 +1,1 @@
+import{o as n,c as s,a}from"./app.016600e8.js";const t='{"title":"[resource].find","description":"","frontmatter":{},"relativePath":"api/find.md","lastUpdated":1630920738349}',o={},p=a('',6);o.render=function(a,t,o,e,c,u){return n(),s("div",null,[p])};export default o;export{t as __pageData};

@@ -1,0 +1,1 @@
+import{o as n,c as s,a}from"./app.016600e8.js";const t='{"title":"[resource].findBy","description":"","frontmatter":{},"relativePath":"api/find-by.md","lastUpdated":1630920910254}',o={},e=a('',4);o.render=function(a,t,o,p,u,c){return n(),s("div",null,[e])};export default o;export{t as __pageData};

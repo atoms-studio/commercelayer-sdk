@@ -1,1 +1,0 @@
-import{o as n,c as s,a}from"./app.3b2c3a90.js";const t='{"title":"Auth.isCustomerLoggedIn","description":"","frontmatter":{},"relativePath":"api/auth/is-customer-logged-in.md","lastUpdated":1627387119517}',o={},p=a('',4);o.render=function(a,t,o,e,c,i){return n(),s("div",null,[p])};export default o;export{t as __pageData};

@@ -1,0 +1,1 @@
+import{o as n,c as a,a as s}from"./app.016600e8.js";const e='{"title":"ResourcePagination","description":"","frontmatter":{},"relativePath":"api/resource-pagination.md","lastUpdated":1630923025647}',t={},o=s('',3);t.render=function(s,e,t,p,r,c){return n(),a("div",null,[o])};export default t;export{e as __pageData};

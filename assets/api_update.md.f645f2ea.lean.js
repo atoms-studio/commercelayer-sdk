@@ -1,0 +1,1 @@
+import{o as n,c as s,a}from"./app.016600e8.js";const t='{"title":"[resource].update","description":"","frontmatter":{},"relativePath":"api/update.md","lastUpdated":1630920957600}',p={},e=a('',4);p.render=function(a,t,p,o,c,r){return n(),s("div",null,[e])};export default p;export{t as __pageData};

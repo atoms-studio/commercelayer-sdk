@@ -1,0 +1,1 @@
+import{o as s,c as n,a}from"./app.016600e8.js";const t='{"title":"Updating resources","description":"","frontmatter":{},"relativePath":"guide/concepts/updating-resources.md","lastUpdated":1630920062492}',p={},e=a('',4);p.render=function(a,t,p,o,c,u){return s(),n("div",null,[e])};export default p;export{t as __pageData};

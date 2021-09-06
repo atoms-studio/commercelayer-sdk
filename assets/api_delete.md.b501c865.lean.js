@@ -1,0 +1,1 @@
+import{o as e,c as s,a as n}from"./app.016600e8.js";const a='{"title":"[resource].delete","description":"","frontmatter":{},"relativePath":"api/delete.md","lastUpdated":1630920157877}',t={},o=n('',4);t.render=function(n,a,t,r,p,l){return e(),s("div",null,[o])};export default t;export{a as __pageData};

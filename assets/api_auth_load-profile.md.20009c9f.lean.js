@@ -1,1 +1,0 @@
-import{o as n,c as s,a}from"./app.3b2c3a90.js";const t='{"title":"Auth.loadProfile","description":"","frontmatter":{},"relativePath":"api/auth/load-profile.md","lastUpdated":1627387627515}',p={},o=a('',4);p.render=function(a,t,p,e,c,u){return n(),s("div",null,[o])};export default p;export{t as __pageData};

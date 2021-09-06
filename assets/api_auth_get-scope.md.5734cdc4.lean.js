@@ -1,0 +1,1 @@
+import{o as n,c as s,a}from"./app.016600e8.js";const t='{"title":"Auth.getScope","description":"","frontmatter":{},"relativePath":"api/auth/get-scope.md","lastUpdated":1627386107063}',p={},o=a('',4);p.render=function(a,t,p,e,c,u){return n(),s("div",null,[o])};export default p;export{t as __pageData};

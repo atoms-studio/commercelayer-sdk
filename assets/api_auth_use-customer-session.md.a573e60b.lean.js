@@ -1,1 +1,0 @@
-import{o as n,c as s,a}from"./app.3b2c3a90.js";const t='{"title":"Auth.useCustomerSection","description":"","frontmatter":{},"relativePath":"api/auth/use-customer-session.md","lastUpdated":1627388546287}',o={},e=a('',4);o.render=function(a,t,o,p,c,i){return n(),s("div",null,[e])};export default o;export{t as __pageData};

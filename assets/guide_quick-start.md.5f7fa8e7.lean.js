@@ -1,1 +1,0 @@
-import{o as n,c as s,a}from"./app.3b2c3a90.js";const t='{"title":"Quick start","description":"","frontmatter":{},"headers":[{"level":2,"title":"Installation","slug":"installation"}],"relativePath":"guide/quick-start.md","lastUpdated":1627390857638}',p={},o=a('',6);p.render=function(a,t,p,e,c,u){return n(),s("div",null,[o])};export default p;export{t as __pageData};
