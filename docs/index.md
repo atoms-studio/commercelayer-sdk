@@ -1,3 +1,7 @@
+---
+title: "A lightweight, opinionated CommerceLayer SDK built for fast delivery of e-commerce functionalities."
+---
+
 # Commercelayer SDK
 ![npm (scoped)](https://img.shields.io/npm/v/@atoms-studio/commercelayer-sdk)&nbsp; 
 ![npm](https://img.shields.io/npm/dm/@atoms-studio/commercelayer-sdk)&nbsp;

@@ -85,6 +85,14 @@ function getApiSidebar() {
         { text: 'update', link: '/api/update' },
         { text: 'delete', link: '/api/delete' },
       ]
+    },
+    {
+      text: 'Misc',
+      children: [
+        { text: 'RequestQuery', link: '/api/request-query' },
+        { text: 'ResourcePagination', link: '/api/resource-pagination' },
+        { text: 'ResourceWriteParams', link: '/api/resource-write-params' },
+      ]
     }
   ]
 }

@@ -1,6 +1,17 @@
-# Updating resources
+# [resource].update
 
-To update a resource, simply call the `update` method on a resource, passing its id and optionally passing attributes, relationships and query parameters.
+Update an existing resource.
+
+- **Arguments:**
+
+  - `id: String`: The resource id.
+  - `params?: ResourceWriteParams`: The parameters to update the resource with. [Read more](/api/resource-write-params)
+
+- **Returns:**
+
+  - `Promise<ResourceInstance | null>`.
+
+- **Example:**
 
 ```ts
 import { Addresses, Auth } from '@atoms-studio/commercelayer-sdk'
@@ -19,4 +30,3 @@ const address = await Addresses.update('xYZkjABcde', {
   },
 })
 ```
-The `update` method returns a promise that resolves with the updated resource.
