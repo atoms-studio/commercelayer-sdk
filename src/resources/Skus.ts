@@ -75,6 +75,8 @@ export const SkusConfig: ResourceConfig<SkuAttributes, SkuRelationships> = {
     'weight',
     'unit_of_weight',
     'hs_tariff_number',
+    'do_not_ship',
+    'do_not_track',
     'inventory',
   ],
 
