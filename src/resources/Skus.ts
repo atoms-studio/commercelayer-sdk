@@ -44,6 +44,8 @@ export interface SkuAttributes {
   weight: number
   unit_of_weight: 'gr' | 'oz'
   hs_tariff_number: string
+  do_not_ship: boolean
+  do_not_track: boolean
   inventory: Inventory
 }
 
