@@ -1,3 +1,10 @@
+### [1.0.1](https://github.com/atoms-studio/commercelayer-sdk/compare/1.0.0...1.0.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* add missing skus attributes ([cb1263b](https://github.com/atoms-studio/commercelayer-sdk/commit/cb1263b8f22850ef973549d7ecd8c92260c19e88))
+
 ## [1.0.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.0.0-beta.2...1.0.0) (2021-09-17)
 
 
