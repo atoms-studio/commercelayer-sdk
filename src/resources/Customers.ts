@@ -7,6 +7,8 @@ import {
 import { AttachmentInstance } from './Attachments'
 import { OrderInstance } from './Orders'
 import { ReturnInstance } from './Returns'
+import { CustomerPaymentSourceInstance } from './CustomerPaymentSources'
+import { CustomerAddressInstance } from './CustomerAddresses'
 
 export interface CustomerAttributes {
   email: string
@@ -17,8 +19,8 @@ export interface CustomerAttributes {
 
 export interface CustomerRelationships {
   customer_group: any // TODO: improve this type
-  customer_addresses: any[] // TODO: improve this type
-  customer_payment_sources: any[] // TODO: improve this type
+  customer_addresses: CustomerAddressInstance[]
+  customer_payment_sources: CustomerPaymentSourceInstance[]
   customer_subscriptions: any[] // TODO: improve this type
   orders: OrderInstance[]
   returns: ReturnInstance[]

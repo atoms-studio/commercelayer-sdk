@@ -56,3 +56,7 @@ export {
   OrderSubscriptions,
   OrderSubscriptionInstance,
 } from './resources/OrderSubscriptions'
+export {
+  CustomerPaymentSources,
+  CustomerPaymentSourceInstance,
+} from './resources/CustomerPaymentSources'
