@@ -14,6 +14,7 @@ export interface OrderCopyAttributes {
   failed_at: string
   place_target_order: boolean
   cancel_source_order: boolean
+  reuse_wallet: boolean
   errors_log: any[] // TODO: improve this type
   errors_count: number
 }
@@ -42,6 +43,7 @@ export const OrderCopiesConfig: ResourceConfig<
     'failed_at',
     'place_target_order',
     'cancel_source_order',
+    'reuse_wallet',
     'errors_log',
     'errors_count',
   ],
