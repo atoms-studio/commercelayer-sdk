@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.0.2...1.1.0) (2021-09-22)
+
+
+### Features
+
+* add CustomerPaymentSources ([80bb7bd](https://github.com/atoms-studio/commercelayer-sdk/commit/80bb7bd292580f71079291aec57d22abedcb8d3e))
+
 ### [1.0.2](https://github.com/atoms-studio/commercelayer-sdk/compare/1.0.1...1.0.2) (2021-09-22)
 
 ### [1.0.1](https://github.com/atoms-studio/commercelayer-sdk/compare/1.0.0...1.0.1) (2021-09-17)
