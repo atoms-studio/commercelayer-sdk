@@ -1,3 +1,10 @@
+## [1.3.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.2.0...1.3.0) (2022-01-11)
+
+
+### Features
+
+* **resources:** add StockItems ([371039b](https://github.com/atoms-studio/commercelayer-sdk/commit/371039be840eb7011351ab06a9703d50b7c82a7f))
+
 ## [1.2.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.1.0...1.2.0) (2022-01-11)
 
 
