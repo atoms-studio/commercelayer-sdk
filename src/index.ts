@@ -60,3 +60,7 @@ export {
   CustomerPaymentSources,
   CustomerPaymentSourceInstance,
 } from './resources/CustomerPaymentSources'
+export {
+  StockLocations,
+  StockLocationInstance,
+} from './resources/StockLocations'
