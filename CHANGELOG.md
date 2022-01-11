@@ -1,3 +1,10 @@
+### [1.3.1](https://github.com/atoms-studio/commercelayer-sdk/compare/1.3.0...1.3.1) (2022-01-11)
+
+
+### Bug Fixes
+
+* **resources:** type on StockItems ([06ca892](https://github.com/atoms-studio/commercelayer-sdk/commit/06ca892ade06ce591942ccb7f83c3a46dbe46ba0))
+
 ## [1.3.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.2.0...1.3.0) (2022-01-11)
 
 
