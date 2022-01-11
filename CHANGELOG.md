@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.1.0...1.2.0) (2022-01-11)
+
+
+### Features
+
+* **resources:** add StockLocations ([3e14c01](https://github.com/atoms-studio/commercelayer-sdk/commit/3e14c01227b4a219cf8f351616239cf69ba3c925))
+
 ## [1.1.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.0.2...1.1.0) (2021-09-22)
 
 
