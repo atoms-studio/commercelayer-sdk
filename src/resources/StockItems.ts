@@ -28,7 +28,7 @@ export const StockItemConfig: ResourceConfig<
   StockItemAttributes,
   StockItemRelationships
 > = {
-  type: 'stock_locations',
+  type: 'stock_items',
 
   attributes: ['sku_code', 'quantity'],
 
