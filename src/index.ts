@@ -64,3 +64,4 @@ export {
   StockLocations,
   StockLocationInstance,
 } from './resources/StockLocations'
+export { StockItems, StockItemInstance } from './resources/StockItems'

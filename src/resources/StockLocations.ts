@@ -5,6 +5,7 @@ import {
   Resource,
 } from '../resource'
 import { AttachmentInstance } from './Attachments'
+import { StockItemInstance } from './StockItems'
 
 export interface StockLocationAttributes {
   number: number
@@ -16,7 +17,7 @@ export interface StockLocationAttributes {
 export interface StockLocationRelationships {
   inventory_stock_locations?: any[]
   inventory_return_locations?: any[]
-  stock_items?: any[]
+  stock_items?: StockItemInstance[]
   stock_transfers?: any[]
   attachments?: AttachmentInstance[]
 }

@@ -9,6 +9,7 @@ import { AttachmentInstance } from './Attachments'
 import { CustomerInstance } from './Customers'
 import { LineItemInstance } from './LineItems'
 import { OrderInstance } from './Orders'
+import { StockLocationInstance } from './StockLocations'
 
 export interface ReturnAttributes {
   number: string
@@ -35,7 +36,7 @@ export interface ReturnAttributes {
 export interface ReturnRelationships {
   order: OrderInstance
   customer: CustomerInstance
-  stock_location: any // TODO: improve this type
+  stock_location: StockLocationInstance
   origin_address: AddressInstance
   destination_address: AddressInstance
   return_line_items: LineItemInstance[]

@@ -11,6 +11,7 @@ import { LineItemInstance } from './LineItems'
 import { OrderInstance } from './Orders'
 import { ShippingCategoryInstance } from './ShippingCategories'
 import { ShippingMethodInstance } from './ShippingMethods'
+import { StockLocationInstance } from './StockLocations'
 
 interface ShipmentRate {
   id: string
@@ -57,7 +58,7 @@ export interface ShipmentAttributes {
 export interface ShipmentRelationships {
   order: OrderInstance
   shipping_category: ShippingCategoryInstance
-  stock_location: any // TODO: improve this type
+  stock_location: StockLocationInstance
   origin_address: AddressInstance
   shipping_address: AddressInstance
   shipping_method: ShippingMethodInstance
