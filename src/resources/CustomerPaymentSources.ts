@@ -32,7 +32,9 @@ export const CustomerPaymentSourcesConfig: ResourceConfig<
 
   relationships: {
     customer: 'customers',
-    payment_source: 'payment_sources', // TODO: this is a polymorphic relation
+    payment_source: {
+      polymorphic: true,
+    },
   },
 }
 

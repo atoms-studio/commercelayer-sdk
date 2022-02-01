@@ -12,7 +12,6 @@ import { getType, isObject } from './utils'
 
 export interface PolymorphicRelationship {
   polymorphic: true
-  field: string
 }
 
 export interface ResourceConfig<T, U> {

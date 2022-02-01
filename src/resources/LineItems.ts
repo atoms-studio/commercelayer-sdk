@@ -95,7 +95,9 @@ export const LineItemsConfig: ResourceConfig<
 
   relationships: {
     order: 'orders',
-    item: 'items', // TODO: handle polymorphic relationship
+    item: {
+      polymorphic: true,
+    },
     line_item_options: 'line_item_options',
     shipment_line_items: 'line_items',
     stock_transfers: 'stock_transfers',

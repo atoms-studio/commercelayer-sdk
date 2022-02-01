@@ -29,7 +29,9 @@ export const AttachmentsConfig: ResourceConfig<
   attributes: ['name', 'description', 'url'],
 
   relationships: {
-    attachable: 'attachables', // TODO: this is a polymorphic relation
+    attachable: {
+      polymorphic: true,
+    },
   },
 }
 

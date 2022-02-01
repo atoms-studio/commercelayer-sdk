@@ -290,7 +290,9 @@ export const OrdersConfig: ResourceConfig<
     available_payment_methods: 'payment_methods',
     available_customer_payment_sources: 'customer_payment_sources',
     payment_method: 'payment_methods',
-    payment_source: 'payment_sources', // TODO: this is a polymorphic relation
+    payment_source: {
+      polymorphic: true,
+    },
     line_items: 'line_items',
     shipments: 'shipments',
     transactions: 'transactions',
