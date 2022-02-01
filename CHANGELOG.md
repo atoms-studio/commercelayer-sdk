@@ -1,3 +1,15 @@
+### [1.3.2](https://github.com/atoms-studio/commercelayer-sdk/compare/1.3.1...1.3.2) (2022-02-01)
+
+
+### Features
+
+* update all polymorphic relationships ([5ac69af](https://github.com/atoms-studio/commercelayer-sdk/commit/5ac69af15949a3f9c05bee35147adf852aa6e5e0))
+
+
+### Bug Fixes
+
+* properly handle polymorphic relationships ([39f6bd3](https://github.com/atoms-studio/commercelayer-sdk/commit/39f6bd376e9405cbbcffc7f6ca8033b6874eaffd))
+
 ### [1.3.1](https://github.com/atoms-studio/commercelayer-sdk/compare/1.3.0...1.3.1) (2022-01-11)
 
 
