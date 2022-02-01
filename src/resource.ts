@@ -10,10 +10,15 @@ import {
 } from './api'
 import { getType, isObject } from './utils'
 
+export interface PolymorphicRelationship {
+  polymorphic: true
+  field: string
+}
+
 export interface ResourceConfig<T, U> {
   type: string
   attributes: (keyof T)[]
-  relationships: Record<keyof U, string>
+  relationships: Record<keyof U, string | PolymorphicRelationship>
 }
 
 export interface CommonResourceAttributes {

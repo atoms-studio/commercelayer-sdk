@@ -4,6 +4,7 @@ import {
   ResourceConfig,
   AttributesPayload,
   RelationshipsPayload,
+  PolymorphicRelationship,
 } from './resource'
 import { getType, isObject } from './utils'
 
@@ -84,10 +85,15 @@ export const serialize = async <T, U>(
     //
     relationshipKeys.forEach((relationshipKey) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const configRelationships: Record<string, any> = config.relationships
+      const configRelationships: Record<
+        string,
+        string | PolymorphicRelationship
+      > = config.relationships
+
+      const relationshipTypeConfig = configRelationships[relationshipKey]
 
       // Only add relationships supported by the config
-      if (configRelationships[relationshipKey]) {
+      if (relationshipTypeConfig) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const relationshipValue = (relationships as any)[relationshipKey] || {
           id: null,
@@ -99,9 +105,19 @@ export const serialize = async <T, U>(
           )
         }
 
+        if (
+          typeof relationshipTypeConfig === 'object' &&
+          relationshipTypeConfig.polymorphic &&
+          (typeof relationshipValue === 'string' || !relationshipValue.type)
+        ) {
+          throw new Error(
+            `You must pass a type for relationship "${relationshipKey}" because it is polymorphic`,
+          )
+        }
+
         serialized.data.relationships[relationshipKey] = {
           data: {
-            type: configRelationships[relationshipKey],
+            type: relationshipValue.type ?? relationshipTypeConfig,
             // Support passing a relationship as id or as a full object
             id:
               typeof relationshipValue === 'string'

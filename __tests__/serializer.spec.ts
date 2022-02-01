@@ -85,6 +85,75 @@ describe('serializer', () => {
     })
   })
 
+  it('serializes a resource with polymorphic relations', async () => {
+    await expect(async () => {
+      await serialize(
+        {
+          type: 'line_items',
+
+          attributes: ['quantity'],
+
+          relationships: {
+            order: 'orders',
+            item: {
+              polymorphic: true,
+              field: 'item_type',
+            },
+            line_item_options: 'line_item_options',
+            shipment_line_items: 'line_items',
+            stock_transfers: 'stock_transfers',
+          },
+        },
+        {
+          quantity: 1,
+        },
+        {
+          order: {
+            id: '12345',
+            type: 'orders',
+          },
+          item: '123456',
+        },
+      )
+    }).rejects.toThrow(
+      'You must pass a type for relationship "item" because it is polymorphic',
+    )
+
+    const body = await serialize(
+      {
+        type: 'line_items',
+
+        attributes: ['quantity'],
+
+        relationships: {
+          order: 'orders',
+          item: {
+            polymorphic: true,
+            field: 'item_type',
+          },
+          line_item_options: 'line_item_options',
+          shipment_line_items: 'line_items',
+          stock_transfers: 'stock_transfers',
+        },
+      },
+      {
+        quantity: 1,
+      },
+      {
+        order: {
+          id: '12345',
+          type: 'orders',
+        },
+        item: {
+          id: '123456',
+          type: 'adjustments',
+        },
+      },
+    )
+
+    expect(body.data.relationships.item.data.type).toEqual('adjustments')
+  })
+
   it('throws an error with invalid attributes', async () => {
     await expect(async () => {
       await serialize(
