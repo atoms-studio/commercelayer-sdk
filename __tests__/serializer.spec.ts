@@ -97,7 +97,6 @@ describe('serializer', () => {
             order: 'orders',
             item: {
               polymorphic: true,
-              field: 'item_type',
             },
             line_item_options: 'line_item_options',
             shipment_line_items: 'line_items',
@@ -129,7 +128,6 @@ describe('serializer', () => {
           order: 'orders',
           item: {
             polymorphic: true,
-            field: 'item_type',
           },
           line_item_options: 'line_item_options',
           shipment_line_items: 'line_items',
