@@ -65,3 +65,7 @@ export {
   StockLocationInstance,
 } from './resources/StockLocations'
 export { StockItems, StockItemInstance } from './resources/StockItems'
+export {
+  CustomerGroups,
+  CustomerGroupInstance,
+} from './resources/CustomerGroups'
