@@ -38,7 +38,7 @@ export const CustomerGroupsConfig: ResourceConfig<
   },
 }
 
-export const Customers: Resource<
+export const CustomerGroups: Resource<
   CustomerGroupAttributes,
   CustomerGroupRelationships,
   CustomerGroupInstance
