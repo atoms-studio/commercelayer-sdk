@@ -4,6 +4,7 @@ import {
   createResource,
   Resource,
 } from '../resource'
+import { CustomerGroupInstance } from './CustomerGroups'
 import { AttachmentInstance } from './Attachments'
 import { OrderInstance } from './Orders'
 import { ReturnInstance } from './Returns'
@@ -18,7 +19,7 @@ export interface CustomerAttributes {
 }
 
 export interface CustomerRelationships {
-  customer_group: any // TODO: improve this type
+  customer_group: CustomerGroupInstance
   customer_addresses: CustomerAddressInstance[]
   customer_payment_sources: CustomerPaymentSourceInstance[]
   customer_subscriptions: any[] // TODO: improve this type
