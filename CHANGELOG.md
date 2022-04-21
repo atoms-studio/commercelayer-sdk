@@ -1,3 +1,11 @@
+## [1.4.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.3.2...1.4.0) (2022-04-21)
+
+
+### Features
+
+* add customer groups ([#6](https://github.com/atoms-studio/commercelayer-sdk/issues/6)) ([5c43df6](https://github.com/atoms-studio/commercelayer-sdk/commit/5c43df6cf6614a95453ada1944bf2698ad3a5fab))
+* add timeout option to config ([c2de1fc](https://github.com/atoms-studio/commercelayer-sdk/commit/c2de1fc3476e83a0939b209663f37b0147204f52))
+
 ### [1.3.2](https://github.com/atoms-studio/commercelayer-sdk/compare/1.3.1...1.3.2) (2022-02-01)
 
 
