@@ -5,6 +5,7 @@ import customerResponse from './responses/customer.json'
 export const mockRequestWithConfig = (): AxiosInstance => {
   initRequest({
     host: 'http://www.google.com',
+    timeout: 5000,
     clientId: '',
     clientSecret: '',
     refreshTokens: false,
@@ -23,6 +24,7 @@ export const mockRequestWithUri = (): AxiosInstance => {
   const baseURL = 'http://www.google.com'
   initRequest({
     host: baseURL,
+    timeout: 5000,
     clientId: '',
     clientSecret: '',
     refreshTokens: false,
@@ -46,6 +48,7 @@ export const mockRequestWithResponse = (
   const baseURL = 'http://www.google.com'
   initRequest({
     host: baseURL,
+    timeout: 5000,
     clientId: '',
     clientSecret: '',
     refreshTokens: false,
@@ -78,6 +81,7 @@ export const mockRequestWithEcho = (): AxiosInstance => {
   const baseURL = 'http://www.google.com'
   initRequest({
     host: baseURL,
+    timeout: 5000,
     clientId: '',
     clientSecret: '',
     refreshTokens: false,
@@ -104,6 +108,7 @@ export const mockRequestWithError = (
   const baseURL = 'http://www.google.com'
   initRequest({
     host: baseURL,
+    timeout: 5000,
     clientId: '',
     clientSecret: '',
     refreshTokens: false,

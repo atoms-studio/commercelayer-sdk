@@ -26,6 +26,7 @@ describe('config', () => {
       })
       expect(config).toEqual({
         host: 'asdasd',
+        timeout: 5000,
         clientId: '',
         clientSecret: '',
         refreshTokens: defaultConfig.refreshTokens,
@@ -40,6 +41,7 @@ describe('config', () => {
       })
       expect(config).toEqual({
         host: 'asdasd',
+        timeout: 5000,
         clientId: 'asd',
         clientSecret: '',
         refreshTokens: defaultConfig.refreshTokens,
@@ -55,6 +57,7 @@ describe('config', () => {
       })
       expect(config).toEqual({
         host: 'asdasd',
+        timeout: 5000,
         clientId: 'asd',
         clientSecret: 'asd2',
         refreshTokens: defaultConfig.refreshTokens,
@@ -70,6 +73,7 @@ describe('config', () => {
       })
       expect(config).toEqual({
         host: 'asdasd',
+        timeout: 5000,
         clientId: 'asd',
         clientSecret: '',
         refreshTokens: false,
@@ -86,6 +90,7 @@ describe('config', () => {
       })
       expect(config).toEqual({
         host: 'asdasd',
+        timeout: 5000,
         clientId: 'asd',
         clientSecret: '',
         refreshTokens: false,
@@ -103,6 +108,7 @@ describe('config', () => {
       })
       expect(config).toEqual({
         host: 'asdasd',
+        timeout: 5000,
         clientId: 'asd',
         clientSecret: '',
         refreshTokens: false,
@@ -126,6 +132,7 @@ describe('config', () => {
       })
       expect(config).toEqual({
         host: 'asdasd',
+        timeout: 5000,
         clientId: 'asd',
         clientSecret: '',
         refreshTokens: true,
@@ -150,6 +157,7 @@ describe('config', () => {
       })
       expect(config).toEqual({
         host: 'asdasd',
+        timeout: 5000,
         clientId: 'asd',
         clientSecret: '',
         refreshTokens: true,
@@ -164,18 +172,25 @@ describe('config', () => {
 
       initConfig({
         host: 'asdasd',
-        clientId: 'asd',
-        refreshTokens: true,
-        refreshTokensAttempts: 4,
-        cookies: {
-          customer_token: '',
-        },
+        timeout: 10000,
+      })
+
+      expect(config).toEqual({
+        host: 'asdasd',
+        timeout: 10000,
+        clientId: '',
+        clientSecret: '',
+        refreshTokens: defaultConfig.refreshTokens,
+        refreshTokensAttempts: defaultConfig.refreshTokensAttempts,
+        onRefreshError: defaultConfig.onRefreshError,
+        cookies: defaultConfig.cookies,
       })
     })
 
-    it('passes host to request', () => {
+    it('passes host and timeout to request', () => {
       initConfig({
         host: 'asdasd',
+        timeout: 10000,
         clientId: 'asd',
         refreshTokens: true,
         refreshTokensAttempts: 4,
@@ -185,6 +200,7 @@ describe('config', () => {
       })
 
       expect(baseRequest.defaults.baseURL).toBe('asdasd')
+      expect(baseRequest.defaults.timeout).toBe(10000)
     })
   })
 

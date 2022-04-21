@@ -5,6 +5,7 @@ describe('request', () => {
     const baseURL = 'http://www.google.com'
     initRequest({
       host: baseURL,
+      timeout: 5000,
       clientId: '',
       clientSecret: '',
       refreshTokens: false,

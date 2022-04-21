@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios'
 import { CommonPayloadAttributes } from './resource'
 export interface InternalConfig {
   host: string
+  timeout: number
   clientId: string
   clientSecret: string
   refreshTokens: boolean
@@ -16,6 +17,7 @@ export interface InternalConfig {
 
 export interface Config {
   host: string
+  timeout?: number
   clientId?: string
   clientSecret?: string
   refreshTokens?: boolean
@@ -32,6 +34,7 @@ export interface Config {
 
 export const defaultConfig: Readonly<InternalConfig> = {
   host: '',
+  timeout: 5000,
   clientId: '',
   clientSecret: '',
   refreshTokens: true,
@@ -49,6 +52,7 @@ export const defaultConfig: Readonly<InternalConfig> = {
 
 export const config: InternalConfig = {
   host: defaultConfig.host,
+  timeout: defaultConfig.timeout,
   clientId: defaultConfig.clientId,
   clientSecret: defaultConfig.clientSecret,
   refreshTokens: defaultConfig.refreshTokens,
@@ -75,6 +79,7 @@ export const __resetConfig = (): void => {
 
 export const initConfig = (providedConfig: Config): void => {
   config.host = providedConfig.host
+  config.timeout = providedConfig.timeout || 5000
   config.clientId = providedConfig.clientId || ''
   config.clientSecret = providedConfig.clientSecret || ''
   config.refreshTokens = !!providedConfig.refreshTokens
@@ -127,7 +132,7 @@ export const getConfig = (): Readonly<InternalConfig> => config
 
 export const baseRequest: AxiosInstance = axios.create({
   baseURL: '',
-  timeout: 5000,
+  timeout: defaultConfig.timeout,
   headers: {
     Accept: 'application/vnd.api+json',
     'Content-Type': 'application/vnd.api+json',
@@ -136,6 +141,7 @@ export const baseRequest: AxiosInstance = axios.create({
 
 export const initRequest = (config: InternalConfig): void => {
   baseRequest.defaults.baseURL = config.host
+  baseRequest.defaults.timeout = config.timeout
 }
 
 export const commonPayloadAttributes: (keyof CommonPayloadAttributes)[] = [
