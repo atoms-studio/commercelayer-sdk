@@ -13,6 +13,8 @@ import {
   loadProfile,
   getProfile,
   cacheToken,
+  getCurrentToken,
+  getRefreshTokenInterceptor,
 } from './session'
 
 export const Auth = {
@@ -30,4 +32,6 @@ export const Auth = {
   loadProfile,
   getProfile,
   __setCurrentToken: cacheToken,
+  getCurrentToken,
+  getRefreshTokenInterceptor,
 }

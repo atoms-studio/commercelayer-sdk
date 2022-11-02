@@ -1,4 +1,4 @@
-export { initConfig as init } from './config'
+export { initConfig as init, getConfig } from './config'
 export { Auth } from './auth'
 
 export { ResourceError } from './errors'
