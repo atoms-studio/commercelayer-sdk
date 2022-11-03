@@ -1,3 +1,10 @@
+### [1.4.1](https://github.com/atoms-studio/commercelayer-sdk/compare/1.4.0...1.4.1) (2022-11-03)
+
+
+### Features
+
+* export additional methods ([4b4409e](https://github.com/atoms-studio/commercelayer-sdk/commit/4b4409e3f041fcb2e5a897fc6e4f1f549174429f))
+
 ## [1.4.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.3.2...1.4.0) (2022-04-21)
 
 
