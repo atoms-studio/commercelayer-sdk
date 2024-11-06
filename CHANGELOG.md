@@ -1,3 +1,11 @@
+## [1.5.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.4.1...1.5.0) (2024-11-06)
+
+
+### Features
+
+* add package manager version ([cd84d38](https://github.com/atoms-studio/commercelayer-sdk/commit/cd84d38756b6a2ff3bb1fca4a5ac3dc3d8799f0d))
+* update Auth.setMarket to accept string values and modify related scope formatting ([a9a4577](https://github.com/atoms-studio/commercelayer-sdk/commit/a9a4577a5d2b40eb6a4079b53deb2c7c88274023))
+
 ### [1.4.1](https://github.com/atoms-studio/commercelayer-sdk/compare/1.4.0...1.4.1) (2022-11-03)
 
 
