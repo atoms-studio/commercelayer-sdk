@@ -6,7 +6,7 @@ init({
 })
 
 document.getElementById('market1-get-token').addEventListener('click', () => {
-  Auth.setMarket(Number(import.meta.env.VITE_CL_PRIMARY_MARKET_ID)).then(() => {
+  Auth.setMarket(String(import.meta.env.VITE_CL_PRIMARY_MARKET_ID)).then(() => {
     document.getElementById(
       'market1-guest-token',
     ).textContent = Auth.getToken().token
@@ -14,7 +14,7 @@ document.getElementById('market1-get-token').addEventListener('click', () => {
 })
 
 document.getElementById('market2-get-token').addEventListener('click', () => {
-  Auth.setMarket(Number(import.meta.env.VITE_CL_SECONDARY_MARKET_ID)).then(
+  Auth.setMarket(String(import.meta.env.VITE_CL_SECONDARY_MARKET_ID)).then(
     () => {
       document.getElementById(
         'market2-guest-token',
@@ -26,7 +26,7 @@ document.getElementById('market2-get-token').addEventListener('click', () => {
 document
   .getElementById('market1-clone-get-token')
   .addEventListener('click', () => {
-    Auth.setMarket(Number(import.meta.env.VITE_CL_PRIMARY_MARKET_ID)).then(
+    Auth.setMarket(String(import.meta.env.VITE_CL_PRIMARY_MARKET_ID)).then(
       () => {
         document.getElementById(
           'market1-clone-guest-token',

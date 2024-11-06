@@ -102,19 +102,19 @@ export const getCustomerToken = (): TokenCacheEntry => {
   }
 }
 
-let currentMarkets: number[] = []
+let currentMarkets: string[] = []
 
-export const getCurrentMarkets = (): number[] => {
+export const getCurrentMarkets = (): string[] => {
   return currentMarkets.slice()
 }
 
-export const setCurrentMarkets = (markets: number[]): void => {
+export const setCurrentMarkets = (markets: string[]): void => {
   currentMarkets = markets.slice()
 }
 
 export const getScope = (): string =>
   getCurrentMarkets()
-    .map((market) => `market:${market}`)
+    .map((market) => `market:code:${market}`)
     .join(' ')
 
 export const getCurrentToken = (): TokenCacheEntry => {
@@ -152,12 +152,15 @@ export const loginAsIntegration = async (): Promise<TokenResponse> => {
   }
 
   const scope = getScope()
-  const { data } = await axios.post(`${config.host}/oauth/token`, {
-    grant_type: 'client_credentials',
-    client_id: config.clientId,
-    client_secret: config.clientSecret,
-    scope,
-  })
+  const { data } = await axios.post(
+    `https://auth.commercelayer.io/oauth/token`,
+    {
+      grant_type: 'client_credentials',
+      client_id: config.clientId,
+      client_secret: config.clientSecret,
+      scope,
+    },
+  )
 
   /* istanbul ignore next */
   const expires = Date.now() + (Number(data.expires_in) || 0) * 1000
@@ -198,11 +201,14 @@ export const loginAsGuest = async (): Promise<TokenResponse> => {
   }
 
   // We dont use try..catch as auth errors must be handled by consumers
-  const { data } = await axios.post(`${config.host}/oauth/token`, {
-    grant_type: 'client_credentials',
-    client_id: config.clientId,
-    scope,
-  })
+  const { data } = await axios.post(
+    `https://auth.commercelayer.io/oauth/token`,
+    {
+      grant_type: 'client_credentials',
+      client_id: config.clientId,
+      scope,
+    },
+  )
 
   /* istanbul ignore next */
   const expires = Date.now() + (Number(data.expires_in) || 0) * 1000
@@ -224,8 +230,8 @@ export const __resetMarket = (): void => {
   setCurrentMarkets([])
 }
 
-export const setMarket = async (marketId: number | number[]): Promise<void> => {
-  let markets: number[]
+export const setMarket = async (marketId: string | string[]): Promise<void> => {
+  let markets: string[]
   if (Array.isArray(marketId)) {
     markets = marketId
   } else {
@@ -248,7 +254,7 @@ export const setMarket = async (marketId: number | number[]): Promise<void> => {
 }
 
 // Always return a copy so consumers cannot alter directly
-export const getMarket = (): number[] => getCurrentMarkets()
+export const getMarket = (): string[] => getCurrentMarkets()
 
 export const isRefreshTokenError = /* istanbul ignore next */ (
   error: AxiosError,
@@ -290,7 +296,7 @@ export const getRefreshTokenInterceptor = (
         errorConfig.headers.authorization = `Bearer ${authData.token}`
       } catch (err) {
         // Could not refresh the token, exit immediatly
-        config.onRefreshError(err)
+        config.onRefreshError(err as Error)
         throw err
       }
 
@@ -324,13 +330,16 @@ export const loginAsCustomer = async (
   }
 
   try {
-    const { data } = await axios.post(`${config.host}/oauth/token`, {
-      grant_type: 'password',
-      client_id: config.clientId,
-      username,
-      password,
-      scope,
-    })
+    const { data } = await axios.post(
+      `https://auth.commercelayer.io/oauth/token`,
+      {
+        grant_type: 'password',
+        client_id: config.clientId,
+        username,
+        password,
+        scope,
+      },
+    )
 
     currentCustomerData.id = data.owner_id
     currentCustomerData.token = data.access_token
@@ -365,11 +374,14 @@ export const refreshCustomer = async (): Promise<SessionData> => {
   }
 
   try {
-    const { data } = await axios.post(`${config.host}/oauth/token`, {
-      grant_type: 'refresh_token',
-      client_id: config.clientId,
-      refresh_token: currentCustomerData.refreshToken,
-    })
+    const { data } = await axios.post(
+      `https://auth.commercelayer.io/oauth/token`,
+      {
+        grant_type: 'refresh_token',
+        client_id: config.clientId,
+        refresh_token: currentCustomerData.refreshToken,
+      },
+    )
 
     currentCustomerData.id = data.owner_id
     currentCustomerData.token = data.access_token

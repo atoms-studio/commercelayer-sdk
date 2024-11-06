@@ -17,8 +17,8 @@ init({
 })
 
 await Auth.setMarket(1234)
-console.log(Auth.getScope()) // Prints: 'market:1234'
+console.log(Auth.getScope()) // Prints: 'market:code:1234'
 
 await Auth.setMarket([1234, 5678])
-console.log(Auth.getMarket()) // Prints: 'market:1234 market:5678'
+console.log(Auth.getMarket()) // Prints: 'market:code:1234 market:code:5678'
 ```

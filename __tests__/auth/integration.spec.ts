@@ -20,7 +20,7 @@ describe('auth:integration', () => {
       access_token: 'your-592-access-token',
       token_type: 'bearer',
       expires_in: 7200,
-      scope: 'market:592',
+      scope: 'market:code:592',
       created_at: Date.now(),
     })
   })
@@ -67,10 +67,10 @@ describe('auth:integration', () => {
       access_token: 'your-access-token',
       token_type: 'bearer',
       expires_in: 7200,
-      scope: 'market:1234',
+      scope: 'market:code:1234',
       created_at: createdAt,
     })
-    await setMarket(1)
+    await setMarket('1')
 
     const response = await loginAsIntegration()
     expect(response).toHaveProperty('token', 'your-access-token')
@@ -114,11 +114,11 @@ describe('auth:integration', () => {
       access_token: 'your-7777-access-token',
       token_type: 'bearer',
       expires_in: 7200,
-      scope: 'market:7777',
+      scope: 'market:code:7777',
       created_at: createdAt,
     })
 
-    await setMarket([7777])
+    await setMarket(['7777'])
 
     await loginAsIntegration()
     const key = `${INTEGRATION_PREFIX}7777`
@@ -137,11 +137,11 @@ describe('auth:integration', () => {
       access_token: 'your-access-token',
       token_type: 'bearer',
       expires_in: 7200,
-      scope: 'market:1234',
+      scope: 'market:code:1234',
       created_at: Date.now(),
     })
 
-    await setMarket([19])
+    await setMarket(['19'])
     await loginAsIntegration()
     expect(axios.post).toHaveBeenCalledTimes(1)
 

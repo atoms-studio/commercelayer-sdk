@@ -20,7 +20,7 @@ init({
   clientId: '9A-ewDDlpDHdeNeJiYDOFFt3g259GMdcVGQg-Jh_SDk', 
 })
 
-await Auth.setMarket(1234)
+await Auth.setMarket('1234')
 
 const result = await Skus.findAll({
   filter: {

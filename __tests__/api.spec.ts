@@ -237,7 +237,7 @@ describe('api', () => {
         access_token: 'asdasd',
         expires_in: 7200,
       })
-      await setMarket(9528)
+      await setMarket('9528')
 
       const config = await createRequest('/test', 'get')
       expect(config).toHaveProperty('headers', {
@@ -250,7 +250,7 @@ describe('api', () => {
         access_token: 'qwerty',
         refresh_token: 'asdasd',
         expires_in: 7200,
-        scope: 'market:1',
+        scope: 'market:code:1',
         created_at: Date.now() - 60 * 1000,
         owner_id: 'zxcVBnMASd',
         owner_type: 'customer',

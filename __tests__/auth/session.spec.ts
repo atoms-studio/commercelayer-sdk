@@ -63,7 +63,7 @@ describe('auth:session', () => {
       access_token: 'your-9955-access-token',
       token_type: 'bearer',
       expires_in: 7200,
-      scope: 'market:9955',
+      scope: 'market:code:9955',
       created_at: Date.now(),
     })
   })
@@ -73,15 +73,15 @@ describe('auth:session', () => {
   })
 
   it('uses market as cache key', async () => {
-    await setMarket(123)
+    await setMarket('123')
     expect(cacheKey()).toBe('123')
 
-    await setMarket([456, 123])
+    await setMarket(['456', '123'])
     expect(cacheKey()).toBe('456,123')
   })
 
   it('caches a token based on current market', async () => {
-    await setMarket(987)
+    await setMarket('987')
     cacheToken('test', 0)
     expect(tokenCache.has(cacheKey())).toBe(true)
     expect(tokenCache.get(cacheKey())).toEqual({
@@ -91,13 +91,13 @@ describe('auth:session', () => {
   })
 
   it('returns an empty string with an expired token', async () => {
-    await setMarket(987)
+    await setMarket('987')
     cacheToken('test', 0)
     expect(getToken()).toEqual({ token: '', expires: 0 })
   })
 
   it('returns current token', async () => {
-    await setMarket(123)
+    await setMarket('123')
     const expires = Date.now() + 1000
     cacheToken('test', expires)
     expect(getToken()).toEqual({ token: 'test', expires })
@@ -250,11 +250,11 @@ describe('refreshCurrentToken', () => {
       access_token: 'your-first-access-token',
       token_type: 'bearer',
       expires_in: 7200,
-      scope: 'market:9955',
+      scope: 'market:code:9955',
       created_at: Date.now(),
     })
 
-    await setMarket(48279)
+    await setMarket('48279')
 
     expect(getToken()).toEqual({
       token: 'your-first-access-token',
@@ -265,7 +265,7 @@ describe('refreshCurrentToken', () => {
       access_token: 'your-refreshed-access-token',
       token_type: 'bearer',
       expires_in: 7200,
-      scope: 'market:9955',
+      scope: 'market:code:9955',
       created_at: Date.now(),
     })
 
@@ -288,11 +288,11 @@ describe('refreshCurrentToken', () => {
       access_token: 'your-first-access-token',
       token_type: 'bearer',
       expires_in: 7200,
-      scope: 'market:9955',
+      scope: 'market:code:9955',
       created_at: Date.now(),
     })
 
-    await setMarket(48279)
+    await setMarket('48279')
     await loginAsIntegration()
 
     expect(getToken()).toEqual({
@@ -304,7 +304,7 @@ describe('refreshCurrentToken', () => {
       access_token: 'your-refreshed-access-token',
       token_type: 'bearer',
       expires_in: 7200,
-      scope: 'market:9955',
+      scope: 'market:code:9955',
       created_at: Date.now(),
     })
 
@@ -328,13 +328,13 @@ describe('refreshCurrentToken', () => {
       token_type: 'bearer',
       expires_in: 7200,
       refresh_token: 'your-refresh-token',
-      scope: 'market:7777',
+      scope: 'market:code:7777',
       created_at: Date.now(),
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
 
-    await setMarket([7777])
+    await setMarket(['7777'])
 
     await loginAsCustomer('asdasd', 'asdasd')
 
@@ -351,7 +351,7 @@ describe('refreshCurrentToken', () => {
       token_type: 'bearer',
       expires_in: 7200,
       refresh_token: 'your-refresh-token',
-      scope: 'market:7777',
+      scope: 'market:code:7777',
       created_at: Date.now(),
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',

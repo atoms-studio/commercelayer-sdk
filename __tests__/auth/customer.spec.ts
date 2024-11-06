@@ -57,12 +57,12 @@ describe('auth:customer', () => {
       token_type: 'bearer',
       expires_in: 7200,
       refresh_token: 'your-refresh-token',
-      scope: 'market:1',
+      scope: 'market:code:1',
       created_at: createdAt,
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
-    await setMarket(1)
+    await setMarket('1')
 
     const response = await loginAsCustomer('asd', 'asd')
     expect(response).toHaveProperty('id', 'zxcVBnMASd')
@@ -87,13 +87,13 @@ describe('auth:customer', () => {
       token_type: 'bearer',
       expires_in: 7200,
       refresh_token: 'your-refresh-token',
-      scope: 'market:7777',
+      scope: 'market:code:7777',
       created_at: createdAt,
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
 
-    await setMarket([7777])
+    await setMarket(['7777'])
 
     await loginAsCustomer('asdasd', 'asdasd')
     expect(currentCustomerData).toEqual({
@@ -116,12 +116,12 @@ describe('auth:customer', () => {
       token_type: 'bearer',
       expires_in: 7200,
       refresh_token: 'your-refresh-token',
-      scope: 'market:7777',
+      scope: 'market:code:7777',
       created_at: createdAt,
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
-    setMarket([7777])
+    setMarket(['7777'])
 
     await loginAsCustomer('asdasd', 'asdasd')
     expect(currentCustomerData).toEqual({
@@ -155,13 +155,13 @@ describe('auth:customer', () => {
       token_type: 'bearer',
       expires_in: 7200,
       refresh_token: 'your-refresh-token',
-      scope: 'market:7777',
+      scope: 'market:code:7777',
       created_at: createdAt,
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
 
-    await setMarket([7777])
+    await setMarket(['7777'])
 
     await loginAsCustomer('asdasd', 'asdasd')
     expect(isCustomerLoggedIn()).toBe(true)
@@ -185,13 +185,13 @@ describe('auth:customer', () => {
       token_type: 'bearer',
       expires_in: 7200,
       refresh_token: 'your-refresh-token',
-      scope: 'market:7777',
+      scope: 'market:code:7777',
       created_at: createdAt,
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
 
-    await setMarket([7777])
+    await setMarket(['7777'])
 
     await loginAsCustomer('asdasd', 'asdasd')
     expect(getCustomerToken()).toEqual({
@@ -223,13 +223,13 @@ describe('auth:customer', () => {
       token_type: 'bearer',
       expires_in: 7200,
       refresh_token: 'your-refresh-token',
-      scope: 'market:7778',
+      scope: 'market:code:7778',
       created_at: createdAt,
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
 
-    await setMarket([7778])
+    await setMarket(['7778'])
 
     const badResult = await refreshCustomer()
     expect(badResult).toEqual({
@@ -279,26 +279,26 @@ describe('auth:customer', () => {
       token_type: 'bearer',
       expires_in: 7200,
       refresh_token: 'your-refresh-token',
-      scope: 'market:7778',
+      scope: 'market:code:7778',
       created_at: createdAt,
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
 
-    await setMarket([77738])
+    await setMarket(['77738'])
 
     expect(async () => {
       await useCustomerSession(
         'your-access-token',
         'your-refresh-token',
-        'market:123',
+        'market:code:123',
       )
     }).rejects.toThrow('Invalid session data')
 
     const result = await useCustomerSession(
       'your-access-token',
       'your-refresh-token',
-      'market:77738',
+      'market:code:77738',
     )
     expect(result).toEqual({
       id: 'zxcVBnMASd',
@@ -337,12 +337,12 @@ describe('auth:customer', () => {
       token_type: 'bearer',
       expires_in: 7200,
       refresh_token: 'your-refresh-token',
-      scope: 'market:1',
+      scope: 'market:code:1',
       created_at: createdAt,
       owner_id: 'zxcVBnMASd',
       owner_type: 'customer',
     })
-    await setMarket(1)
+    await setMarket('1')
 
     await loginAsCustomer('asd', 'asd')
 

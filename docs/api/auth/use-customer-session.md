@@ -29,7 +29,7 @@ try {
   await Auth.useCustomerSession(
     'eyJhbGciOiJIUzUxMiJ9.eyJ....',
     'IjN2TXbif8rq....',
-    'market:1234'
+    'market:code:1234'
   )
   // Customer is logged in now
 } catch (error) {
