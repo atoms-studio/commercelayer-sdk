@@ -10,6 +10,7 @@ import { OrderInstance } from './Orders'
 import { PaymentMethodInstance } from './PaymentMethods'
 import { ShipmentInstance } from './Shipments'
 import { SkuInstance } from './Skus'
+import { BundleInstance } from './Bundles'
 
 export interface LineItemAttributes {
   sku_code: string
@@ -49,6 +50,7 @@ export interface LineItemRelationships {
     | PaymentMethodInstance
     | AdjustmentInstance
     | GiftCardInstance // TODO: missing promotions
+    | BundleInstance
   line_item_options: any[] // TODO: improve this type
   shipment_line_items: LineItemInstance[]
   stock_transfers: any[] // TODO: improve this type
