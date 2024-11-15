@@ -38,6 +38,7 @@ export interface LineItemAttributes {
   tax_rate: number
   tax_breakdown: any // TODO: improve this type
   item_type: string
+  bundle_code: string
 }
 
 export interface LineItemRelationships {
@@ -91,6 +92,7 @@ export const LineItemsConfig: ResourceConfig<
     'tax_rate',
     'tax_breakdown',
     'item_type',
+    'bundle_code'
   ],
 
   relationships: {
