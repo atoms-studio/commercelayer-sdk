@@ -1,3 +1,16 @@
+### [1.5.1](https://github.com/atoms-studio/commercelayer-sdk/compare/1.5.0...1.5.1) (2024-11-22)
+
+
+### Features
+
+* add bundle as item type in line items ([358d745](https://github.com/atoms-studio/commercelayer-sdk/commit/358d745b0a691b94ddef072ae0a4157acaded19f))
+* add bundles ([6f0c111](https://github.com/atoms-studio/commercelayer-sdk/commit/6f0c1111b71d0e5f0bbbbe957a64e6a8ded87319))
+
+
+### Bug Fixes
+
+* add bundle_code attribute to line item instance ([895ecfc](https://github.com/atoms-studio/commercelayer-sdk/commit/895ecfcf7bbc2d785a47820ffe9389e4907206f8))
+
 ## [1.5.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.4.1...1.5.0) (2024-11-06)
 
 
