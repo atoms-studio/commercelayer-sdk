@@ -21,7 +21,6 @@ export interface SkuListItemAttributes {
 export interface SkuListItemRelationships {
   sku_list: SkuListInstance
   sku: SkuInstance
-
 }
 
 export type SkuListItemInstance = ConcreteResourceInstance<
@@ -29,7 +28,10 @@ export type SkuListItemInstance = ConcreteResourceInstance<
   SkuListItemRelationships
 >
 
-export const SkuListItemsConfig: ResourceConfig<SkuListItemAttributes, SkuListItemRelationships> = {
+export const SkuListItemsConfig: ResourceConfig<
+  SkuListItemAttributes,
+  SkuListItemRelationships
+> = {
   type: 'sku_lists',
 
   attributes: [
@@ -52,4 +54,6 @@ export const SkuListItems: Resource<
   SkuListItemAttributes,
   SkuListItemRelationships,
   SkuListItemInstance
-> = createResource<SkuListItemAttributes, SkuListItemRelationships>(SkuListItemsConfig)
+> = createResource<SkuListItemAttributes, SkuListItemRelationships>(
+  SkuListItemsConfig,
+)

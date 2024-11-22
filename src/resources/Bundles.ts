@@ -9,8 +9,6 @@ import { MarketInstance } from './Markets'
 import { SkuListInstance } from './SkuLists'
 import { SkuInstance } from './Skus'
 
-
-
 export interface BundleAttributes {
   code: string
   name: string
@@ -46,7 +44,10 @@ export type BundleInstance = ConcreteResourceInstance<
   BundleRelationships
 >
 
-export const BundlesConfig: ResourceConfig<BundleAttributes, BundleRelationships> = {
+export const BundlesConfig: ResourceConfig<
+  BundleAttributes,
+  BundleRelationships
+> = {
   type: 'bundles',
 
   attributes: [

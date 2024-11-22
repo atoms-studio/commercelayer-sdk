@@ -9,7 +9,6 @@ import { SkuInstance } from './Skus'
 import { BundleInstance } from './Bundles'
 import { SkuListItemInstance } from './SkuListItems'
 
-
 export interface SkuListAttributes {
   name: string
   slug: string
@@ -35,7 +34,10 @@ export type SkuListInstance = ConcreteResourceInstance<
   SkuListRelationships
 >
 
-export const SkuListsConfig: ResourceConfig<SkuListAttributes, SkuListRelationships> = {
+export const SkuListsConfig: ResourceConfig<
+  SkuListAttributes,
+  SkuListRelationships
+> = {
   type: 'sku_lists',
 
   attributes: [

@@ -69,15 +69,6 @@ export {
   CustomerGroups,
   CustomerGroupInstance,
 } from './resources/CustomerGroups'
-export {
-  SkuListItems,
-  SkuListItemInstance,
-} from './resources/SkuListItems'
-export {
-  SkuLists,
-  SkuListInstance,
-} from './resources/SkuLists'
-export {
-  Bundles,
-  BundleInstance,
-} from './resources/Bundles'
+export { SkuListItems, SkuListItemInstance } from './resources/SkuListItems'
+export { SkuLists, SkuListInstance } from './resources/SkuLists'
+export { Bundles, BundleInstance } from './resources/Bundles'

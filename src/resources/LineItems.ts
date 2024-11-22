@@ -94,7 +94,7 @@ export const LineItemsConfig: ResourceConfig<
     'tax_rate',
     'tax_breakdown',
     'item_type',
-    'bundle_code'
+    'bundle_code',
   ],
 
   relationships: {
