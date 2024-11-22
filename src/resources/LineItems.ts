@@ -10,6 +10,7 @@ import { OrderInstance } from './Orders'
 import { PaymentMethodInstance } from './PaymentMethods'
 import { ShipmentInstance } from './Shipments'
 import { SkuInstance } from './Skus'
+import { BundleInstance } from './Bundles'
 
 export interface LineItemAttributes {
   sku_code: string
@@ -38,6 +39,7 @@ export interface LineItemAttributes {
   tax_rate: number
   tax_breakdown: any // TODO: improve this type
   item_type: string
+  bundle_code: string
 }
 
 export interface LineItemRelationships {
@@ -48,6 +50,7 @@ export interface LineItemRelationships {
     | PaymentMethodInstance
     | AdjustmentInstance
     | GiftCardInstance // TODO: missing promotions
+    | BundleInstance
   line_item_options: any[] // TODO: improve this type
   shipment_line_items: LineItemInstance[]
   stock_transfers: any[] // TODO: improve this type
@@ -91,6 +94,7 @@ export const LineItemsConfig: ResourceConfig<
     'tax_rate',
     'tax_breakdown',
     'item_type',
+    'bundle_code'
   ],
 
   relationships: {
