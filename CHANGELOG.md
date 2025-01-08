@@ -1,3 +1,10 @@
+## [1.6.0](https://github.com/atoms-studio/commercelayer-sdk/compare/1.5.1...1.6.0) (2025-01-08)
+
+
+### Features
+
+* add scope ([057c75e](https://github.com/atoms-studio/commercelayer-sdk/commit/057c75e38bf03d7cf7f25bdd7168aa90d170b431))
+
 ### [1.5.1](https://github.com/atoms-studio/commercelayer-sdk/compare/1.5.0...1.5.1) (2024-11-22)
 
 
