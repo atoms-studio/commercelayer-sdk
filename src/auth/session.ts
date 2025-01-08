@@ -380,6 +380,7 @@ export const refreshCustomer = async (): Promise<SessionData> => {
         grant_type: 'refresh_token',
         client_id: config.clientId,
         refresh_token: currentCustomerData.refreshToken,
+        scope: getScope(),
       },
     )
 
